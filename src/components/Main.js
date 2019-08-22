@@ -3,6 +3,7 @@ import Header from './Header'
 import Body from './Body'
 import Footer from './Footer'
 import Social from './social/Social'
+import Events from './events/Events'
 
 import { Route, Switch } from 'react-router-dom'
 
@@ -14,8 +15,8 @@ class Main extends Component {
         <Header/>
         <Switch>
           <Route path='/social' component={Social}/>
-          <Route path='/events'/>
-          <Route path='/social'/>
+          <Route path='/events' component={Events}/>
+          <Route path='/social' component={Social}/>
         </Switch>
         <Footer/>
       </>
