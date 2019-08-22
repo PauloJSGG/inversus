@@ -1,8 +1,25 @@
 .home{
   display: flex;
   justify-content: center;
+  padding-top: 200px;
+  // scroll-padding-top: var(--top-spacing);
+  margin: var(--top-spacing) auto;
   &__text{
-    color: white;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(83, 0, 30, 0) 0%,
+        rgb(255, 255, 255) 50%,
+        rgba(83, 0, 30, 0) 100%,
+      )
+      left
+      bottom
+      no-repeat;
+    background-size:100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     width: 300px;
+    max-height: 500px;
+
   }
 }

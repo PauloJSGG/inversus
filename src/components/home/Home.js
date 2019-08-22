@@ -14,6 +14,7 @@ const Home = () => {
         Mauris in vehicula erat. Phasellus sodales sapien a nisl porttitor, sit amet feugiat neque scelerisque. Donec ultrices sapien felis, a vestibulum erat sollicitudin ut. Nunc euismod, sapien et dapibus bibendum, neque quam pharetra tellus, vitae dapibus odio massa nec nulla. Donec nec auctor felis. Nam euismod elit non mi imperdiet, at sagittis lectus pulvinar. Etiam pretium sapien a metus venenatis, ac varius eros facilisis. Nullam lacus nisi, condimentum non neque non, fringilla luctus augue. In hac habitasse platea dictumst. Nulla scelerisque vitae justo non gravida. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ut laoreet erat.
       </p>
     </div>
+
   )
 }
 

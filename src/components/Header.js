@@ -4,15 +4,18 @@ import { NavLink, Switch, withRouter, Link  } from "react-router-dom";
 
   const Header = () => {
   return(
-    <div className='header'>
+    <header className='fixed'>
       <Link to={'/'} title="Home" className='header__logo'><img src={Logo}></img></Link>
-      <ul className='flex justify-center'>
-        <NavLink to={'/news'} title="Social" className='m-2'>News</NavLink>
-        <NavLink to={'/social'} title="Social" className='m-2'>Social</NavLink>
-        <NavLink to={'/events'} title="Events" className='m-2'>Events</NavLink>
-        <NavLink to={'/contacts'} title="Events" className='m-2'>Contacts</NavLink>
-      </ul>
-    </div>
+      <nav>
+        <ul className='flex justify-center'>
+          <NavLink to={'/news'} title="Social" className='m-2'>News</NavLink>
+          <NavLink to={'/social'} title="Social" className='m-2'>Social</NavLink>
+          <NavLink to={'/events'} title="Events" className='m-2'>Events</NavLink>
+          <NavLink to={'/contacts'} title="Events" className='m-2'>Contacts</NavLink>
+        </ul>
+      </nav>
+      <div className='header__border-bottom'></div>
+    </header>
   )
 }
 
