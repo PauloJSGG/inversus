@@ -1,0 +1,14 @@
+.event{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 20vw;
+  padding-right: 20vw;
+  &__card{
+    color: white;
+    box-shadow: 2px;
+    background-color: grey;
+    flex-basis: 100%;
+  }
+}
+

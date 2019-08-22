@@ -13,7 +13,7 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
+    <div className="global-container">
       <Router>
         <Route path='/' component={Main} />
       </Router>

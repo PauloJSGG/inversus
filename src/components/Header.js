@@ -1,13 +1,11 @@
 import React from 'react'
 import Logo from '../assets/img/logo_black_small.png'
-import { NavLink, Switch, withRouter } from "react-router-dom";
+import { NavLink, Switch, withRouter, Link  } from "react-router-dom";
 
   const Header = () => {
   return(
     <div className='header'>
-      <div className='header__logo'>
-        <img src={ Logo }/>
-      </div>
+      <Link to={'/'} title="Home" className='header__logo'><img src={Logo}></img></Link>
       <ul className='flex justify-center'>
         <NavLink to={'/news'} title="Social" className='m-2'>News</NavLink>
         <NavLink to={'/social'} title="Social" className='m-2'>Social</NavLink>
