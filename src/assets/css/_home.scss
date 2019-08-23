@@ -1,25 +1,57 @@
 .home{
+  position: relative;
   display: flex;
   justify-content: center;
-  padding-top: 200px;
-  // scroll-padding-top: var(--top-spacing);
-  margin: var(--top-spacing) auto;
+  width: 100%;
   &__text{
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(83, 0, 30, 0) 0%,
-        rgb(255, 255, 255) 50%,
-        rgba(83, 0, 30, 0) 100%,
-      )
-      left
-      bottom
-      no-repeat;
-    background-size:100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    width: 300px;
-    max-height: 500px;
+    text-align: center;
+    color: white;
+    width: 30%;
+    // background:
+    //   linear-gradient(
+    //     to bottom,
+    //     rgba(83, 0, 30, 0) 0%,
+    //     rgb(255, 255, 255) 50%,
+    //     rgba(83, 0, 30, 0) 100%,
+    //   )
+    //   left
+    //   bottom
+    //   no-repeat;
+    // background-size:100%;
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
+    // width: 300px;
+    // max-height: 500px;
 
   }
+}
+
+// .scroll { position:relative;}
+.shade1 {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  height: 30rem;
+  margin: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) 100%,
+  )
+  no-repeat;
+  background-size:100%
+}
+
+.shade2 {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  height: 10rem;
+  bottom: 0;
+  background-image: linear-gradient(transparent, #000);
+  z-index: 10;
+  pointer-events: none;
 }
