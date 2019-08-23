@@ -1,6 +1,7 @@
 
 header.fixed {
-  z-index: 999999;
+  z-index: 99999;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   width: 100%;
@@ -45,7 +46,8 @@ nav {
     display: flex;
     justify-content: center;
     img{
-      width: 200px
+      width: 200px;
+      height: 200px;
     }
   }
 }
