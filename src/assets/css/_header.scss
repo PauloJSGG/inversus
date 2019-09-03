@@ -1,8 +1,7 @@
 
 header.fixed {
   z-index: 99999;
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   background-color: black;
@@ -12,12 +11,19 @@ nav {
   color: white;
 }
 
+.header-container{
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
 .header{
   display: flex;
   flex-direction: column;
   justify-items: center;
   justify-content: center;
   color: #ffffff;
+  height: 100px;
 
   &__border-bottom{
     padding-bottom:1px;

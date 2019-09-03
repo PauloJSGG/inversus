@@ -11,7 +11,7 @@ import {
 } from 'react-transition-group'
 import db from '../db'
 
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 class Main extends Component {
   state = {
@@ -34,8 +34,10 @@ class Main extends Component {
             timeout={300}
             classNames="fade">
              <Switch>
-               <Route path='/social' component={Social}/>
-               <Route path='/events' component={Events}/>
+               <Route path='/about-us' component={Social}/>
+               <Route path='/discography' component={Events}/>
+               <Route path='/events' component={Social}/>
+               <Route path='/contacts' component={Social}/>
                <Route path='/social' component={Social}/>
                <Route path='/' component={() => <Home text={this.state.mainText}></Home>}/>
              </Switch>
