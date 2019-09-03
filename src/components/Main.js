@@ -19,8 +19,7 @@ class Main extends Component {
   }
 
   componentDidMount(){
-    db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
-    console.log(this.state.mainText)
+    db().child('mainText').on('value', x => this.setState({mainText: x.val()}))
   }
 
   render() {
@@ -39,7 +38,7 @@ class Main extends Component {
                <Route path='/events' component={Social}/>
                <Route path='/contacts' component={Social}/>
                <Route path='/social' component={Social}/>
-               <Route path='/' component={() => <Home text={this.state.mainText}></Home>}/>
+               <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
              </Switch>
            </CSSTransition>
          </TransitionGroup>
