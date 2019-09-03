@@ -1,0 +1,16 @@
+.shared-button{
+  text-decoration: none;
+  background-color: white;
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+  width: 10vh;
+  margin: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 5px;
+  &--second{
+    background-color: rgb(188,158,91)
+  }
+}

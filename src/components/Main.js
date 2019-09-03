@@ -9,10 +9,19 @@ import {
   CSSTransition,
   TransitionGroup
 } from 'react-transition-group'
+import db from '../db'
 
 import { Route, Switch } from 'react-router-dom'
 
 class Main extends Component {
+  state = {
+    mainText: ""
+  }
+
+  componentDidMount(){
+    db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
+    console.log(this.state.mainText)
+  }
 
   render() {
     return (
@@ -28,7 +37,7 @@ class Main extends Component {
                <Route path='/social' component={Social}/>
                <Route path='/events' component={Events}/>
                <Route path='/social' component={Social}/>
-               <Route path='/' component={Home}/>
+               <Route path='/' component={() => <Home text={this.state.mainText}></Home>}/>
              </Switch>
            </CSSTransition>
          </TransitionGroup>

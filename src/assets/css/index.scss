@@ -1,6 +1,7 @@
 @import "./header";
 @import "./events";
 @import "./home";
+@import "./shared";
 
 // second color: BC965B
 
@@ -19,4 +20,8 @@ body {
   top: 0;
   margin: 0;
   padding: 0;
+}
+
+html, body, .global-container, #root {
+  height: 100%;
 }
