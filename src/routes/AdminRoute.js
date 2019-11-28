@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AdminHeader from '../components/admin/AdminHeader'
 import Footer from '../components/Footer'
-import Social from '../containers/SocialContainer'
+import MainEdit from '../components/admin/MainEdit'
 import Events from '../containers/EventsContainer'
 import {
   CSSTransition,
@@ -45,9 +45,9 @@ const AdminRoute = (props) => {
           timeout={300}
           classNames="fade">
           <Switch>
-            <Route exact path={`${url}/main`} component={Social}/>
+            <Route exact path={`${url}/main`} component={MainEdit}/>
             <Route exact path='/discography' component={Events}/>
-            <Route exact path='/contacts' component={Social}/>
+            {/* <Route exact path='/contacts' component={Social}/> */}
             {/* <Route path='admin/login' component={Login}/>
             <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/> */}
           </Switch>

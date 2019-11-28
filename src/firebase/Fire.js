@@ -34,17 +34,38 @@ class Fire {
 		return this.auth.currentUser.updateProfile({
 			displayName: name
 		})
-	}
+  }
 
-	addQuote(quote) {
-		if(!this.auth.currentUser) {
+  addMainText(text) {
+    if(!this.auth.currentUser) {
 			return alert('Not authorized')
-		}
+    }
 
-		return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
-			quote
+    return this.db.doc(`main_text/main`).set({
+			text
 		})
-	}
+  }
+
+  async getMainText() {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+
+    const text = await this.db.doc('main_text/main').get()
+
+    return text.get('text')
+
+  }
+
+	// addQuote(quote) {
+	// 	if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+	// 	}
+
+	// 	return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
+	// 		quote
+	// 	})
+	// }
 
 	isInitialized() {
 		return new Promise(resolve => {
@@ -56,10 +77,10 @@ class Fire {
 		return this.auth.currentUser && this.auth.currentUser.displayName
 	}
 
-	async getCurrentUserQuote() {
-		const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
-		return quote.get('quote')
-	}
+	// async getCurrentUserQuote() {
+	// 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
+	// 	return quote.get('quote')
+	// }
 }
 
 export default new Fire()

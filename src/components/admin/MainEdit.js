@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import Fire from '../../firebase/Fire'
 
 class MainEdit extends Component {
-
   constructor(props){
     super(props);
     this.submitMain = this.submitMain.bind(this);
 
     this.state = {
-      mainText: null
+      mainText: '--'
     }
   }
 
   componentDidMount() {
-    Fire.db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
+    Fire.getMainText()
+      .then(r => this.setState({mainText: r}))
+    // Fire.db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
   }
 
   onFormChange(txt) {
@@ -23,13 +24,13 @@ class MainEdit extends Component {
   }
 
   submitMain() {
-    Fire.db().child('mainText').set(this.state)
+    Fire.addMainText(this.state.mainText)
   }
 
   render() {
     return(
       <>
-        <div className='flex flex-col justify-center my-5 items-center'>
+        <div className='content-container flex flex-col justify-center my-5 items-center'>
           {this.state.mainText == null ? null :
             <textarea onChange={(e) => this.onFormChange(e.target.value)} className='h-24 w-1/2' value={this.state.mainText}></textarea>
           }
