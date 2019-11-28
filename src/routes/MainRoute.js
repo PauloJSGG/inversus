@@ -13,31 +13,76 @@ import Fire from '../firebase/Fire'
 
 import { Route, Switch, Redirect } from 'react-router-dom'
 
-const MainRoute = () => {
-  return(
-    <>
-      <Header/>
-      <Route render={({location}) => (
-        <TransitionGroup>
-          <CSSTransition
-          key={location.key}
-          timeout={300}
-          classNames="fade">
-            <Switch>
-              {/* <Route path='/about-us' component={Social}/>
-              <Route path='/discography' component={Events}/> */}
-              {/* <Route path='/contacts' component={Social}/> */}
-              <Route path='/events' component={Events}/>
-              <Route path='/social' component={Social}/>
-              <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      )} />
-      <Footer/>
-    </>
-  )
+class MainRoute extends Component {
+
+  componentDidMount() {
+    Fire.getMainText()
+      .then(r => this.setState({mainText: r}))
+    // Fire.db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
+  }
+
+  onFormChange(txt) {
+    this.setState({
+      mainText: txt
+    })
+  }
+
+  submitMain() {
+    Fire.addMainText(this.state.mainText)
+  }
+
+  render() {
+    return(
+      <>
+        <Header/>
+        <Route render={({location}) => (
+          <TransitionGroup>
+            <CSSTransition
+            key={location.key}
+            timeout={300}
+            classNames="fade">
+              <Switch>
+                {/* <Route path='/about-us' component={Social}/>
+                <Route path='/discography' component={Events}/> */}
+                {/* <Route path='/contacts' component={Social}/> */}
+                <Route path='/events' component={Events}/>
+                <Route path='/social' component={Social}/>
+                <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )} />
+        <Footer/>
+      </>
+    )
+  }
 }
+
+// const MainRoute = () => {
+//   return(
+//     <>
+//       <Header/>
+//       <Route render={({location}) => (
+//         <TransitionGroup>
+//           <CSSTransition
+//           key={location.key}
+//           timeout={300}
+//           classNames="fade">
+//             <Switch>
+//               {/* <Route path='/about-us' component={Social}/>
+//               <Route path='/discography' component={Events}/> */}
+//               {/* <Route path='/contacts' component={Social}/> */}
+//               <Route path='/events' component={Events}/>
+//               <Route path='/social' component={Social}/>
+//               <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
+//             </Switch>
+//           </CSSTransition>
+//         </TransitionGroup>
+//       )} />
+//       <Footer/>
+//     </>
+//   )
+// }
 
 
 // class Main extends Component {
