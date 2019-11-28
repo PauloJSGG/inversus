@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import db from '../../db'
+import Fire from '../../firebase/Fire'
 
 class MainEdit extends Component {
 
@@ -13,7 +13,7 @@ class MainEdit extends Component {
   }
 
   componentDidMount() {
-    db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
+    Fire.db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
   }
 
   onFormChange(txt) {
@@ -23,7 +23,7 @@ class MainEdit extends Component {
   }
 
   submitMain() {
-    db().child('mainText').set(this.state)
+    Fire.db().child('mainText').set(this.state)
   }
 
   render() {

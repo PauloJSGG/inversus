@@ -13,24 +13,12 @@ const row = (props) => {
 }
 
 class Events extends Component {
-
   render() {
-
-    const data = [{
-      name: "fados no algarve",
-      date: "22/11/2019",
-      location: "Lagoa"
-    },
-    {
-      name: "vinho na casa",
-      date: "01/09/2020",
-      location: "Portimao"
-    }
-  ]
-
+    const {events} = this.props;
+    console.log('events',this.props)
     return (
       <div className='event'>
-        {data.map(r => row(r))}
+        {events.map(r => row(r))}
       </div>
     )
   }

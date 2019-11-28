@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import db from '../../db'
+import Fire from '../../firebase/Fire'
 
 class DiscographyEdit extends Component {
 
@@ -9,7 +9,7 @@ class DiscographyEdit extends Component {
   }
 
   componentDidMount() {
-    db().child('discography').on('value', x => this.setState({discography: x.val()}))
+    Fire.db().child('discography').on('value', x => this.setState({discography: x.val()}))
   }
 
   onFormChange(txt) {
@@ -19,7 +19,7 @@ class DiscographyEdit extends Component {
   }
 
   submitMain() {
-    db().child('mainText').set(this.state)
+    Fire.db().child('mainText').set(this.state)
   }
 
   onInputChange = (num) => {
