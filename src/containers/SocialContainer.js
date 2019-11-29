@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Social from '../components/social/Social'
+import Social from '../components/main/social'
 
 export class SocialContaner extends Component {
   render() {

@@ -15,7 +15,7 @@ import { withRouter } from 'react-router-dom'
 class AdminRoute extends Component{
   state = {
     firebaseInitialized: false,
-    mainText: 'dfasd'
+    mainText: ""
   }
 
   componentDidMount() {
@@ -26,20 +26,12 @@ class AdminRoute extends Component{
           this.setState({mainText: r})
         } )
       })
-
-    // if (this.state.firebaseInitialized !== false){
-    //   debugger
-    //   Fire.getMainText().then(r => {
-    //     debugger
-    //     return this.setState({mainText: r})
-    //   } )
-    // }
   }
 
   submitMain = () => {
     Fire.addMainText(this.state.mainText)
-      .then(alert('Success'))
-      .catch((e) => alert('asdfasdf'))
+      .then(r => alert('Success'))
+      .catch(e => alert('asdfasdf'))
   }
 
   handleFormChange = (txt) => {

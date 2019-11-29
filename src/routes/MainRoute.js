@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import Header from '../components/Header'
 import Body from '../components/Body'
 import Footer from '../components/Footer'
-import Social from '../containers/SocialContainer'
-import Events from '../containers/EventsContainer'
-import Home from '../components/home/Home'
+import Social from '../components/main/social'
+import Events from '../components/main/events'
+import Home from '../components/main/'
 import {
   CSSTransition,
   TransitionGroup
@@ -14,10 +14,15 @@ import Fire from '../firebase/Fire'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 class MainRoute extends Component {
+  state = { mainText: ""}
 
   componentDidMount() {
-    Fire.getMainText()
-      .then(r => this.setState({mainText: r}))
+    Fire.isInitialized()
+      .then(val => {
+        this.setState({firebaseInitialized: val})
+        Fire.getMainText()
+          .then(r => this.setState({mainText: r}))
+      })
     // Fire.db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
   }
 
@@ -32,28 +37,28 @@ class MainRoute extends Component {
   }
 
   render() {
-    return(
-      <>
-        <Header/>
-        <Route render={({location}) => (
-          <TransitionGroup>
-            <CSSTransition
-            key={location.key}
-            timeout={300}
-            classNames="fade">
-              <Switch>
-                {/* <Route path='/about-us' component={Social}/>
-                <Route path='/discography' component={Events}/> */}
-                {/* <Route path='/contacts' component={Social}/> */}
-                <Route path='/events' component={Events}/>
-                <Route path='/social' component={Social}/>
-                <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-        )} />
-        <Footer/>
-      </>
+      return(
+        <>
+          <Header/>
+          <Route render={({location}) => (
+            <TransitionGroup>
+              <CSSTransition
+              key={location.key}
+              timeout={300}
+              classNames="fade">
+                <Switch>
+                  {/* <Route path='/about-us' component={Social}/>
+                  <Route path='/discography' component={Events}/> */}
+                  {/* <Route path='/contacts' component={Social}/> */}
+                  <Route exact path='/events' component={Events}/>
+                  <Route exact path='/social' component={Social}/>
+                  <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          )} />
+          <Footer/>
+        </>
     )
   }
 }

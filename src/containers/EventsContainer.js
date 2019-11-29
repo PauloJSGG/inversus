@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Events from '../components/events/Events'
+import Events from '../components/main/events'
 
 export default class EventsContaner extends Component {
   state = {
