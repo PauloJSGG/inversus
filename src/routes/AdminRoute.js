@@ -1,8 +1,9 @@
 import React, { useEffect, useState, Component } from 'react'
 import AdminHeader from '../components/admin/AdminHeader'
-import Footer from '../components/Footer'
+import LoginForm from '../components/admin/LoginForm'
+import Footer from '../components/shared/Footer'
 import MainEdit from '../components/admin/MainEdit'
-import Events from '../containers/EventsContainer'
+import RepertoireEdit from '../components/admin/RepertoireEdit'
 import {
   CSSTransition,
   TransitionGroup
@@ -15,7 +16,9 @@ import { withRouter } from 'react-router-dom'
 class AdminRoute extends Component{
   state = {
     firebaseInitialized: false,
-    mainText: ""
+    mainText: "",
+    tracks: [],
+    isAddingTrack: false
   }
 
   componentDidMount() {
@@ -26,6 +29,15 @@ class AdminRoute extends Component{
           this.setState({mainText: r})
         } )
       })
+  }
+
+  login = async () => {
+    try {
+      await Fire.login(this.state.Email, this.state.Password);
+      this.props.history.replace('/admin')
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   submitMain = () => {
@@ -40,10 +52,44 @@ class AdminRoute extends Component{
     })
   }
 
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+
+  }
+
+  //Repertoire edit
+  handleRepertoireChange(txt, param) {
+    this.setState({
+      mainText: txt
+    })
+  }
+
+  handleIsAddingTrack = (val) => this.setState({isAddingTrack: val})
+
+  submitReportoire() {
+    Fire.db().child('mainText').set(this.state)
+  }
+
+  onInputChange = (num) => {
+    console.log(num)
+    this.setState({numberOfTracks: num})
+  }
+  //------------------------------------------
+
+
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
     if (this.state.firebaseInitialized === false)
       return <h1 style={{color: 'red'}}>LOADIIIINNNGGGGGGG</h1>
+
+    console.log(Fire.getCurrentUsername())
 
     if(!Fire.getCurrentUsername()) {
       // not logged in
@@ -53,7 +99,8 @@ class AdminRoute extends Component{
 
   const { match: { url } } = this.props
 
-  console.log('estado', this.state)
+  console.log(this.props)
+
   return(
       <>
         <AdminHeader/>
@@ -74,10 +121,17 @@ class AdminRoute extends Component{
                   />
                 }
               />
-              <Route exact path='/discography' component={Events}/>
+              <Route
+                exact path={`${url}/repertoire`}
+                render = {
+                  (props) => <RepertoireEdit
+                    handleIsAddingTrack = {this.handleIsAddingTrack}
+                    isAddingTrack = {this.state.isAddingTrack}
+                  />
+                }
+              />
               {/* <Route exact path='/contacts' component={Social}/> */}
-              {/* <Route path='admin/login' component={Login}/>
-              <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/> */}
+              {/* <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/> */}
             </Switch>
           </CSSTransition>
         </TransitionGroup>

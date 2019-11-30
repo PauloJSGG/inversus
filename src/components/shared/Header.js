@@ -1,6 +1,6 @@
 import React from 'react'
-import Logo from '../assets/img/logo_black_small.png'
-import { NavLink, Switch, Link  } from "react-router-dom";
+import Logo from '../../assets/img/logo_black_small.png'
+import { NavLink, Link  } from "react-router-dom";
 
   const Header = () => {
   return(

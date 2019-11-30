@@ -16,9 +16,9 @@ function App() {
   return (
     <div className="global-container">
       <Router>
-        <Route path='/' component={MainRoute} />
+        <Route path='/' exact component={MainRoute} />
         <Route path='/login' exact component={LoginContainer} />
-        <Route path='/admin' component={AdminRoute} />
+        <Route path='/admin' exact component={AdminRoute} />
       </Router>
     </div>
   );

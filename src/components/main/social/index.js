@@ -1,11 +1,8 @@
 import React from 'react'
 
 const Social = () => {
-
-  debugger
-
   return (
-    <div className='content-container'>
+    <div className='content-container' style={{color: 'white'}}>
       <h3>sssssssifajsdfhashdfkashdfkuahsdufhahdfahskfjhaskdfhaksdhfkujas</h3>
     </div>
   )

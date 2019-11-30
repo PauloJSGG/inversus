@@ -19,18 +19,20 @@ const Events = () => {
   {
     name: 'test1',
     date: '22/11/1888',
-    location: 'silves'
+    location: 'city1'
   },
   {
     name: '2teste',
     date: '22/08/999',
-    location: 'Lagoa'
+    location: 'city2'
   },
 ]
 
   return(
-    <div className='event'>
-      {events.map(r => row(r))}
+    <div className='content-container'>
+      <div className='event'>
+        {events.map(r => row(r))}
+      </div>
     </div>
   )
 }
