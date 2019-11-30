@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Fire from '../firebase/Fire'
 import LoginForm from '../components/admin/LoginForm'
+import Logo from '../assets/img/logo_black_small.png'
 
 export default class LoginContainer extends Component {
   state = {
@@ -29,14 +30,21 @@ export default class LoginContainer extends Component {
 
   render() {
     return (
-      <div>
-        <LoginForm
-          login={this.login}
-          emailValue={this.state.email}
-          passwordValue={this.state.password}
-          handleInputChange={this.handleInputChange}
-        />
-      </div>
+      <>
+        <header className='fixed'>
+          <div className='header__logo'>
+            <img src={Logo}></img>
+          </div>
+        </header>
+        <div className="login-container">
+          <LoginForm
+            login={this.login}
+            emailValue={this.state.email}
+            passwordValue={this.state.password}
+            handleInputChange={this.handleInputChange}
+          />
+        </div>
+      </>
     )
   }
 }

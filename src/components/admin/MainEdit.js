@@ -5,7 +5,6 @@ const MainEdit = (props) => {
 
   const {submitMain, handleFormChange, formValue} = props
 
-  console.log('PROPAAAA', props)
 
   return(
     <>

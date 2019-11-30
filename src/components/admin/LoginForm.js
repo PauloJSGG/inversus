@@ -3,32 +3,36 @@ import React from 'react'
 const LoginForm = (props) => {
   const {login, emailValue, passwordValue, handleInputChange} = props
   return (
-    <div>
-      <form onSubmit={e => e.preventDefault() && false}>
-
-        <label>
+    <div className="login-form-container">
+      {/* <form onSubmit={e => e.preventDefault() && false}> */}
+      <div>
+        <label className="login-form__label">
           Email
-          <input
+        </label>
+        <input
+            className="login-form__input"
             style={{color: 'black'}}
             value={emailValue}
             name="Email"
             onChange={handleInputChange}
           />
-        </label>
+      </div>
 
-        <label>
+      <div>
+        <label className="login-form__label">
           Password
-          <input
+        </label>
+        <input
+            className="login-form__input"
             style={{color: 'black'}}
             value={passwordValue}
             name="Password"
             onChange={handleInputChange}
             type="password"
           />
-        </label>
-
-        <button type="submit" onClick={login}>submit</button>
-      </form>
+      </div>
+      <button type="submit" className="shared-button--second" onClick={login}>submit</button>
+      {/* </form> */}
     </div>
   )
 }
