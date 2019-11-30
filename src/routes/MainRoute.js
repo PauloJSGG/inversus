@@ -37,6 +37,9 @@ class MainRoute extends Component {
   }
 
   render() {
+
+    const { match: { url } } = this.props
+
       return(
         <>
           <Header/>
@@ -50,9 +53,9 @@ class MainRoute extends Component {
                   {/* <Route path='/about-us' component={Social}/>
                   <Route path='/discography' component={Events}/> */}
                   {/* <Route path='/contacts' component={Social}/> */}
-                  <Route exact path='/events' component={Events}/>
-                  <Route exact path='/social' component={Social}/>
-                  <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
+                  <Route path={`${url}/events`} component={Events}/>
+                  <Route path={`${url}/social`} component={Social}/>
+                  <Route path={`${url}`} component={() => <Home text={this.state.mainText}></Home>}/>
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

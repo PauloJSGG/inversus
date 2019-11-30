@@ -15,11 +15,16 @@
 
 .login-form__label{
   display: inline-block;
+  padding: 9px 5px;
+  text-align: right;
   color: white;
-  width: 50%;
+  width: 35%;
 }
 
 .login-form__input{
   display: inline-block;
-  width: 50%;
+  width: 65%;
+  // height: 35px;
+  // font-size: 5px;
+  // height: 100%;
 }

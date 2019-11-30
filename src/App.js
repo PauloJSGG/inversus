@@ -9,16 +9,28 @@ import Auth from './containers/AuthContainer'
 
 import LoginContainer from './containers/LoginContainer'
 
+
 import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+
+// import '@fortawesome/fontawesome'
+import '@fortawesome/free-regular-svg-icons'
+import '@fortawesome/free-solid-svg-icons'
+import '@fortawesome/free-brands-svg-icons'
+
+// fontawesome.library.add(regular)
+// fontawesome.library.add(solid)
+// fontawesome.library.add(brands)
 
 function App() {
 
   return (
     <div className="global-container">
       <Router>
-        <Route path='/' exact component={MainRoute} />
+        {/* <Redirect from="/" exact to="/main" /> */}
+        <Route path='/admin' component={AdminRoute} />
         <Route path='/login' exact component={LoginContainer} />
-        <Route path='/admin' exact component={AdminRoute} />
+        <Route path='/main' component={MainRoute} />
       </Router>
     </div>
   );
