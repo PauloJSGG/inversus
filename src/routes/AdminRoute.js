@@ -115,7 +115,8 @@ class AdminRoute extends Component{
                 <Route
                   exact path = {`${url}/main`}
                   render = {
-                    (props) => <MainEdit
+                    (props) =>
+                    <MainEdit
                       submitMain = {this.submitMain}
                       handleFormChange = {this.handleFormChange}
                       formValue = {this.state.mainText}
@@ -125,7 +126,8 @@ class AdminRoute extends Component{
                 <Route
                   exact path={`${url}/repertoire`}
                   render = {
-                    (props) => <RepertoireEdit
+                    (props) =>
+                    <RepertoireEdit
                       handleIsAddingTrack = {this.handleIsAddingTrack}
                       isAddingTrack = {this.state.isAddingTrack}
                       repertoire = {this.state.repertoire}

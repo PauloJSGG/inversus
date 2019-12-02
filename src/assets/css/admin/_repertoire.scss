@@ -7,3 +7,14 @@
   background-color: rgba(188,158,91,0.5);
   flex-basis: 100%;
 }
+
+.repetoire-modal {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  color: white;
+  input {
+    width: 75%;
+  }
+}
+

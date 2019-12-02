@@ -8,9 +8,9 @@ const MainEdit = (props) => {
 
   return(
     <>
-      <div className='flex flex-col justify-center my-5 items-center'>
+      <div className='flex flex-col justify-center my-5 items-center w-full'>
         {formValue == null ? null :
-          <textarea onChange={e => handleFormChange(e.target.value)} className='h-24 w-1/2' value={formValue}></textarea>
+          <textarea onChange={e => handleFormChange(e.target.value)} className='h-56 w-1/2' value={formValue}></textarea>
         }
         <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={submitMain}>enviar</button>
       </div>
