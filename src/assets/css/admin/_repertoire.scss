@@ -13,8 +13,9 @@
   flex-direction: column;
   width: 500px;
   color: white;
-  input {
+  input, textarea {
     width: 75%;
+    color: black
   }
 }
 

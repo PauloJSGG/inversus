@@ -19,42 +19,56 @@ const customStyles = {
 };
 
 const RepertoireEdit = (props) => {
-  const { handleIsAddingTrack, isAddingTrack, repertoire } = props
+  const {
+    handleModalOpen,
+    isModalOpen,
+    repertoire,
+    handleTrackChange,
+    submitTrack,
+    currentTrack
+  } = props
+
+  console.log('current',currentTrack)
 
   return (
     <>
       <div className = 'w-full flex flex-col justify-center my-5 items-center'>
         <Modal
-          isOpen={isAddingTrack}
+          isOpen={isModalOpen}
           // onAfterOpen={afterOpenModal}
-          onRequestClose={() => handleIsAddingTrack(false)}
+          onRequestClose={() => handleModalOpen(false)}
           style={customStyles}
           contentLabel="Example Modal"
         >
           <div className = 'repetoire-modal'>
             <div className = 'flex justify-between m-3'>
               <label>Nome:</label>
-              <input/>
-            </div>
-            <div className = 'flex justify-between m-3'>
-              <label>Texto:</label>
-              <input/>
+              <input name = "name" value = {currentTrack.name} onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Imagem:</label>
-              <input/>
+              <input name = "imageUrl" value = {currentTrack.imageUrl} onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Spotify:</label>
-              <input/>
+              <input name = "spotifyUrl" value = {currentTrack.spotifyUrl} onChange={e => handleTrackChange(e)}/>
+            </div>
+            <div className = 'flex justify-between m-3'>
+              <label >Letra:</label>
+              <textarea name = "lyrics" value = {currentTrack.lyrics} className='h-56 w-1/2' onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-end'>
-              <button className = 'shared-button shared-button--second'><FontAwesomeIcon icon={['fas','plus']} /></button>
+              <button
+                className = 'shared-button shared-button--second'
+                onClick = {submitTrack}
+                type='submit'
+                title='submit'
+              >
+                <FontAwesomeIcon icon={['fas','plus']} />
+              </button>
             </div>
           </div>
         </Modal>
-
-
           {repertoire.map((item => {
             return(
               <div className = "repetoire-card">
@@ -65,54 +79,10 @@ const RepertoireEdit = (props) => {
               </div>
             )
           }))}
-          <button className = 'shared-button shared-button--second' onClick = { () => handleIsAddingTrack(true)}>Adicionar</button>
+          <button className = 'shared-button shared-button--second' onClick = { () => handleModalOpen(true)}>Adicionar</button>
       </div>
     </>
   )
 }
-
-// class Repertoire extends Component {
-
-//   state = {
-//     numberOfTracks: 0,
-//     discography: null
-//   }
-
-//   componentDidMount() {
-//     Fire.db().child('discography').on('value', x => this.setState({discography: x.val()}))
-//   }
-
-//   onFormChange(txt) {
-//     this.setState({
-//       mainText: txt
-//     })
-//   }
-
-//   submitMain() {
-//     Fire.db().child('mainText').set(this.state)
-//   }
-
-//   onInputChange = (num) => {
-//     console.log(num)
-//     this.setState({numberOfTracks: num})
-//   }
-
-//   render() {
-//     console.log(this.state.discography)
-//     return(
-//       <>
-//         <div className='content-container'>
-//           <div>
-//             {
-//               this.state.discography != null ?
-//               this.state.discography.map(x => console.log(x)) : null
-//             }
-//           </div>
-//         </div>
-//         {}
-//       </>
-//     )
-//   }
-// }
 
 export default RepertoireEdit

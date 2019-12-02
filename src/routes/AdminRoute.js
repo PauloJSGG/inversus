@@ -18,8 +18,9 @@ class AdminRoute extends Component{
     firebaseInitialized: false,
     mainText: "",
     tracks: [],
-    isAddingTrack: false,
-    repertoire: []
+    isModalOpen: false,
+    repertoire: [],
+    currentTrack: {}
   }
 
   componentDidMount() {
@@ -56,15 +57,23 @@ class AdminRoute extends Component{
   }
 
 
-  handleInputChange = (event) => {
+  handleTrackChange = (event) => {
+    console.log(this.state.currentTrack)
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
-      [name]: value
+      currentTrack: {
+        ...this.state.currentTrack,
+        [name]: value
+      }
     });
 
+  }
+
+  submitTrack = () => {
+    Fire.addTrack(this.state.currentTrack)
   }
 
   //Repertoire edit
@@ -74,11 +83,7 @@ class AdminRoute extends Component{
     })
   }
 
-  handleIsAddingTrack = (val) => this.setState({isAddingTrack: val})
-
-  submitReportoire() {
-    Fire.db().child('mainText').set(this.state)
-  }
+  handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   onInputChange = (num) => {
     this.setState({numberOfTracks: num})
@@ -128,9 +133,12 @@ class AdminRoute extends Component{
                   render = {
                     (props) =>
                     <RepertoireEdit
-                      handleIsAddingTrack = {this.handleIsAddingTrack}
-                      isAddingTrack = {this.state.isAddingTrack}
+                      handleTrackChange = {this.handleTrackChange}
+                      submitTrack = {this.submitTrack}
+                      handleModalOpen = {this.handleModalOpen}
+                      isModalOpen = {this.state.isModalOpen}
                       repertoire = {this.state.repertoire}
+                      currentTrack = {this.state.currentTrack}
                     />
                   }
                 />

@@ -72,6 +72,17 @@ class Fire {
     return snapshot.docs.map(doc => doc.data());
   }
 
+  addTrack(track) {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+
+    return this.db.doc(`repertoire`).set({
+			track
+		})
+
+  }
+
 
 
 	// addQuote(quote) {
