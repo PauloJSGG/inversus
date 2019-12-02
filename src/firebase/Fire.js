@@ -27,7 +27,21 @@ class Fire {
 
 	logout() {
 		return this.auth.signOut()
-	}
+  }
+
+  async getAdminData() {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+
+    const mainText = await this.getMainText()
+    const repertoire = await this.getRepertoire()
+    const data = {
+      mainText: mainText,
+      repertoire: repertoire
+    }
+    return data
+  }
 
 	async register(name, email, password) {
 		await this.auth.createUserWithEmailAndPassword(email, password)
@@ -47,15 +61,18 @@ class Fire {
   }
 
   async getMainText() {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
-
     const text = await this.db.doc('main_text/main').get()
 
     return text.get('text')
-
   }
+
+  async getRepertoire() {
+    const snapshot = await this.db.collection('repertoire').get()
+
+    return snapshot.docs.map(doc => doc.data());
+  }
+
+
 
 	// addQuote(quote) {
 	// 	if(!this.auth.currentUser) {

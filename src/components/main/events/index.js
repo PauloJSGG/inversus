@@ -1,7 +1,6 @@
 import React from 'react'
 
 const row = (props) => {
-  console.log(props)
   const {name, date, location} = props;
   return (
     <div className='event__card m-5'>

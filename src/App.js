@@ -13,14 +13,13 @@ import LoginContainer from './containers/LoginContainer'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
-// import '@fortawesome/fontawesome'
-import '@fortawesome/free-regular-svg-icons'
-import '@fortawesome/free-solid-svg-icons'
-import '@fortawesome/free-brands-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas, faHome, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
-// fontawesome.library.add(regular)
-// fontawesome.library.add(solid)
-// fontawesome.library.add(brands)
+library.add(fab, fas)
+
 
 function App() {
 

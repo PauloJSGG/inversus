@@ -1,12 +1,13 @@
 import React from 'react'
 // import Fire from '../../firebase/Fire'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const RepertoireEdit = (props) => {
-  const { handleIsAddingTrack, isAddingTrack } = props
+  const { handleIsAddingTrack, isAddingTrack, repertoire } = props
 
   return (
     <>
-      <div className='content-container'>
+      <div>
         { isAddingTrack && (
           <div className="modal">
             <h1 style = {{color: 'red'}}>TOU AQUI CARALHO</h1>
@@ -30,6 +31,16 @@ const RepertoireEdit = (props) => {
           </div>
         )}
         <button style = {{color: 'red'}} onClick = { () => handleIsAddingTrack(true)}>Adicionar música</button>
+          {repertoire.map((item => {
+            return(
+              <div className = "repetoire-card">
+                <h1>
+                  {item.name}
+                </h1>
+                <button><FontAwesomeIcon icon={['fas','edit']} /></button>
+              </div>
+            )
+          }))}
       </div>
     </>
   )

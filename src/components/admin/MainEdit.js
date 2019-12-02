@@ -8,7 +8,7 @@ const MainEdit = (props) => {
 
   return(
     <>
-      <div className='content-container flex flex-col justify-center my-5 items-center'>
+      <div className='flex flex-col justify-center my-5 items-center'>
         {formValue == null ? null :
           <textarea onChange={e => handleFormChange(e.target.value)} className='h-24 w-1/2' value={formValue}></textarea>
         }

@@ -18,15 +18,16 @@ class AdminRoute extends Component{
     firebaseInitialized: false,
     mainText: "",
     tracks: [],
-    isAddingTrack: false
+    isAddingTrack: false,
+    repertoire: []
   }
 
   componentDidMount() {
     Fire.isInitialized()
       .then(val => {
         this.setState({firebaseInitialized: val})
-        Fire.getMainText().then(r => {
-          this.setState({mainText: r})
+        Fire.getAdminData().then(r => {
+          this.setState(r)
         } )
       })
   }
@@ -39,6 +40,8 @@ class AdminRoute extends Component{
       console.log(e)
     }
   }
+
+  getRepertoire = async() => Fire.getRepertoire()
 
   submitMain = () => {
     Fire.addMainText(this.state.mainText)
@@ -78,7 +81,6 @@ class AdminRoute extends Component{
   }
 
   onInputChange = (num) => {
-    console.log(num)
     this.setState({numberOfTracks: num})
   }
   //------------------------------------------
@@ -99,8 +101,6 @@ class AdminRoute extends Component{
 
   const { match: { url } } = this.props
 
-  console.log(this.props)
-
   return(
       <>
         <AdminHeader/>
@@ -111,25 +111,28 @@ class AdminRoute extends Component{
             timeout={300}
             classNames="fade">
             <Switch>
-              <Route
-                exact path = {`${url}/main`}
-                render = {
-                  (props) => <MainEdit
-                    submitMain = {this.submitMain}
-                    handleFormChange = {this.handleFormChange}
-                    formValue = {this.state.mainText}
-                  />
-                }
-              />
-              <Route
-                exact path={`${url}/repertoire`}
-                render = {
-                  (props) => <RepertoireEdit
-                    handleIsAddingTrack = {this.handleIsAddingTrack}
-                    isAddingTrack = {this.state.isAddingTrack}
-                  />
-                }
-              />
+              <div className = "content-container">
+                <Route
+                  exact path = {`${url}/main`}
+                  render = {
+                    (props) => <MainEdit
+                      submitMain = {this.submitMain}
+                      handleFormChange = {this.handleFormChange}
+                      formValue = {this.state.mainText}
+                    />
+                  }
+                />
+                <Route
+                  exact path={`${url}/repertoire`}
+                  render = {
+                    (props) => <RepertoireEdit
+                      handleIsAddingTrack = {this.handleIsAddingTrack}
+                      isAddingTrack = {this.state.isAddingTrack}
+                      repertoire = {this.state.repertoire}
+                    />
+                  }
+                />
+              </div>
               {/* <Route exact path='/contacts' component={Social}/> */}
               {/* <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/> */}
             </Switch>

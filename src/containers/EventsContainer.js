@@ -18,7 +18,6 @@ export default class EventsContaner extends Component {
   }
 
   render() {
-    console.log('chego ate aquis')
     return (
       <Events events={this.state.events}/>
     )
