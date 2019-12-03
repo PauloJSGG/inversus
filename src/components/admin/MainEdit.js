@@ -3,7 +3,7 @@ import Fire from '../../firebase/Fire'
 
 const MainEdit = (props) => {
 
-  const {submitMain, handleFormChange, formValue} = props
+  const {handleSubmitMain, handleFormChange, formValue} = props
 
 
   return(
@@ -12,7 +12,7 @@ const MainEdit = (props) => {
         {formValue == null ? null :
           <textarea onChange={e => handleFormChange(e.target.value)} className='h-56 w-1/2' value={formValue}></textarea>
         }
-        <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={submitMain}>enviar</button>
+        <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={handleSubmitMain}>enviar</button>
       </div>
     </>
   )

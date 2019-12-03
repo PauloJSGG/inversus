@@ -4,6 +4,9 @@ import LoginForm from '../components/admin/LoginForm'
 import Footer from '../components/shared/Footer'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
+
+import { useAlert } from 'react-alert'
+
 import {
   CSSTransition,
   TransitionGroup
@@ -12,11 +15,13 @@ import Fire from '../firebase/Fire'
 
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import { async } from 'q'
 
 class AdminRoute extends Component{
   state = {
     firebaseInitialized: false,
     mainText: "",
+    wtf: 'wtf',
     tracks: [],
     isModalOpen: false,
     repertoire: [],
@@ -44,7 +49,7 @@ class AdminRoute extends Component{
 
   getRepertoire = async() => Fire.getRepertoire()
 
-  submitMain = () => {
+  handleSubmitMain = () => {
     Fire.addMainText(this.state.mainText)
       .then(r => alert('Success'))
       .catch(e => alert('asdfasdf'))
@@ -56,34 +61,55 @@ class AdminRoute extends Component{
     })
   }
 
+  handleEditClick = (id) => {
+    const track = this.state.repertoire.filter(item => item.id === id)[0]
+
+    this.setState({
+      ...this.state,
+      isModalOpen: true,
+      currentTrack: track.data
+    })
+
+  }
 
   handleTrackChange = (event) => {
-    console.log(this.state.currentTrack)
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
       currentTrack: {
-        ...this.state.currentTrack,
-        [name]: value
+        ...this.state.currentTrack.id,
+
+        data: {
+          ...this.state.currentTrack.data,
+          [name]: value
+        }
+
       }
     });
 
   }
 
-  submitTrack = () => {
+  handleSubmitTrack = () => {
     Fire.addTrack(this.state.currentTrack)
+      .then(() => alert('Success'))
+      .catch(() => alert('Failed'))
   }
 
-  //Repertoire edit
+  handleModalOpen = (val) => {
+    if (!val)
+      this.setState({currentTrack: {}})
+
+    this.setState({isModalOpen: val})
+  }
+
   handleRepertoireChange(txt, param) {
     this.setState({
       mainText: txt
     })
   }
 
-  handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   onInputChange = (num) => {
     this.setState({numberOfTracks: num})
@@ -95,8 +121,6 @@ class AdminRoute extends Component{
     //waiting for firebase to initiate, otherwise it doesn't work
     if (this.state.firebaseInitialized === false)
       return <h1 style={{color: 'red'}}>LOADIIIINNNGGGGGGG</h1>
-
-    console.log(Fire.getCurrentUsername())
 
     if(!Fire.getCurrentUsername()) {
       // not logged in
@@ -122,7 +146,7 @@ class AdminRoute extends Component{
                   render = {
                     (props) =>
                     <MainEdit
-                      submitMain = {this.submitMain}
+                      handleSubmitMain = {this.handleSubmitMain}
                       handleFormChange = {this.handleFormChange}
                       formValue = {this.state.mainText}
                     />
@@ -133,9 +157,10 @@ class AdminRoute extends Component{
                   render = {
                     (props) =>
                     <RepertoireEdit
+                      handleEditClick = {this.handleEditClick}
                       handleTrackChange = {this.handleTrackChange}
-                      submitTrack = {this.submitTrack}
                       handleModalOpen = {this.handleModalOpen}
+                      handleSubmitTrack = {this.handleSubmitTrack}
                       isModalOpen = {this.state.isModalOpen}
                       repertoire = {this.state.repertoire}
                       currentTrack = {this.state.currentTrack}

@@ -55,13 +55,13 @@ class Fire {
 			return alert('Not authorized')
     }
 
-    return this.db.doc(`main_text/main`).set({
+    return this.db.doc(`admin_values/main`).set({
 			text
 		})
   }
 
   async getMainText() {
-    const text = await this.db.doc('main_text/main').get()
+    const text = await this.db.doc('admin_values/main').get()
 
     return text.get('text')
   }
@@ -69,18 +69,30 @@ class Fire {
   async getRepertoire() {
     const snapshot = await this.db.collection('repertoire').get()
 
-    return snapshot.docs.map(doc => doc.data());
+    return snapshot.docs.map(doc => {
+      return {
+        id: doc.id,
+        data: doc.data().data
+      }
+    })
   }
+
 
   addTrack(track) {
     if(!this.auth.currentUser) {
 			return alert('Not authorized')
     }
 
-    return this.db.doc(`repertoire`).set({
-			track
-		})
+    return this.db.collection(`repertoire`).add(track)
 
+  }
+
+  editTrack(track) {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+
+    return this.db.doc(`repertoire/${track.id}`).update(track.data)
   }
 
 
