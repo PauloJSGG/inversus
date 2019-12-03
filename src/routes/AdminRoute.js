@@ -5,8 +5,6 @@ import Footer from '../components/shared/Footer'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
 
-import { useAlert } from 'react-alert'
-
 import {
   CSSTransition,
   TransitionGroup
@@ -15,13 +13,11 @@ import Fire from '../firebase/Fire'
 
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
-import { async } from 'q'
 
 class AdminRoute extends Component{
   state = {
     firebaseInitialized: false,
     mainText: "",
-    wtf: 'wtf',
     tracks: [],
     isModalOpen: false,
     repertoire: [],
@@ -30,12 +26,9 @@ class AdminRoute extends Component{
 
   componentDidMount() {
     Fire.isInitialized()
-      .then(val => {
-        this.setState({firebaseInitialized: val})
-        Fire.getAdminData().then(r => {
-          this.setState(r)
-        } )
-      })
+      .then(val => this.setState({firebaseInitialized: val}))
+      .then(() => Fire.getAdminData())
+      .then(r => this.setState(r))
   }
 
   login = async () => {
@@ -51,8 +44,8 @@ class AdminRoute extends Component{
 
   handleSubmitMain = () => {
     Fire.addMainText(this.state.mainText)
-      .then(r => alert('Success'))
-      .catch(e => alert('asdfasdf'))
+      .then(r => alert('✔️Success✔️'))
+      .catch(e => alert('❌Error❌'))
   }
 
   handleFormChange = (txt) => {
@@ -93,8 +86,13 @@ class AdminRoute extends Component{
 
   handleSubmitTrack = () => {
     Fire.addTrack(this.state.currentTrack)
-      .then(() => alert('Success'))
-      .catch(() => alert('Failed'))
+      .catch(() => alert('❌Error❌'))
+      .then(() =>  alert('✔️Success✔️'))
+      .then(() => Fire.getAdminData())
+      .then(r => this.setState(r))
+      .finally(() => this.handleModalOpen(false))
+      // .then(() => alert('Success'))
+      // .catch(() => alert('Failed'))
   }
 
   handleModalOpen = (val) => {
