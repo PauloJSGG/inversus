@@ -4,6 +4,7 @@ import Body from '../components/shared/Body'
 import Footer from '../components/shared/Footer'
 import Social from '../components/main/social'
 import Events from '../components/main/events'
+import Repertoire from '../components/main/repertoire'
 import Home from '../components/main/'
 import {
   CSSTransition,
@@ -14,16 +15,16 @@ import Fire from '../firebase/Fire'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 class MainRoute extends Component {
-  state = { mainText: ""}
+  state = {
+    mainText: "",
+    repertoire: []
+  }
 
   componentDidMount() {
     Fire.isInitialized()
-      .then(val => {
-        this.setState({firebaseInitialized: val})
-        Fire.getMainText()
-          .then(r => this.setState({mainText: r}))
-      })
-    // Fire.db().child('mainText').on('value', x => x.forEach(y=> this.setState({mainText: y.val()})))
+      .then(val => this.setState({firebaseInitialized: val}))
+      .then(() => Fire.getMainData())
+      .then(r => this.setState(r))
   }
 
   onFormChange(txt) {
@@ -52,7 +53,11 @@ class MainRoute extends Component {
                 <Switch>
                   {/* <Route path='/about-us' component={Social}/>
                   <Route path='/discography' component={Events}/> */}
-                  {/* <Route path='/contacts' component={Social}/> */}
+                  <Route
+                    path={`${url}/repertoire`}
+
+                    render={ () => <Repertoire repertoire = {this.state.repertoire}/>}
+                  />
                   <Route path={`${url}/events`} component={Events}/>
                   <Route path={`${url}/social`} component={Social}/>
                   <Route path={`${url}`} component={() => <Home text={this.state.mainText}></Home>}/>

@@ -4,7 +4,7 @@ import Logo from '../../assets/img/logo_black_small.png'
 
 const AdminHeader = () => {
   return(
-    <header className='fixed'>
+    <header className='header-admin'>
       <Link to={'/admin'} title="Home" className='header__logo'><img src={Logo}></img></Link>
       <nav>
         <ul className='flex justify-center'>

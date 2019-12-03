@@ -1,6 +1,14 @@
 
-header.fixed {
+header.header-admin {
   z-index: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: black;
+}
+
+header.header-main {
+  z-index: 99999;
   position: fixed;
   top: 0;
   width: 100%;

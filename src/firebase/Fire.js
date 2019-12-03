@@ -19,19 +19,12 @@ class Fire {
 		app.initializeApp(fireConfig)
 		this.auth = app.auth()
 		this.db = app.firestore()
-	}
-
-	login(email, password) {
-		return this.auth.signInWithEmailAndPassword(email, password)
-	}
-
-	logout() {
-		return this.auth.signOut()
   }
 
+  //ADMIN DATA
   async getAdminData() {
     if(!this.auth.currentUser) {
-			return alert('Not authorized')
+      return alert('Not authorized')
     }
 
     const mainText = await this.getMainText()
@@ -42,6 +35,30 @@ class Fire {
     }
     return data
   }
+
+  //MAIN DATA
+  async getMainData() {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+
+    const mainText = await this.getMainText()
+    const repertoire = await this.getRepertoire()
+    const data = {
+      mainText: mainText,
+      repertoire: repertoire
+    }
+    return data
+  }
+
+	login(email, password) {
+		return this.auth.signInWithEmailAndPassword(email, password)
+	}
+
+	logout() {
+		return this.auth.signOut()
+  }
+
 
 	async register(name, email, password) {
 		await this.auth.createUserWithEmailAndPassword(email, password)
