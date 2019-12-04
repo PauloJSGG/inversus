@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="global-container">
-      <Router basename={process.env.PUBLIC_URL}>>
+      <Router basename={process.env.PUBLIC_URL}>
         {/* <Redirect from="/" exact to="/main" /> */}
         <Route path='/admin' component={AdminRoute} />
         <Route path='/login' exact component={LoginContainer} />
