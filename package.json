@@ -1,6 +1,7 @@
 {
   "name": "inversus",
   "version": "0.1.0",
+  "homepage": "http://paulojsgg.github.io/inverus",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -25,6 +26,8 @@
     "tailwindcss": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "npm-run-all --parallel watch:css start:react",
     "build": "npm-run-all build:css build:react",
     "build:css": "postcss src/vendor/css/tailwind.css -o src/vendor/css/index.css",
