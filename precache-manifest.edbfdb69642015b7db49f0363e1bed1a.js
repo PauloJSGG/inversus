@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "235f6e2badf9687d27364ec80d1d88da",
+    "revision": "0d550bcc49d154c18eaf05cb2fc1dd57",
     "url": "/inverus/index.html"
   },
   {
-    "revision": "80c911deba9f6a78e742",
+    "revision": "d89a71f4249d3134153f",
     "url": "/inverus/static/css/main.1265900f.chunk.css"
   },
   {
-    "revision": "8d4858c0bf021cf4ca3e",
-    "url": "/inverus/static/js/2.17076f5d.chunk.js"
+    "revision": "ba8f762a994fdb933a4b",
+    "url": "/inverus/static/js/2.a03e182c.chunk.js"
   },
   {
-    "revision": "80c911deba9f6a78e742",
-    "url": "/inverus/static/js/main.a6ec7820.chunk.js"
+    "revision": "d89a71f4249d3134153f",
+    "url": "/inverus/static/js/main.22272b8f.chunk.js"
   },
   {
     "revision": "84f9ab2624bd9771fda1",
