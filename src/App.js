@@ -11,7 +11,7 @@ import LoginContainer from './containers/LoginContainer'
 
 
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+import { Redirect, HashRouter } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,12 +25,14 @@ function App() {
 
   return (
     <div className="global-container">
-      <Router>
-        {/* <Redirect from="/" exact to="/main" /> */}
-        <Route path='/admin' component={AdminRoute} />
-        <Route path='/login' exact component={LoginContainer} />
-        <Route path='/main' component={MainRoute} />
-      </Router>
+      <HashRouter>
+        <Router>
+          {/* <Redirect from="/" exact to="/main" /> */}
+          <Route path='/admin' component={AdminRoute} />
+          <Route path='/login' exact component={LoginContainer} />
+          <Route path='/main' component={MainRoute} />
+        </Router>
+      </HashRouter>
     </div>
   );
 }
