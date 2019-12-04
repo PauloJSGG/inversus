@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/inverus/static/css/main.1265900f.chunk.css",
-    "main.js": "/inverus/static/js/main.3bf9be19.chunk.js",
-    "main.js.map": "/inverus/static/js/main.3bf9be19.chunk.js.map",
-    "runtime~main.js": "/inverus/static/js/runtime~main.32c70fc5.js",
-    "runtime~main.js.map": "/inverus/static/js/runtime~main.32c70fc5.js.map",
-    "static/js/2.17076f5d.chunk.js": "/inverus/static/js/2.17076f5d.chunk.js",
-    "static/js/2.17076f5d.chunk.js.map": "/inverus/static/js/2.17076f5d.chunk.js.map",
-    "index.html": "/inverus/index.html",
-    "precache-manifest.af75900578011aa227689477188a00c8.js": "/inverus/precache-manifest.af75900578011aa227689477188a00c8.js",
-    "service-worker.js": "/inverus/service-worker.js",
-    "static/css/main.1265900f.chunk.css.map": "/inverus/static/css/main.1265900f.chunk.css.map",
-    "static/media/FADO.jpg": "/inverus/static/media/FADO.8ae6123d.jpg",
-    "static/media/logo.svg": "/inverus/static/media/logo.5d5d9eef.svg",
-    "static/media/logo_black_small.png": "/inverus/static/media/logo_black_small.504f93d3.png"
+    "main.css": "/inversus/static/css/main.1265900f.chunk.css",
+    "main.js": "/inversus/static/js/main.b9d3908a.chunk.js",
+    "main.js.map": "/inversus/static/js/main.b9d3908a.chunk.js.map",
+    "runtime~main.js": "/inversus/static/js/runtime~main.8a87e9e9.js",
+    "runtime~main.js.map": "/inversus/static/js/runtime~main.8a87e9e9.js.map",
+    "static/js/2.3a64e2db.chunk.js": "/inversus/static/js/2.3a64e2db.chunk.js",
+    "static/js/2.3a64e2db.chunk.js.map": "/inversus/static/js/2.3a64e2db.chunk.js.map",
+    "index.html": "/inversus/index.html",
+    "precache-manifest.8348f68088f88fd45833339e6bedc1ee.js": "/inversus/precache-manifest.8348f68088f88fd45833339e6bedc1ee.js",
+    "service-worker.js": "/inversus/service-worker.js",
+    "static/css/main.1265900f.chunk.css.map": "/inversus/static/css/main.1265900f.chunk.css.map",
+    "static/media/FADO.jpg": "/inversus/static/media/FADO.8ae6123d.jpg",
+    "static/media/logo.svg": "/inversus/static/media/logo.5d5d9eef.svg",
+    "static/media/logo_black_small.png": "/inversus/static/media/logo_black_small.504f93d3.png"
   }
 }
