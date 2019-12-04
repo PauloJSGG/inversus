@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <h1>IM HEREEEEEEE</h1>
+      {console.log('envvvv',process.env.PUBLIC_URL)}
       <div className="global-container">
         <Router basename={process.env.PUBLIC_URL}>
           {/* <Redirect from="/" exact to="/main" /> */}
