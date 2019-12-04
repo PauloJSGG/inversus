@@ -24,14 +24,17 @@ library.add(fab, fas)
 function App() {
 
   return (
-    <div className="global-container">
-      <Router basename={process.env.PUBLIC_URL}>
-        {/* <Redirect from="/" exact to="/main" /> */}
-        <Route path='/admin' component={AdminRoute} />
-        <Route path='/login' exact component={LoginContainer} />
-        <Route path='/main' component={MainRoute} />
-      </Router>
-    </div>
+    <>
+      <h1>IM HEREEEEEEE</h1>
+      <div className="global-container">
+        <Router basename={process.env.PUBLIC_URL}>
+          {/* <Redirect from="/" exact to="/main" /> */}
+          <Route path='/admin' component={AdminRoute} />
+          <Route path='/login' exact component={LoginContainer} />
+          <Route path='/main' component={MainRoute} />
+        </Router>
+      </div>
+    </>
   );
 }
 
