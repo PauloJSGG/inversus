@@ -10,8 +10,8 @@ import Auth from './containers/AuthContainer'
 import LoginContainer from './containers/LoginContainer'
 
 
-import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import { Redirect, HashRouter } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,12 +27,12 @@ function App() {
     <>
       {console.log('envvvv',process.env.PUBLIC_URL)}
       <div className="global-container">
-        <Router basename={process.env.PUBLIC_URL}>
+        <HashRouter  basename='/inversus' >
           {/* <Redirect from="/" exact to="/main" /> */}
           <Route path='/admin' component={AdminRoute} />
           <Route path='/login' exact component={LoginContainer} />
           <Route path='/main' component={MainRoute} />
-        </Router>
+        </HashRouter>
       </div>
     </>
   );
