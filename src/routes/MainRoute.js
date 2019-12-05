@@ -47,7 +47,7 @@ class MainRoute extends Component {
           <Route render={({location}) => (
             <TransitionGroup>
               <CSSTransition
-              key={location.key}
+              key={location.pathname}
               timeout={300}
               classNames="fade">
                 <Switch>
