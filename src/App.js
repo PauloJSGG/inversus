@@ -28,7 +28,7 @@ function App() {
           {/* <Redirect from="/" exact to="/main" /> */}
           <Route path='/admin' component={AdminRoute} />
           <Route path='/login' exact component={LoginContainer} />
-          <Route path='/' component={MainRoute} />
+          <Route path='/main' component={MainRoute} />
         </Router>
       </div>
     </>
