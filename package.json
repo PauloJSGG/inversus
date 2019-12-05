@@ -28,12 +28,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "npm-run-all --parallel watch:css start:react",
-    "build": "npm-run-all build:css build:react",
-    "build:css": "postcss src/vendor/css/tailwind.css -o src/vendor/css/index.css",
-    "watch:css": "postcss src/vendor/css/tailwind.css -o src/vendor/css/index.css -w",
-    "start:react": "react-scripts start",
-    "build:react": "react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
