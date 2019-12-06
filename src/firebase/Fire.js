@@ -38,10 +38,6 @@ class Fire {
 
   //MAIN DATA
   async getMainData() {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
-    }
-
     const mainText = await this.getMainText()
     const repertoire = await this.getRepertoire()
     const data = {

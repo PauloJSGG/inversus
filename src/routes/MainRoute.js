@@ -21,9 +21,10 @@ class MainRoute extends Component {
   }
 
   componentDidMount() {
-    Fire.isInitialized()
-      .then(val => this.setState({firebaseInitialized: val}))
-      .then(() => Fire.getMainData())
+    // Fire.isInitialized()
+    //   .then(val => this.setState({firebaseInitialized: val}))
+    Fire.getMainData()
+      // .then(() => Fire.getMainData())
       .then(r => this.setState(r))
   }
 
