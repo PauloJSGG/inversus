@@ -28,6 +28,10 @@ class MainRoute extends Component {
       .then(r => this.setState(r))
   }
 
+  handleSetLanguage(language) {
+    Fire.setLanguage(language)
+  }
+
   onFormChange(txt) {
     this.setState({
       mainText: txt
@@ -44,7 +48,7 @@ class MainRoute extends Component {
 
       return(
         <>
-          <Header/>
+          <Header handleSetLanguage = {this.handleSetLanguage}/>
           <Route render={({location}) => (
             <TransitionGroup>
               <CSSTransition

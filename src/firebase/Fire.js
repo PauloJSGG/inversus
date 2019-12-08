@@ -1,4 +1,6 @@
+import 'firebase'
 import app from 'firebase/app'
+import { SetOptions } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
 // import fireConfig from './fireConfig'
@@ -15,19 +17,21 @@ const fireConfig = {
 
 
 class Fire {
-	constructor() {
-		app.initializeApp(fireConfig)
+	constructor(language) {
+    app.initializeApp(fireConfig)
+
+    this.language = 'pt'
 		this.auth = app.auth()
-		this.db = app.firestore()
+    this.db = app.firestore()
   }
 
   //ADMIN DATA
-  async getAdminData() {
+  async getDynamicData() {
     if(!this.auth.currentUser) {
       return alert('Not authorized')
     }
 
-    const mainText = await this.getMainText()
+    const mainText = await this.getHomeText()
     const repertoire = await this.getRepertoire()
     const data = {
       mainText: mainText,
@@ -38,13 +42,13 @@ class Fire {
 
   //MAIN DATA
   async getMainData() {
-    const mainText = await this.getMainText()
-    const repertoire = await this.getRepertoire()
-    const data = {
-      mainText: mainText,
-      repertoire: repertoire
-    }
-    return data
+    // const mainText = await this.getMainText()
+    // const repertoire = await this.getRepertoire()
+    // const data = {
+    //   mainText: mainText,
+    //   repertoire: repertoire
+    // }
+    // return data
   }
 
 	login(email, password) {
@@ -55,6 +59,9 @@ class Fire {
 		return this.auth.signOut()
   }
 
+  setLanguage(language) {
+    this.language = language
+  }
 
 	async register(name, email, password) {
 		await this.auth.createUserWithEmailAndPassword(email, password)
@@ -68,19 +75,27 @@ class Fire {
 			return alert('Not authorized')
     }
 
-    return this.db.doc(`admin_values/main`).set({
-			text
-		})
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .set({home_text: text})
   }
 
-  async getMainText() {
-    const text = await this.db.doc('admin_values/main').get()
+  async getHomeText() {
+    const home_text = await this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .get()
 
-    return text.get('text')
+    return home_text.get('home_text')
   }
 
   async getRepertoire() {
-    const snapshot = await this.db.collection('repertoire').get()
+    const snapshot = await this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection('repertoire')
+      .get()
 
     return snapshot.docs.map(doc => {
       return {
@@ -91,13 +106,16 @@ class Fire {
   }
 
 
-  addTrack(track) {
+  async addTrack(track) {
     if(!this.auth.currentUser) {
 			return alert('Not authorized')
     }
 
-    return this.db.collection(`repertoire`).add(track)
-
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection('repertoire')
+      .add(track)
   }
 
   editTrack(track) {
@@ -105,20 +123,12 @@ class Fire {
 			return alert('Not authorized')
     }
 
-    return this.db.doc(`repertoire/${track.id}`).update(track.data)
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection(track.id)
+      .update(track.data)
   }
-
-
-
-	// addQuote(quote) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
-	// 		quote
-	// 	})
-	// }
 
 	isInitialized() {
 		return new Promise(resolve => {
@@ -129,11 +139,6 @@ class Fire {
 	getCurrentUsername() {
 		return this.auth.currentUser && this.auth.currentUser.displayName
 	}
-
-	// async getCurrentUserQuote() {
-	// 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
-	// 	return quote.get('quote')
-	// }
 }
 
 export default new Fire()

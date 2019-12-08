@@ -27,7 +27,7 @@ class AdminRoute extends Component{
   componentDidMount() {
     Fire.isInitialized()
       .then(val => this.setState({firebaseInitialized: val}))
-      .then(() => Fire.getAdminData())
+      .then(() => Fire.getDynamicData())
       .then(r => this.setState(r))
   }
 
@@ -86,10 +86,10 @@ class AdminRoute extends Component{
 
   handleSubmitTrack = () => {
     Fire.addTrack(this.state.currentTrack)
-      .catch(() => alert('❌Error❌'))
       .then(() =>  alert('✔️Success✔️'))
-      .then(() => Fire.getAdminData())
+      .then(() => Fire.getDynamicData())
       .then(r => this.setState(r))
+      .catch(() => alert('❌Error❌'))
       .finally(() => this.handleModalOpen(false))
       // .then(() => alert('Success'))
       // .catch(() => alert('Failed'))
