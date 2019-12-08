@@ -10,9 +10,9 @@ const { handleSetLanguage } = props
     <header className='header-main'>
       <div className='header-container'>
         <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>
-        <button onClick = {handleSetLanguage('PT')}>PT</button>
-        <button onClick = {handleSetLanguage('EN')}>EN</button>
-        <button onClick = {handleSetLanguage('DE')}>DE</button>
+        <button style = {{color: 'red'}} onClick = {() => handleSetLanguage('pt')}>PT</button>
+        <button style = {{color: 'red'}} onClick = {() => handleSetLanguage('en')}>EN</button>
+        <button style = {{color: 'red'}} onClick = {() => handleSetLanguage('de')}>DE</button>
         <nav>
           <ul className='flex justify-center'>
             {/* <NavLink to={'/news'} title="Social" className='m-2'>Sobre nós</NavLink>

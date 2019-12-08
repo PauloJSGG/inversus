@@ -40,7 +40,7 @@ class AdminRoute extends Component{
     }
   }
 
-  getRepertoire = async() => Fire.getRepertoire()
+  // getRepertoire = async() => Fire.getRepertoire()
 
   handleSubmitMain = () => {
     Fire.addMainText(this.state.mainText)
@@ -100,6 +100,12 @@ class AdminRoute extends Component{
       this.setState({currentTrack: {}})
 
     this.setState({isModalOpen: val})
+  }
+
+  handleSetLanguage = (language) => {
+    Fire.setLanguage(language)
+    Fire.getDynamicData()
+      .then(r => this.setState(r))
   }
 
   handleRepertoireChange(txt, param) {

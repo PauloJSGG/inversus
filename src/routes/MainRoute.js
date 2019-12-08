@@ -16,33 +16,36 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 class MainRoute extends Component {
   state = {
-    mainText: "",
+    homeText: "",
     repertoire: []
   }
 
   componentDidMount() {
-    // Fire.isInitialized()
-    //   .then(val => this.setState({firebaseInitialized: val}))
-    Fire.getMainData()
-      // .then(() => Fire.getMainData())
+    Fire.isInitialized()
+      .then(val => this.setState({firebaseInitialized: val}))
+      .then(() => Fire.getDynamicData())
       .then(r => this.setState(r))
   }
 
-  handleSetLanguage(language) {
+  handleSetLanguage = (language) => {
     Fire.setLanguage(language)
+    Fire.getDynamicData()
+      .then(r => this.setState(r))
   }
 
-  onFormChange(txt) {
-    this.setState({
-      mainText: txt
-    })
-  }
+  // onFormChange(txt) {
+  //   this.setState({
+  //     mainText: txt
+  //   })
+  // }
 
   submitMain() {
     Fire.addMainText(this.state.mainText)
   }
 
   render() {
+
+    console.log('state: ', this.state)
 
     const { match: { url } } = this.props
 
@@ -60,7 +63,6 @@ class MainRoute extends Component {
                   <Route path='/discography' component={Events}/> */}
                   <Route
                     path={`${url}/repertoire`}
-
                     render={ () => <Repertoire repertoire = {this.state.repertoire}/>}
                   />
                   <Route path={`${url}/events`} component={Events}/>
@@ -75,48 +77,5 @@ class MainRoute extends Component {
     )
   }
 }
-
-// const MainRoute = () => {
-//   return(
-//     <>
-//       <Header/>
-//       <Route render={({location}) => (
-//         <TransitionGroup>
-//           <CSSTransition
-//           key={location.key}
-//           timeout={300}
-//           classNames="fade">
-//             <Switch>
-//               {/* <Route path='/about-us' component={Social}/>
-//               <Route path='/discography' component={Events}/> */}
-//               {/* <Route path='/contacts' component={Social}/> */}
-//               <Route path='/events' component={Events}/>
-//               <Route path='/social' component={Social}/>
-//               <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/>
-//             </Switch>
-//           </CSSTransition>
-//         </TransitionGroup>
-//       )} />
-//       <Footer/>
-//     </>
-//   )
-// }
-
-
-// class Main extends Component {
-  // state = {
-  //   mainText: ""
-  // }
-
-  // componentDidMount(){
-  //   Fire.db().child('mainText').on('value', x => this.setState({mainText: x.val()}))
-  // }
-
-//   render() {
-//     return (
-
-//     )
-//   }
-// }
 
 export default MainRoute

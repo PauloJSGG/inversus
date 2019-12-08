@@ -27,10 +27,6 @@ class Fire {
 
   //ADMIN DATA
   async getDynamicData() {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
-    }
-
     const mainText = await this.getHomeText()
     const repertoire = await this.getRepertoire()
     const data = {
@@ -86,6 +82,8 @@ class Fire {
       .collection(this.language)
       .doc('dynamic_values')
       .get()
+
+      debugger
 
     return home_text.get('home_text')
   }
