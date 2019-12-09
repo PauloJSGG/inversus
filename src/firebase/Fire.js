@@ -3,6 +3,7 @@ import app from 'firebase/app'
 import { SetOptions } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
+import { bindExpression } from '@babel/types'
 // import fireConfig from './fireConfig'
 
 const fireConfig = {
@@ -90,6 +91,12 @@ class Fire {
   }
 
   async getRepertoire() {
+    const data = {
+      name: '',
+      lyrics: '',
+      imgUrl: '',
+      spotifyUrl: ''
+    }
     const snapshot = await this.db
       .collection(this.language)
       .doc('dynamic_values')
@@ -97,17 +104,31 @@ class Fire {
       .get()
 
     return snapshot.docs.map(doc => {
+
+      const docData = doc.data().data
+
       return {
         id: doc.id,
-        data: doc.data().data
+        data:{
+          ...data,
+          ...docData
+        }
       }
     })
   }
 
 
-  async addTrack(track) {
+  addTrack = async (track) => {
     if(!this.auth.currentUser) {
 			return alert('Not authorized')
+    }
+
+    const trackData = track.data
+
+    for (var key in trackData){
+      debugger
+      if(trackData[key].length === 0)
+        throw 'Fill in the blanks'
     }
 
     return this.db

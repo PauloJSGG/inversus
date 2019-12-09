@@ -46,7 +46,7 @@ const RepertoireEdit = (props) => {
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Imagem:</label>
-              <input name = "imageUrl" value = {currentTrack.imageUrl} onChange={e => handleTrackChange(e)}/>
+              <input name = "imgUrl" value = {currentTrack.imgUrl} onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Spotify:</label>
@@ -68,14 +68,14 @@ const RepertoireEdit = (props) => {
             </div>
           </div>
         </Modal>
-        <div className = 'flex flex-row flex-wrap'>
+        <div className = 'flex flex-row flex-wrap w-1/4'>
           {repertoire.map((item => {
               return(
-                <div key={item.id} className = "repetoire-card" >
+                <div key={item.id} onClick = {() => handleEditClick(item.id) } className = "repetoire-card" >
                   <h1>
                     {item.data.name}
                   </h1>
-                  <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button>
+                  {/* <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button> */}
                 </div>
               )
           }))}

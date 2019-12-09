@@ -27,7 +27,14 @@ class AdminRoute extends Component{
     tracks: [],
     isModalOpen: false,
     repertoire: [],
-    currentTrack: {},
+    currentTrack: {
+      data: {
+        name: '',
+        lyrics: '',
+        imgUrl: '',
+        spotifyUrl: ''
+      }
+    },
     languageList: [
       {
         language: 'pt',
@@ -108,16 +115,23 @@ class AdminRoute extends Component{
 
   handleSubmitTrack = () => {
     Fire.addTrack(this.state.currentTrack)
-    .then(() =>  alert('✔️Success✔️'))
-    .then(() => Fire.getDynamicData())
-    .then(r => this.setState(r))
-    .catch(() => alert('❌Error❌'))
-    .finally(() => this.handleModalOpen(false))
+      .then(() =>  alert('✔️Success✔️'))
+      .then(() => Fire.getDynamicData())
+      .then(r => this.setState(r))
+      .catch((e) => alert('❌Error❌' + e))
+      .finally(() => this.handleModalOpen(false))
   }
 
   handleModalOpen = (val) => {
     if (!val)
-    this.setState({currentTrack: {}})
+    this.setState({currentTrack: {
+      data: {
+        name: '',
+        lyrics: '',
+        imgUrl: '',
+        spotifyUrl: ''
+      }
+    }})
 
     this.setState({isModalOpen: val})
   }

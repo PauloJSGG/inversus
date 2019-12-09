@@ -11,6 +11,12 @@
   font-weight: 600;
   padding: 10px 5px;
   &--second{
-    background-color: rgb(188,158,91)
+    background-color: rgb(188,158,91);
+    transition: 0.3s;
   }
+}
+
+.shared-button--second:hover{
+  color: black;
+  background-color: rgba(188,158,91,0.9);
 }

@@ -11,7 +11,7 @@ export const repertoire = (props) => {
       {repertoire.map(item => {
         return(
           <div className = "repertoire">
-            <img className = "repertoire__track-logo" src = {item.data.imageUrl === "" ? guitarImg : item.data.imageUrl } alt = "track"/>
+            <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/>
             <h1>{item.data.name}</h1>
           </div>
         )
