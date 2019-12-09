@@ -1,18 +1,21 @@
 {
   "files": {
     "main.css": "/inversus/static/css/main.a34a402d.chunk.css",
-    "main.js": "/inversus/static/js/main.2aa722da.chunk.js",
-    "main.js.map": "/inversus/static/js/main.2aa722da.chunk.js.map",
+    "main.js": "/inversus/static/js/main.2024f496.chunk.js",
+    "main.js.map": "/inversus/static/js/main.2024f496.chunk.js.map",
     "runtime~main.js": "/inversus/static/js/runtime~main.8a87e9e9.js",
     "runtime~main.js.map": "/inversus/static/js/runtime~main.8a87e9e9.js.map",
-    "static/js/2.7318a823.chunk.js": "/inversus/static/js/2.7318a823.chunk.js",
-    "static/js/2.7318a823.chunk.js.map": "/inversus/static/js/2.7318a823.chunk.js.map",
+    "static/js/2.7d48378f.chunk.js": "/inversus/static/js/2.7d48378f.chunk.js",
+    "static/js/2.7d48378f.chunk.js.map": "/inversus/static/js/2.7d48378f.chunk.js.map",
     "index.html": "/inversus/index.html",
-    "precache-manifest.a2b8b18ac6113d80a4180fa86ade8a1a.js": "/inversus/precache-manifest.a2b8b18ac6113d80a4180fa86ade8a1a.js",
+    "precache-manifest.bf3d9f5d7feb1e9fbfc33a36b3d7bf79.js": "/inversus/precache-manifest.bf3d9f5d7feb1e9fbfc33a36b3d7bf79.js",
     "service-worker.js": "/inversus/service-worker.js",
     "static/css/main.a34a402d.chunk.css.map": "/inversus/static/css/main.a34a402d.chunk.css.map",
     "static/media/FADO.jpg": "/inversus/static/media/FADO.8ae6123d.jpg",
+    "static/media/de.svg": "/inversus/static/media/de.69ccebc7.svg",
+    "static/media/gb.svg": "/inversus/static/media/gb.c4cd6642.svg",
     "static/media/logo.svg": "/inversus/static/media/logo.5d5d9eef.svg",
-    "static/media/logo_black_small.png": "/inversus/static/media/logo_black_small.504f93d3.png"
+    "static/media/logo_black_small.png": "/inversus/static/media/logo_black_small.504f93d3.png",
+    "static/media/pt.svg": "/inversus/static/media/pt.8ce156e0.svg"
   }
 }
