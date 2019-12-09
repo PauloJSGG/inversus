@@ -5,6 +5,8 @@ import Footer from '../components/shared/Footer'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
 
+import LanguageSelector from '../components/shared/LanguageSelector'
+
 import pt from '../assets/img/pt.svg'
 import en from '../assets/img/gb.svg'
 import de from '../assets/img/de.svg'
@@ -155,7 +157,12 @@ class AdminRoute extends Component{
             timeout={300}
             classNames="fade">
             <Switch>
-              <div className = "content-container">
+              <div className = "content-container flex-col">
+                <LanguageSelector
+                  languageList = {this.state.languageList}
+                  currentLanguage = {this.state.currentLanguage}
+                  handleSetLanguage = {this.handleSetLanguage}
+                />
                 <Route
                   exact path = {`${url}/main`}
                   render = {

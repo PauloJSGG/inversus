@@ -1,6 +1,5 @@
 import React from 'react'
 
-import LanguageSelector from '../shared/LanguageSelector'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 
@@ -69,7 +68,7 @@ const RepertoireEdit = (props) => {
             </div>
           </div>
         </Modal>
-          <LanguageSelector {...props} />
+
           {repertoire.map((item => {
             return(
               <div key={item.id} className = "repetoire-card">

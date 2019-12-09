@@ -44,14 +44,6 @@ class MainRoute extends Component {
   componentDidMount() {
     Fire.isInitialized()
     this.refreshData(Fire.language)
-      // .then(val => this.setState({firebaseInitialized: val}))
-      // .then(() => Fire.getDynamicData())
-      // .then(r => {
-      //   data = r
-      //   return null
-      // })
-      // .then(() => Fire.getStaticData())
-      // .then(r => this.setState({data, staticData: r}))
   }
 
   refreshData = (language) => {

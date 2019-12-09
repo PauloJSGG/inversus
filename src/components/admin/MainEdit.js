@@ -14,7 +14,6 @@ const MainEdit = (props) => {
   return(
     <>
       <div className='flex flex-col justify-center my-5 items-center w-full'>
-        <LanguageSelector {...props} />
         <textarea onChange={e => handleFormChange(e.target.value)} className='h-56 w-1/2' value={formValue}></textarea>
         <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={handleSubmitHomeText}>enviar</button>
       </div>
