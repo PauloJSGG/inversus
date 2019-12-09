@@ -5,6 +5,10 @@ import Footer from '../components/shared/Footer'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
 
+import pt from '../assets/img/pt.svg'
+import en from '../assets/img/gb.svg'
+import de from '../assets/img/de.svg'
+
 import {
   CSSTransition,
   TransitionGroup
@@ -17,11 +21,26 @@ import { withRouter } from 'react-router-dom'
 class AdminRoute extends Component{
   state = {
     firebaseInitialized: false,
-    mainText: "",
+    homeText: '',
     tracks: [],
     isModalOpen: false,
     repertoire: [],
-    currentTrack: {}
+    currentTrack: {},
+    languageList: [
+      {
+        language: 'pt',
+        imgSrc: pt
+      },
+      {
+        language: 'en',
+        imgSrc: en
+      },
+      {
+        language: 'de',
+        imgSrc: de
+      },
+    ],
+    currentLanguage: ''
   }
 
   componentDidMount() {
@@ -114,6 +133,12 @@ class AdminRoute extends Component{
     })
   }
 
+  handleSetLanguage = (language) => {
+    Fire.setLanguage(language)
+    Fire.getDynamicData()
+      .then(r => this.setState(r))
+    debugger
+  }
 
   onInputChange = (num) => {
     this.setState({numberOfTracks: num})
@@ -152,7 +177,10 @@ class AdminRoute extends Component{
                     <MainEdit
                       handleSubmitMain = {this.handleSubmitMain}
                       handleFormChange = {this.handleFormChange}
-                      formValue = {this.state.mainText}
+                      handleSetLanguage = {this.handleSetLanguage}
+                      languageList = {this.state.languageList}
+                      currentLanguage = {this.state.currentLanguage}
+                      formValue = {this.state.homeText}
                     />
                   }
                 />

@@ -27,11 +27,12 @@ class Fire {
 
   //ADMIN DATA
   async getDynamicData() {
-    const mainText = await this.getHomeText()
+    const homeText = await this.getHomeText()
     const repertoire = await this.getRepertoire()
     const data = {
-      mainText: mainText,
-      repertoire: repertoire
+      homeText: homeText,
+      repertoire: repertoire,
+      currentLanguage: this.language
     }
     return data
   }
@@ -82,8 +83,6 @@ class Fire {
       .collection(this.language)
       .doc('dynamic_values')
       .get()
-
-      debugger
 
     return home_text.get('home_text')
   }
