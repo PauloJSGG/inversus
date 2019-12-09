@@ -68,18 +68,19 @@ const RepertoireEdit = (props) => {
             </div>
           </div>
         </Modal>
-
+        <div className = 'flex flex-row flex-wrap'>
           {repertoire.map((item => {
-            return(
-              <div key={item.id} className = "repetoire-card">
-                <h1>
-                  {item.data.name}
-                </h1>
-                <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button>
-              </div>
-            )
+              return(
+                <div key={item.id} className = "repetoire-card" >
+                  <h1>
+                    {item.data.name}
+                  </h1>
+                  <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button>
+                </div>
+              )
           }))}
-          <button className = 'shared-button shared-button--second' onClick = { () => handleModalOpen(true)}>Adicionar</button>
+        </div>
+        <button className = 'shared-button shared-button--second' onClick = { () => handleModalOpen(true)}>Adicionar</button>
       </div>
     </>
   )
