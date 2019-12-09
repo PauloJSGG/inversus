@@ -1,36 +1,22 @@
 import React, { Component } from 'react'
+import LanguageSelector from '../shared/LanguageSelector'
 import Fire from '../../firebase/Fire'
 
 
 const MainEdit = (props) => {
 
   const {
-    handleSubmitMain,
+    handleSubmitHomeText,
     handleFormChange,
-    handleSetLanguage,
-    languageList,
-    currentLanguage,
     formValue
   } = props
-
-  console.log(currentLanguage)
 
   return(
     <>
       <div className='flex flex-col justify-center my-5 items-center w-full'>
-        <div className = 'flex flex-row justify-around w-1/2 my-5'>
-          {
-            languageList.map((item) => {
-              if (item.language === currentLanguage)
-                return <img src = {item.imgSrc} style = {{width: '50px', border: '5px solid #ddd'} }/>
-              else
-                return <button onClick = { () => handleSetLanguage(item.language)}><img src = {item.imgSrc} style = {{width: '50px'} }/></button>
-            })
-          }
-
-        </div>
+        <LanguageSelector {...props} />
         <textarea onChange={e => handleFormChange(e.target.value)} className='h-56 w-1/2' value={formValue}></textarea>
-        <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={handleSubmitMain}>enviar</button>
+        <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={handleSubmitHomeText}>enviar</button>
       </div>
     </>
   )

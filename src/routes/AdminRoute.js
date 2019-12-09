@@ -122,6 +122,7 @@ class AdminRoute extends Component{
   }
 
   handleSetLanguage = (language) => {
+    debugger
     Fire.setLanguage(language)
     Fire.getDynamicData()
       .then(r => this.setState(r))
@@ -131,12 +132,6 @@ class AdminRoute extends Component{
     this.setState({
       mainText: txt
     })
-  }
-
-  handleSetLanguage = (language) => {
-    Fire.setLanguage(language)
-    Fire.getDynamicData()
-      .then(r => this.setState(r))
   }
 
   onInputChange = (num) => {
@@ -174,7 +169,7 @@ class AdminRoute extends Component{
                   render = {
                     (props) =>
                     <MainEdit
-                      handleSubmitMain = {this.handleSubmitMain}
+                      handleSubmitHomeText = {this.handleSubmitHomeText}
                       handleFormChange = {this.handleFormChange}
                       handleSetLanguage = {this.handleSetLanguage}
                       languageList = {this.state.languageList}
@@ -192,6 +187,9 @@ class AdminRoute extends Component{
                       handleTrackChange = {this.handleTrackChange}
                       handleModalOpen = {this.handleModalOpen}
                       handleSubmitTrack = {this.handleSubmitTrack}
+                      handleSetLanguage = {this.handleSetLanguage}
+                      languageList = {this.state.languageList}
+                      currentLanguage = {this.state.currentLanguage}
                       isModalOpen = {this.state.isModalOpen}
                       repertoire = {this.state.repertoire}
                       currentTrack = {this.state.currentTrack}
