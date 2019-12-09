@@ -42,38 +42,35 @@ class MainRoute extends Component {
   }
 
   componentDidMount() {
-    let data = {}
     Fire.isInitialized()
-      .then(val => this.setState({firebaseInitialized: val}))
+    this.refreshData(Fire.language)
+      // .then(val => this.setState({firebaseInitialized: val}))
+      // .then(() => Fire.getDynamicData())
+      // .then(r => {
+      //   data = r
+      //   return null
+      // })
+      // .then(() => Fire.getStaticData())
+      // .then(r => this.setState({data, staticData: r}))
+  }
+
+  refreshData = (language) => {
+    let data = {}
+    Fire.setLanguage(language)
+    Fire.getDynamicData()
       .then(() => Fire.getDynamicData())
       .then(r => {
         data = r
         return null
       })
       .then(() => Fire.getStaticData())
-      .then(r => this.setState({data, r}))
+      .then(r => this.setState({data, staticData: r}))
   }
 
   handleSetLanguage = (language) => {
-    let data = {}
-    Fire.setLanguage(language)
-    Fire.getDynamicData()
-      .then(r => this.setState(r))
-      .then(r => {
-        data = r
-        return null
-      })
-      .then(() => Fire.getStaticData())
-      .then(r => this.setState({data, r}))
+    this.refreshData(language)
   }
 
-
-
-  // onFormChange(txt) {
-  //   this.setState({
-  //     mainText: txt
-  //   })
-  // }
 
   submitMain() {
     Fire.addMainText(this.state.mainText)
