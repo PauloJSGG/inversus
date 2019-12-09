@@ -61,15 +61,15 @@ class AdminRoute extends Component{
 
   // getRepertoire = async() => Fire.getRepertoire()
 
-  handleSubmitMain = () => {
-    Fire.addMainText(this.state.mainText)
+  handleSubmitHomeText = () => {
+    Fire.addMainText(this.state.homeText)
       .then(r => alert('✔️Success✔️'))
       .catch(e => alert('❌Error❌'))
   }
 
   handleFormChange = (txt) => {
     this.setState({
-      mainText: txt
+      homeText: txt
     })
   }
 
@@ -137,7 +137,6 @@ class AdminRoute extends Component{
     Fire.setLanguage(language)
     Fire.getDynamicData()
       .then(r => this.setState(r))
-    debugger
   }
 
   onInputChange = (num) => {

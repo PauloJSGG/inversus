@@ -84,7 +84,10 @@ class Fire {
       .doc('dynamic_values')
       .get()
 
-    return home_text.get('home_text')
+    if (home_text.get('home_text'))
+      return home_text.get('home_text')
+    else
+      return ''
   }
 
   async getRepertoire() {

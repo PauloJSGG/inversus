@@ -13,14 +13,14 @@ const MainEdit = (props) => {
     formValue
   } = props
 
+  console.log(currentLanguage)
+
   return(
     <>
-
       <div className='flex flex-col justify-center my-5 items-center w-full'>
         <div className = 'flex flex-row justify-around w-1/2 my-5'>
           {
             languageList.map((item) => {
-              debugger
               if (item.language === currentLanguage)
                 return <img src = {item.imgSrc} style = {{width: '50px', border: '5px solid #ddd'} }/>
               else
