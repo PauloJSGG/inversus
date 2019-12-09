@@ -21,8 +21,11 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 class MainRoute extends Component {
   state = {
-    homeText: "",
-    repertoire: [],
+    dynamicData: {
+      homeText: "",
+      repertoire: []
+    },
+
     languageList: [
       {
         language: 'pt',
@@ -37,26 +40,27 @@ class MainRoute extends Component {
         imgSrc: de
       },
     ],
+
+    staticData: {},
     currentLanguage: '',
-    staticData: {}
   }
 
   componentDidMount() {
     Fire.isInitialized()
-    this.refreshData(Fire.language)
+      .then(this.refreshData(Fire.language))
   }
 
   refreshData = (language) => {
-    let data = {}
+    let dynamicData = {}
     Fire.setLanguage(language)
     Fire.getDynamicData()
       .then(() => Fire.getDynamicData())
       .then(r => {
-        data = r
+        dynamicData = r
         return null
       })
       .then(() => Fire.getStaticData())
-      .then(r => this.setState({data, staticData: r}))
+      .then(r => this.setState({dynamicData, staticData: r}))
   }
 
   handleSetLanguage = (language) => {
@@ -70,6 +74,8 @@ class MainRoute extends Component {
 
   render() {
     const { match: { url } } = this.props
+
+    console.log('estadoooooo',  this.state)
 
       return(
         <>
@@ -94,7 +100,7 @@ class MainRoute extends Component {
                   />
                   <Route path={`${url}/events`} component={Events}/>
                   <Route path={`${url}/social`} component={Social}/>
-                  <Route path={`${url}`} component={() => <Home text={this.state.mainText}></Home>}/>
+                  <Route path={`${url}`} component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
