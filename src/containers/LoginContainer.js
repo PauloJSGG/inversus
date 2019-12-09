@@ -31,7 +31,7 @@ export default class LoginContainer extends Component {
   render() {
     return (
       <>
-        <header className='fixed'>
+        <header className='header-admin'>
           <div className='header__logo'>
             <img src={Logo}></img>
           </div>
