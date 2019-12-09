@@ -25,7 +25,7 @@ class Fire {
     this.db = app.firestore()
   }
 
-  //ADMIN DATA
+  //DYNAMIC DATA
   async getDynamicData() {
     const homeText = await this.getHomeText()
     const repertoire = await this.getRepertoire()
@@ -37,15 +37,14 @@ class Fire {
     return data
   }
 
-  //MAIN DATA
-  async getMainData() {
-    // const mainText = await this.getMainText()
-    // const repertoire = await this.getRepertoire()
-    // const data = {
-    //   mainText: mainText,
-    //   repertoire: repertoire
-    // }
-    // return data
+  //STATIC DATA
+  async getStaticData() {
+    const staticData = await this.db
+      .collection(this.language)
+      .doc('static_values')
+      .get()
+
+    return staticData.get('header')
   }
 
 	login(email, password) {

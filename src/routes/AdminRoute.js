@@ -45,9 +45,9 @@ class AdminRoute extends Component{
 
   componentDidMount() {
     Fire.isInitialized()
-      .then(val => this.setState({firebaseInitialized: val}))
-      .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
+    .then(val => this.setState({firebaseInitialized: val}))
+    .then(() => Fire.getDynamicData())
+    .then(r => this.setState(r))
   }
 
   login = async () => {
@@ -59,12 +59,10 @@ class AdminRoute extends Component{
     }
   }
 
-  // getRepertoire = async() => Fire.getRepertoire()
-
   handleSubmitHomeText = () => {
     Fire.addMainText(this.state.homeText)
-      .then(r => alert('✔️Success✔️'))
-      .catch(e => alert('❌Error❌'))
+    .then(r => alert('✔️Success✔️'))
+    .catch(e => alert('❌Error❌'))
   }
 
   handleFormChange = (txt) => {
@@ -81,7 +79,6 @@ class AdminRoute extends Component{
       isModalOpen: true,
       currentTrack: track.data
     })
-
   }
 
   handleTrackChange = (event) => {
@@ -97,36 +94,32 @@ class AdminRoute extends Component{
           ...this.state.currentTrack.data,
           [name]: value
         }
-
       }
     });
-
-  }
-
-  handleSubmitTrack = () => {
-    Fire.addTrack(this.state.currentTrack)
-      .then(() =>  alert('✔️Success✔️'))
-      .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
-      .catch(() => alert('❌Error❌'))
-      .finally(() => this.handleModalOpen(false))
-      // .then(() => alert('Success'))
-      // .catch(() => alert('Failed'))
-  }
-
-  handleModalOpen = (val) => {
-    if (!val)
-      this.setState({currentTrack: {}})
-
-    this.setState({isModalOpen: val})
   }
 
   handleSetLanguage = (language) => {
-    debugger
     Fire.setLanguage(language)
     Fire.getDynamicData()
       .then(r => this.setState(r))
   }
+
+  handleSubmitTrack = () => {
+    Fire.addTrack(this.state.currentTrack)
+    .then(() =>  alert('✔️Success✔️'))
+    .then(() => Fire.getDynamicData())
+    .then(r => this.setState(r))
+    .catch(() => alert('❌Error❌'))
+    .finally(() => this.handleModalOpen(false))
+  }
+
+  handleModalOpen = (val) => {
+    if (!val)
+    this.setState({currentTrack: {}})
+
+    this.setState({isModalOpen: val})
+  }
+
 
   handleRepertoireChange(txt, param) {
     this.setState({
@@ -139,11 +132,10 @@ class AdminRoute extends Component{
   }
   //------------------------------------------
 
-
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
     if (this.state.firebaseInitialized === false)
-      return <h1 style={{color: 'red'}}>LOADIIIINNNGGGGGGG</h1>
+    return <h1 style={{color: 'red'}}>LOADIIIINNNGGGGGGG</h1>
 
     if(!Fire.getCurrentUsername()) {
       // not logged in
@@ -151,9 +143,9 @@ class AdminRoute extends Component{
       return null
     }
 
-  const { match: { url } } = this.props
+    const { match: { url } } = this.props
 
-  return(
+    return(
       <>
         <AdminHeader/>
         <Route render={({location}) => (
@@ -187,9 +179,11 @@ class AdminRoute extends Component{
                       handleTrackChange = {this.handleTrackChange}
                       handleModalOpen = {this.handleModalOpen}
                       handleSubmitTrack = {this.handleSubmitTrack}
+
                       handleSetLanguage = {this.handleSetLanguage}
                       languageList = {this.state.languageList}
                       currentLanguage = {this.state.currentLanguage}
+
                       isModalOpen = {this.state.isModalOpen}
                       repertoire = {this.state.repertoire}
                       currentTrack = {this.state.currentTrack}

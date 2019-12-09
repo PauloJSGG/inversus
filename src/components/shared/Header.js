@@ -1,18 +1,21 @@
 import React from 'react'
 import Logo from '../../assets/img/logo_black_small.png'
+import LanguageSelector from '../shared/LanguageSelector'
 import { NavLink, Link  } from "react-router-dom";
 
-  const Header = (props) => {
+const Header = (props) => {
 
-const { handleSetLanguage } = props
+  const {staticData} = props
+
+  console.log('static', staticData)
 
   return(
     <header className='header-main'>
       <div className='header-container'>
-        <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>
-        <button style = {{color: 'red'}} onClick = {() => handleSetLanguage('pt')}>PT</button>
-        <button style = {{color: 'red'}} onClick = {() => handleSetLanguage('en')}>EN</button>
-        <button style = {{color: 'red'}} onClick = {() => handleSetLanguage('de')}>DE</button>
+        <div className = 'flex w-full justify-center mx-20'>
+          <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>
+          <LanguageSelector {...props} />
+        </div>
         <nav>
           <ul className='flex justify-center'>
             {/* <NavLink to={'/news'} title="Social" className='m-2'>Sobre nós</NavLink>

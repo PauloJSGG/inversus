@@ -5,6 +5,11 @@ import Footer from '../components/shared/Footer'
 import Social from '../components/main/social'
 import Events from '../components/main/events'
 import Repertoire from '../components/main/repertoire'
+
+import pt from '../assets/img/pt.svg'
+import en from '../assets/img/gb.svg'
+import de from '../assets/img/de.svg'
+
 import Home from '../components/main/'
 import {
   CSSTransition,
@@ -17,21 +22,52 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 class MainRoute extends Component {
   state = {
     homeText: "",
-    repertoire: []
+    repertoire: [],
+    languageList: [
+      {
+        language: 'pt',
+        imgSrc: pt
+      },
+      {
+        language: 'en',
+        imgSrc: en
+      },
+      {
+        language: 'de',
+        imgSrc: de
+      },
+    ],
+    currentLanguage: '',
+    staticData: {}
   }
 
   componentDidMount() {
+    let data = {}
     Fire.isInitialized()
       .then(val => this.setState({firebaseInitialized: val}))
       .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
+      .then(r => {
+        data = r
+        return null
+      })
+      .then(() => Fire.getStaticData())
+      .then(r => this.setState({data, r}))
   }
 
   handleSetLanguage = (language) => {
+    let data = {}
     Fire.setLanguage(language)
     Fire.getDynamicData()
       .then(r => this.setState(r))
+      .then(r => {
+        data = r
+        return null
+      })
+      .then(() => Fire.getStaticData())
+      .then(r => this.setState({data, r}))
   }
+
+
 
   // onFormChange(txt) {
   //   this.setState({
@@ -44,14 +80,16 @@ class MainRoute extends Component {
   }
 
   render() {
-
-    console.log('state: ', this.state)
-
     const { match: { url } } = this.props
 
       return(
         <>
-          <Header handleSetLanguage = {this.handleSetLanguage}/>
+          <Header
+            handleSetLanguage = {this.handleSetLanguage}
+            languageList = {this.state.languageList}
+            currentLanguage = {this.state.currentLanguage}
+            staticData = {this.state.staticData}
+          />
           <Route render={({location}) => (
             <TransitionGroup>
               <CSSTransition

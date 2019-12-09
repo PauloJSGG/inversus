@@ -10,7 +10,7 @@ const LanguageSelector = (props) => {
           {
             languageList.map((item) => {
               if (item.language === currentLanguage)
-                return <img src = {item.imgSrc} style = {{width: '50px', border: '5px solid #ddd'} }/>
+                return null
               else
                 return <button onClick = { () => handleSetLanguage(item.language)}><img src = {item.imgSrc} style = {{width: '50px'} }/></button>
             })
