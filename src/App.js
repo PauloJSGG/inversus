@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <div className="global-container">
-        <HashRouter>
+        <HashRouter basename={'/'}>
           {/* <Redirect from="/" exact to="/main" /> */}
           <Switch>
             <Route path='/admin' component={AdminRoute} />
