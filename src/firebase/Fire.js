@@ -1,9 +1,6 @@
-import 'firebase'
 import app from 'firebase/app'
-import { SetOptions } from 'firebase'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
-import { bindExpression } from '@babel/types'
 // import fireConfig from './fireConfig'
 
 const fireConfig = {
