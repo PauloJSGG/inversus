@@ -1,15 +1,20 @@
 import React from 'react'
 import guitarImg from '../../../assets/img/FADO.jpg'
+import Divider from '../../shared/Divider.js'
 
 export const repertoire = (props) => {
   const {
-    repertoire
-  } = props
+    repertoire,
 
-  console.log('propsssss  ', props)
+  } = props
 
   return (
     <div>
+      <div className = 'flex flex-row w-full'>
+        <Divider classs='test test--flip' />
+        <Divider classs='test'  />
+      </div>
+      {/* <svg src = {divider}/> */}
       {repertoire.map(item => {
         return(
           <div className = "repertoire">

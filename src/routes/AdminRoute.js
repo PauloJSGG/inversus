@@ -1,7 +1,5 @@
 import React, { useEffect, useState, Component } from 'react'
 import AdminHeader from '../components/admin/AdminHeader'
-import LoginForm from '../components/admin/LoginForm'
-import Footer from '../components/shared/Footer'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
 
@@ -17,7 +15,7 @@ import {
 } from 'react-transition-group'
 import Fire from '../firebase/Fire'
 
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 class AdminRoute extends Component{
@@ -178,7 +176,7 @@ class AdminRoute extends Component{
                   handleSetLanguage = {this.handleSetLanguage}
                 />
                 <Route
-                  exact path = {`${url}/main`}
+                  exact path = {`${url}`}
                   render = {
                     (props) =>
                     <MainEdit
@@ -212,13 +210,10 @@ class AdminRoute extends Component{
                   }
                 />
               </div>
-              {/* <Route exact path='/contacts' component={Social}/> */}
-              {/* <Route exact path='/' component={() => <Home text={this.state.mainText}></Home>}/> */}
             </Switch>
           </CSSTransition>
         </TransitionGroup>
         )} />
-        <Footer/>
       </>
     )
   }

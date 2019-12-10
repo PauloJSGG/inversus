@@ -8,7 +8,7 @@ const AdminHeader = () => {
       <Link to={'/admin'} title="Home" className='header__logo'><img src={Logo}></img></Link>
       <nav>
         <ul className='flex justify-center'>
-          <NavLink to={'/admin/main'} title="Social" className='m-2'>Texto página principal</NavLink>
+          <NavLink to={'/admin/'} title="Social" className='m-2'>Texto página principal</NavLink>
           <NavLink to={'/admin/repertoire'} title="Social" className='m-2'>Editar reportorio</NavLink>
         </ul>
       </nav>

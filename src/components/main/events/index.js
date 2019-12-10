@@ -11,7 +11,6 @@ const row = (props) => {
   )
 }
 
-
 const Events = () => {
 
   const events = [
