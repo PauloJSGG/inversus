@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <div className="global-container">
-        <Router basename={'inversus'}>
+        <Router basename={'inversus/'}>
           {/* <Redirect from="/" exact to="/main" /> */}
           <Switch>
             <Route path='/admin' component={AdminRoute} />
