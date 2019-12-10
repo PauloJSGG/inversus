@@ -9,7 +9,7 @@ import Auth from './containers/AuthContainer'
 
 import LoginContainer from './containers/LoginContainer'
 
-import { Route, HashRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Redirect, Switch } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -36,5 +36,4 @@ function App() {
     </>
   );
 }
-
 export default App;
