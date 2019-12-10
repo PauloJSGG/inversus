@@ -9,8 +9,8 @@ import Auth from './containers/AuthContainer'
 
 import LoginContainer from './containers/LoginContainer'
 
-import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { Redirect, Switch } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
+// import { Redirect, Switch } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,14 +24,14 @@ function App() {
   return (
     <>
       <div className="global-container">
-        <Router basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           {/* <Redirect from="/" exact to="/main" /> */}
           <Switch>
             <Route path='/admin' component={AdminRoute} />
             <Route path='/login' exact component={LoginContainer} />
             <Route path='/' component={MainRoute} />
           </Switch>
-        </Router>
+        </BrowserRouter>
       </div>
     </>
   );
