@@ -12,12 +12,12 @@ import LoginContainer from './containers/LoginContainer'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 // import { Redirect, Switch } from 'react-router-dom'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
+// import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { fas, faHome, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 
-library.add(fab, fas)
+// library.add(fab, fas)
 
 function App() {
 
