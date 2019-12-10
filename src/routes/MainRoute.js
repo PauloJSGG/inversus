@@ -6,6 +6,8 @@ import Social from '../components/main/social'
 import Events from '../components/main/events'
 import Repertoire from '../components/main/repertoire'
 
+import asdf from '../routes/AdminRoute'
+
 import pt from '../assets/img/pt.svg'
 import en from '../assets/img/gb.svg'
 import de from '../assets/img/de.svg'
@@ -18,6 +20,7 @@ import {
 import Fire from '../firebase/Fire'
 
 import { Route, Switch, Redirect } from 'react-router-dom'
+import AdminRoute from '../routes/AdminRoute'
 
 class MainRoute extends Component {
   state = {
@@ -98,9 +101,9 @@ class MainRoute extends Component {
                     path={`${url}/repertoire`}
                     render={ () => <Repertoire repertoire = {this.state.repertoire}/>}
                   />
-                  <Route path={`${url}/events`} component={Events}/>
-                  <Route path={`${url}/social`} component={Social}/>
-                  <Route path={`${url}`} component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
+                  <Route path={'/events'} component={Events}/>
+                  <Route path={'/social'} component={Social}/>
+                  <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

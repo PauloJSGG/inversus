@@ -16,9 +16,9 @@ const Header = (props) => {
         </div>
         <nav>
           <ul className='flex justify-center'>
-            <NavLink exact to={'/main/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
-            <NavLink exact to={'/main/events'} title="Events" className='m-2'>{staticData.events}</NavLink>
-            <NavLink exact to={'/main/social'} title="Social" className='m-2'>{staticData.social}</NavLink>
+            <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
+            <NavLink exact to={'/events'} title="Events" className='m-2'>{staticData.events}</NavLink>
+            <NavLink exact to={'/social'} title="Social" className='m-2'>{staticData.social}</NavLink>
           </ul>
         </nav>
         <div className='header__border-bottom'></div>
