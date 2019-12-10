@@ -1,7 +1,7 @@
 {
   "name": "inversus",
   "version": "0.1.0",
-  "homepage": "http://paulojsgg.github.io/inversus",
+  "homepage": "http://paulojsgg.github.io/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
