@@ -36,17 +36,4 @@ const Events = () => {
   )
 }
 
-// class Events extends Component {
-//   debugger
-//   render() {
-//     const {events} = this.props;
-//     console.log('events',this.props)
-//     return (
-//       <div className='event'>
-//         {events.map(r => row(r))}
-//       </div>
-//     )
-//   }
-// }
-
 export default Events;

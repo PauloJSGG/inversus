@@ -8,8 +8,6 @@ const LanguageSelector = (props) => {
     handleSetLanguage,
   } = props
 
-  console.log('url ', props)
-
   return (
     <div>
        <div className = 'flex flex-row justify-center w-full my-5'>

@@ -76,41 +76,37 @@ class MainRoute extends Component {
   }
 
   render() {
-    const { match: { url } } = this.props
-
-    console.log('estadoooooo',  this.state)
-
-      return(
-        <>
-          <Header
-            handleSetLanguage = {this.handleSetLanguage}
-            languageList = {this.state.languageList}
-            currentLanguage = {this.state.currentLanguage}
-            staticData = {this.state.staticData}
-          />
-          <Route render={({location}) => (
-            <TransitionGroup>
-              <CSSTransition
-              key={location.pathname}
-              timeout={300}
-              classNames="fade">
-                <Switch>
-                  {/* <Route path='/about-us' component={Social}/>
-                  <Route path='/discography' component={Events}/> */}
+    return(
+      <>
+        <Header
+          handleSetLanguage = {this.handleSetLanguage}
+          languageList = {this.state.languageList}
+          currentLanguage = {this.state.currentLanguage}
+          staticData = {this.state.staticData}
+        />
+        <Route render={({location}) => (
+          <TransitionGroup>
+            <CSSTransition
+            key={location.pathname}
+            timeout={300}
+            classNames="fade">
+              <Switch>
+                <div className = 'content-container'>
                   <Route
-                    path={`${url}/repertoire`}
-                    render={ () => <Repertoire repertoire = {this.state.repertoire}/>}
+                    path={'/repertoire'}
+                    render={ () => <Repertoire repertoire = {this.state.dynamicData.repertoire}/>}
                   />
                   <Route path={'/events'} component={Events}/>
                   <Route path={'/social'} component={Social}/>
                   <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
-          )} />
-          <Footer/>
-        </>
-    )
+                </div>
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )} />
+        <Footer/>
+      </>
+  )
   }
 }
 

@@ -6,6 +6,8 @@ export const repertoire = (props) => {
     repertoire
   } = props
 
+  console.log('propsssss  ', props)
+
   return (
     <div>
       {repertoire.map(item => {
