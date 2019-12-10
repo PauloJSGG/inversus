@@ -28,10 +28,8 @@ const Events = () => {
 ]
 
   return(
-    <div className='content-container'>
-      <div className='event'>
-        {events.map(r => row(r))}
-      </div>
+    <div className='event'>
+      {events.map(r => row(r))}
     </div>
   )
 }

@@ -4,13 +4,11 @@ const Main = ({text}) => {
 
   return (
     <>
-      <div className='content-container'>
-        <div className='shade1'></div>
-          <p className='home__text m-3'>
-            {text}
-          </p>
-          <div className='shade2'></div>
-      </div>
+      <div className='shade1'/>
+        <p className='home__text m-3'>
+          {text}
+        </p>
+      <div className='shade2'/>
     </>
 
   )
