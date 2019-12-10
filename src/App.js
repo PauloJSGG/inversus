@@ -9,7 +9,7 @@ import Auth from './containers/AuthContainer'
 
 import LoginContainer from './containers/LoginContainer'
 
-import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, HashRouter, Switch } from 'react-router-dom'
 // import { Redirect, Switch } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -24,14 +24,14 @@ function App() {
   return (
     <>
       <div className="global-container">
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter basename={process.env.PUBLIC_URL}>
           {/* <Redirect from="/" exact to="/main" /> */}
           <Switch>
             <Route path='/admin' component={AdminRoute} />
             <Route path='/login' exact component={LoginContainer} />
             <Route path='/' component={MainRoute} />
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     </>
   );
