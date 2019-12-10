@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/inversus/static/css/main.050600fd.chunk.css",
-    "main.js": "/inversus/static/js/main.1f633711.chunk.js",
-    "main.js.map": "/inversus/static/js/main.1f633711.chunk.js.map",
-    "runtime~main.js": "/inversus/static/js/runtime~main.8a87e9e9.js",
-    "runtime~main.js.map": "/inversus/static/js/runtime~main.8a87e9e9.js.map",
-    "static/js/2.f2d4f1c4.chunk.js": "/inversus/static/js/2.f2d4f1c4.chunk.js",
-    "static/js/2.f2d4f1c4.chunk.js.map": "/inversus/static/js/2.f2d4f1c4.chunk.js.map",
-    "index.html": "/inversus/index.html",
-    "precache-manifest.e7d5a94a05a18bc356f0767615183edd.js": "/inversus/precache-manifest.e7d5a94a05a18bc356f0767615183edd.js",
-    "service-worker.js": "/inversus/service-worker.js",
-    "static/css/main.050600fd.chunk.css.map": "/inversus/static/css/main.050600fd.chunk.css.map",
-    "static/media/FADO.jpg": "/inversus/static/media/FADO.8ae6123d.jpg",
-    "static/media/de.svg": "/inversus/static/media/de.69ccebc7.svg",
-    "static/media/gb.svg": "/inversus/static/media/gb.c4cd6642.svg",
-    "static/media/logo.svg": "/inversus/static/media/logo.5d5d9eef.svg",
-    "static/media/logo_black_small.png": "/inversus/static/media/logo_black_small.504f93d3.png",
-    "static/media/pt.svg": "/inversus/static/media/pt.8ce156e0.svg"
+    "main.css": "/static/css/main.050600fd.chunk.css",
+    "main.js": "/static/js/main.59d5ba34.chunk.js",
+    "main.js.map": "/static/js/main.59d5ba34.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.9148483b.js",
+    "runtime~main.js.map": "/static/js/runtime~main.9148483b.js.map",
+    "static/js/2.85c41836.chunk.js": "/static/js/2.85c41836.chunk.js",
+    "static/js/2.85c41836.chunk.js.map": "/static/js/2.85c41836.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.82bc9b6a4f74064524cde233da3dccd5.js": "/precache-manifest.82bc9b6a4f74064524cde233da3dccd5.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.050600fd.chunk.css.map": "/static/css/main.050600fd.chunk.css.map",
+    "static/media/FADO.jpg": "/static/media/FADO.8ae6123d.jpg",
+    "static/media/de.svg": "/static/media/de.69ccebc7.svg",
+    "static/media/gb.svg": "/static/media/gb.c4cd6642.svg",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+    "static/media/logo_black_small.png": "/static/media/logo_black_small.504f93d3.png",
+    "static/media/pt.svg": "/static/media/pt.8ce156e0.svg"
   }
 }
