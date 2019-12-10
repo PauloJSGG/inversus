@@ -25,7 +25,7 @@ function App() {
     <>
       <div className="global-container">
         <h1>WTF m8</h1>
-        <BrowserRouter basename = {process.env.PUBLIC_URL}>
+        <BrowserRouter>
           {/* <Redirect from="/" exact to="/main" /> */}
           <Switch>
             <Route path='/admin' component={AdminRoute} />
