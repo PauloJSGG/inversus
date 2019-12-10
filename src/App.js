@@ -24,7 +24,6 @@ function App() {
   return (
     <>
       <div className="global-container">
-        <h1>WTF m8</h1>
         <BrowserRouter>
           {/* <Redirect from="/" exact to="/main" /> */}
           <Switch>
