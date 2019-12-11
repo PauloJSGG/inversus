@@ -32,9 +32,9 @@ export const repertoire = (props) => {
   return (
     <div>
       <div className = 'flex flex-row w-full'>
-        <Divider classs='test test--flip' />
-  <h2 style = {{color: 'white'}} className = 'my-20'>{staticData.repertoire}</h2>
-        <Divider classs='test'  />
+        <Divider classs='test' />
+        <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
+        <Divider classs='test test--flip'  />
       </div>
       {/* <svg src = {divider}/> */}
       <Modal
