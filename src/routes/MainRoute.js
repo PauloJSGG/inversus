@@ -28,6 +28,7 @@ class MainRoute extends Component {
       homeText: "",
       repertoire: []
     },
+    isModalOpen: false,
 
     languageList: [
       {
@@ -43,6 +44,15 @@ class MainRoute extends Component {
         imgSrc: de
       },
     ],
+
+    currentTrack: {
+      data: {
+        name: '',
+        lyrics: '',
+        imgUrl: '',
+        spotifyUrl: ''
+      }
+    },
 
     staticData: {},
     currentLanguage: '',
@@ -70,12 +80,26 @@ class MainRoute extends Component {
     this.refreshData(language)
   }
 
+  handleSelectTrack = (id) => {
+    const track = this.state.dynamicData.repertoire.filter(item => item.id === id)[0]
+
+    this.setState({
+      ...this.state,
+      isModalOpen: true,
+      currentTrack: track.data
+    })
+  }
+
+  handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   submitMain() {
     Fire.addMainText(this.state.mainText)
   }
 
+
   render() {
+
+    console.log('estado',this.state)
     return(
       <>
         <Header
@@ -94,7 +118,11 @@ class MainRoute extends Component {
                 <div className = 'content-container'>
                   <Route
                     path={'/repertoire'}
-                    render={ () => <Repertoire repertoire = {this.state.dynamicData.repertoire}/>}
+                    render={ () => <Repertoire
+                      {...this.state}
+                      handleSelectTrack = {this.handleSelectTrack}
+                      handleModalOpen = {this.handleModalOpen}
+                    />}
                   />
                   <Route path={'/events'} component={Events}/>
                   <Route path={'/social'} component={Social}/>

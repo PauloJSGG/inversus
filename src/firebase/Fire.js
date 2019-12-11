@@ -42,7 +42,7 @@ class Fire {
       .doc('static_values')
       .get()
 
-    return staticData.get('header')
+    return staticData.data()
   }
 
 	login(email, password) {
