@@ -7,12 +7,14 @@
 @import "./login";
 
 // second color: BC965B
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes&display=swap');
 
 .global-container{
   background-color: black
 }
 
 html {
+  font-family: 'Great Vibes', cursive;
   background-color: black;
   margin: 0;
   --top-spacing: 50px;
@@ -23,6 +25,7 @@ body {
   top: 0;
   margin: 0;
   padding: 0;
+  font-family: '';
 }
 
 html, body, .global-container, #root {

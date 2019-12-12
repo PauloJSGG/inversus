@@ -16,7 +16,7 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     backgroundColor       : 'black'
   },
-  overlay: { backgroundColor: 'rgba(188,158,91,0.2)' }
+  overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0.2)' }
 };
 
 export const repertoire = (props) => {

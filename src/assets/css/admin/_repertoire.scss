@@ -24,6 +24,7 @@
 }
 
 .repetoire-modal {
+  z-index: 99999;
   display: flex;
   flex-direction: column;
   width: 500px;
