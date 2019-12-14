@@ -71,12 +71,15 @@ const RepertoireEdit = (props) => {
         <div className = 'flex flex-row flex-wrap w-1/4'>
           {repertoire.map((item => {
               return(
-                <div key={item.id} onClick = {() => handleEditClick(item.id) } className = "repetoire-card" >
-                  <h1>
-                    {item.data.name}
-                  </h1>
-                  {/* <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button> */}
-                </div>
+                <>
+                  <div key={item.id} onClick = {() => handleEditClick(item.id) } className = "repetoire-card" >
+                    <h1>
+                      {item.data.name}
+                    </h1>
+                    {/* <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button> */}
+                  </div>
+                  <button onClick = {() => props.handleRemoveTrack(item.id)}>❌</button>
+                </>
               )
           }))}
         </div>

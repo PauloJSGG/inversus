@@ -116,8 +116,16 @@ class AdminRoute extends Component{
       .then(() =>  alert('✔️Success✔️'))
       .then(() => Fire.getDynamicData())
       .then(r => this.setState(r))
-      .catch((e) => alert('❌Error❌' + e))
+      .catch((e) => alert('❌Error❌'))
       .finally(() => this.handleModalOpen(false))
+  }
+
+  handleRemoveTrack = (trackId) => {
+    Fire.removeTrack(trackId)
+      .then((e) => alert('✅Success✅'))
+      .then(() => Fire.getDynamicData())
+      .then(r => this.setState(r))
+      .catch((e) => alert('❌Error❌'))
   }
 
   handleModalOpen = (val) => {
@@ -199,6 +207,7 @@ class AdminRoute extends Component{
                       handleTrackChange = {this.handleTrackChange}
                       handleModalOpen = {this.handleModalOpen}
                       handleSubmitTrack = {this.handleSubmitTrack}
+                      handleRemoveTrack = {this.handleRemoveTrack}
 
                       handleSetLanguage = {this.handleSetLanguage}
                       languageList = {this.state.languageList}

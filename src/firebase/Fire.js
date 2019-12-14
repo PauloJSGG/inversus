@@ -135,6 +135,19 @@ class Fire {
       .add(track)
   }
 
+  removeTrack(trackId) {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+    console.log('trackID::::: ', trackId)
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection('repertoire')
+      .doc(trackId)
+      .delete()
+  }
+
   editTrack(track) {
     if(!this.auth.currentUser) {
 			return alert('Not authorized')
