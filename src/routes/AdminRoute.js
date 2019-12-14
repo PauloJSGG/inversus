@@ -174,6 +174,7 @@ class AdminRoute extends Component{
                   languageList = {this.state.languageList}
                   currentLanguage = {this.state.currentLanguage}
                   handleSetLanguage = {this.handleSetLanguage}
+                  displaySelected
                 />
                 <Route
                   exact path = {`${url}`}

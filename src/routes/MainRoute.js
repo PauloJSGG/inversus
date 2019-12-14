@@ -25,8 +25,9 @@ import AdminRoute from '../routes/AdminRoute'
 class MainRoute extends Component {
   state = {
     dynamicData: {
-      homeText: "",
-      repertoire: []
+      homeText: '',
+      repertoire: [],
+      currentLanguage: '',
     },
     isModalOpen: false,
 
@@ -55,7 +56,6 @@ class MainRoute extends Component {
     },
 
     staticData: {},
-    currentLanguage: '',
   }
 
   componentDidMount() {
@@ -105,7 +105,7 @@ class MainRoute extends Component {
         <Header
           handleSetLanguage = {this.handleSetLanguage}
           languageList = {this.state.languageList}
-          currentLanguage = {this.state.currentLanguage}
+          currentLanguage = {this.state.dynamicData.currentLanguage}
           staticData = {this.state.staticData}
         />
         <Route render={({location}) => (

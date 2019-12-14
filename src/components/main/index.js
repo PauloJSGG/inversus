@@ -5,9 +5,9 @@ const Main = ({text}) => {
   return (
     <>
       <div className='shade1'/>
-        <p className='home__text m-3'>
+        <h1 className='home__text m-3'>
           {text}
-        </p>
+        </h1>
       <div className='shade2'/>
     </>
 
