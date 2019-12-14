@@ -7,7 +7,7 @@ import MainRoute from './routes/MainRoute'
 import AdminRoute from './routes/AdminRoute'
 // import Auth from './containers/AuthContainer'
 
-import LoginContainer from './containers/LoginContainer'
+import LoginRoute from './routes/LoginRoute'
 
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 // import { Redirect, Switch } from 'react-router-dom'
@@ -27,7 +27,7 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route path='/admin' component={AdminRoute} />
-            <Route path='/login' exact component={LoginContainer} />
+            <Route path='/login' exact component={LoginRoute} />
             <Route path='/' component={MainRoute} />
           </Switch>
         </BrowserRouter>

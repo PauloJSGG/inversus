@@ -24,7 +24,7 @@ export default class LoginContainer extends Component {
       await Fire.login(this.state.Email, this.state.Password);
       this.props.history.replace('/admin')
     } catch(e) {
-      console.log(e)
+      alert('❌Failed to login❌')
     }
   }
 

@@ -68,7 +68,7 @@ class AdminRoute extends Component{
 
   handleSubmitHomeText = () => {
     Fire.addMainText(this.state.homeText)
-    .then(r => alert('✔️Success✔️'))
+    .then(r => alert('✅Success✅'))
     .catch(e => alert('❌Error❌'))
   }
 
