@@ -11,7 +11,8 @@ import audio from '../assets/img/intro website.mp3'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
 
-import Logo from '../assets/img/Inversus-gif-v2.gif'
+import LogoUp from '../assets/img/inversus-logo-up.png'
+import LogoDown from '../assets/img/inversus-logo-down.png'
 
 import pt from '../assets/img/pt.svg'
 import en from '../assets/img/gb.svg'
@@ -120,7 +121,9 @@ class MainRoute extends Component {
 
           <div className='header__logo flex flex-col justify-center items-center h-full'>
 
-            <img src={Logo} alt={'logo'} className='header__logo'/>
+            {/* <img src={Logo} alt={'logo'} className='header__logo'/> */}
+            <img src={LogoUp} alt={'logo'} className='header__logo--up'/>
+            <img src={LogoDown} alt={'logo'} className='header__logo--down'/>
             <LanguageSelector
               handleSetLanguage = {this.handleSetLanguage}
               {...this.state}

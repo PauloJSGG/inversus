@@ -59,11 +59,26 @@ nav {
   &__logo{
     display: flex;
     justify-content: center;
-    img{
-      width: 200px;
-      height: 200px;
+    &--up{
+      width: 25%;
+      animation: fadein 2s;
+    }
+    &--down{
+      width: 25%;
+      animation: fadeinlater 4s;
     }
   }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeinlater {
+  from { opacity: 0; }
+  50% { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* simple - enter transition 300ms, exit 150ms */

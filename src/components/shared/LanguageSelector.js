@@ -12,7 +12,7 @@ const LanguageSelector = (props) => {
 
   return (
     <div>
-       <div className = 'flex flex-row justify-center w-full my-5'>
+       <div className = 'language-selector flex flex-row justify-center w-full my-5'>
           {
             languageList.map((item) => {
               if (item.language === currentLanguage)
