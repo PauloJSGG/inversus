@@ -6,7 +6,12 @@ import Social from '../components/main/social'
 import Events from '../components/main/events'
 import Repertoire from '../components/main/repertoire'
 
-import asdf from '../routes/AdminRoute'
+import video from '../assets/img/Intro Site.mp4'
+import audio from '../assets/img/intro website.mp3'
+
+import LanguageSelector from '../components/shared/LanguageSelector'
+
+import Logo from '../assets/img/logo_black_small.png'
 
 import pt from '../assets/img/pt.svg'
 import en from '../assets/img/gb.svg'
@@ -54,13 +59,17 @@ class MainRoute extends Component {
         spotifyUrl: ''
       }
     },
-
     staticData: {},
   }
 
   componentDidMount() {
     Fire.isInitialized()
-      .then(this.refreshData(Fire.language))
+      .then(() => {
+        if (this.state.dynamicData.currentLanguage.length > 0)
+          this.refreshData(Fire.language)
+      })
+      document.getElementById('myVideo').play()
+      document.getElementById('myAudio').play()
   }
 
   refreshData = (language) => {
@@ -99,40 +108,58 @@ class MainRoute extends Component {
 
   render() {
 
-    console.log('estado',this.state)
     return(
       <>
-        <Header
-          handleSetLanguage = {this.handleSetLanguage}
-          languageList = {this.state.languageList}
-          currentLanguage = {this.state.dynamicData.currentLanguage}
-          staticData = {this.state.staticData}
-        />
-        <Route render={({location}) => (
-          <TransitionGroup>
-            <CSSTransition
-            key={location.pathname}
-            timeout={300}
-            classNames="fade">
-              <Switch>
-                <div className = 'content-container'>
-                  <Route
-                    path={'/repertoire'}
-                    render={ () => <Repertoire
-                      {...this.state}
-                      handleSelectTrack = {this.handleSelectTrack}
-                      handleModalOpen = {this.handleModalOpen}
-                    />}
-                  />
-                  <Route path={'/events'} component={Events}/>
-                  <Route path={'/social'} component={Social}/>
-                  <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
-                </div>
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-        )} />
-        <Footer/>
+        {!this.state.dynamicData.currentLanguage ?
+
+          <div className='header__logo flex flex-col justify-center items-center h-full'>
+            <audio controls autoplay id="myAudio">
+              <source src={audio} type="audio/mpeg"/>
+            </audio>
+            <video autoplay muted id="myVideo"  >
+              <source src={video} type="video/mp4" />
+            </video>
+            <img src={Logo} alt={'logo'} className='header__logo'/>
+            <LanguageSelector
+              handleSetLanguage = {this.handleSetLanguage}
+              {...this.state}
+            />
+          </div>
+         :
+          <>
+             <Header
+                handleSetLanguage = {this.handleSetLanguage}
+                languageList = {this.state.languageList}
+                currentLanguage = {this.state.dynamicData.currentLanguage}
+                staticData = {this.state.staticData}
+              />
+              <Route render={({location}) => (
+                <TransitionGroup>
+                  <CSSTransition
+                  key={location.pathname}
+                  timeout={300}
+                  classNames="fade">
+                    <Switch>
+                      <div className = 'content-container'>
+                        <Route
+                          path={'/repertoire'}
+                          render={ () => <Repertoire
+                            {...this.state}
+                            handleSelectTrack = {this.handleSelectTrack}
+                            handleModalOpen = {this.handleModalOpen}
+                          />}
+                        />
+                        <Route path={'/events'} component={Events}/>
+                        <Route path={'/social'} component={Social}/>
+                        <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
+                      </div>
+                    </Switch>
+                  </CSSTransition>
+                </TransitionGroup>
+              )} />
+          </>
+        }
+
       </>
   )
   }

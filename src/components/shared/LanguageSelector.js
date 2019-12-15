@@ -8,8 +8,6 @@ const LanguageSelector = (props) => {
     handleSetLanguage
   } = props
 
-  console.log('P R O P S', props)
-
   const display = props.displaySelected ? 'inline-block' : 'none'
 
   return (
@@ -20,7 +18,7 @@ const LanguageSelector = (props) => {
               if (item.language === currentLanguage)
                 return <img src = {item.imgSrc} style = {{width: '50px', border: '5px solid #ddd', margin: '2px 2px', display: display }}/>
               else
-                return <button onClick = { () => handleSetLanguage(item.language)}><img src = {item.imgSrc} style = {{width: '50px', margin: '2px 2px'}}/></button>
+                return <button onClick = { () => handleSetLanguage(item.language)}><img src = {item.imgSrc} style = {{width: '50px', height: '30px', margin: '2px 2px'}}/></button>
             })
           }
         </div>
