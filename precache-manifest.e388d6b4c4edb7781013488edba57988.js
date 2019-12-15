@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f17a156ecc01836a7bcf1dcc9ba1def5",
+    "revision": "87dc7a777a88c34ef4bdbfca43d343d2",
     "url": "/index.html"
   },
   {
-    "revision": "80c38550a6edc1420503",
+    "revision": "d73959f3633596529660",
     "url": "/static/css/main.058d7a6a.chunk.css"
   },
   {
-    "revision": "1f02a70156aa08be5f45",
-    "url": "/static/js/2.ddf49ff1.chunk.js"
+    "revision": "c9268c1b3a1a16227550",
+    "url": "/static/js/2.ff80829c.chunk.js"
   },
   {
-    "revision": "80c38550a6edc1420503",
-    "url": "/static/js/main.234037e9.chunk.js"
+    "revision": "d73959f3633596529660",
+    "url": "/static/js/main.53866632.chunk.js"
   },
   {
     "revision": "e5d96460de81fbf97663",
@@ -26,6 +26,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a2599c276c5f5501a40b16af57983ddb",
     "url": "/static/media/Intro Site.a2599c27.mp4"
+  },
+  {
+    "revision": "c51fe8d3baa1351b10afcd11758f0546",
+    "url": "/static/media/Inversus-gif-v2.c51fe8d3.gif"
   },
   {
     "revision": "69ccebc79b1b1a91264cd7db692525e8",
