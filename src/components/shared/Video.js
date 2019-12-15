@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import video from '../../assets/img/Intro Site.mp4'
+import video from '../../assets/img/Untitled.mp4'
 
 export default class Video extends Component {
 
