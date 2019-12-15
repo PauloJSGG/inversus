@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "394f08e129e43a199dd9e77b216ab676",
+    "revision": "9c5779a99845b6facc4ee6ef8235bbab",
     "url": "/index.html"
   },
   {
-    "revision": "0c7d24eca4fd4117a748",
-    "url": "/static/css/main.9f3eea67.chunk.css"
+    "revision": "ff9a5824ea5aeec9378a",
+    "url": "/static/css/main.759b9a01.chunk.css"
   },
   {
-    "revision": "167bcd6cbb141432c3b7",
-    "url": "/static/js/2.3f388789.chunk.js"
+    "revision": "81b8866d76915a9ce39b",
+    "url": "/static/js/2.18c6f410.chunk.js"
   },
   {
-    "revision": "0c7d24eca4fd4117a748",
-    "url": "/static/js/main.8570b92d.chunk.js"
+    "revision": "ff9a5824ea5aeec9378a",
+    "url": "/static/js/main.45e1b9c1.chunk.js"
   },
   {
     "revision": "e5d96460de81fbf97663",
@@ -28,10 +28,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Intro Site.a2599c27.mp4"
   },
   {
-    "revision": "c51fe8d3baa1351b10afcd11758f0546",
-    "url": "/static/media/Inversus-gif-v2.c51fe8d3.gif"
-  },
-  {
     "revision": "69ccebc79b1b1a91264cd7db692525e8",
     "url": "/static/media/de.69ccebc7.svg"
   },
@@ -42,6 +38,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a0a7ff83279559b933616e00986393bb",
     "url": "/static/media/intro website.a0a7ff83.mp3"
+  },
+  {
+    "revision": "273a33b97baa240bfd4b350d72f277d4",
+    "url": "/static/media/inversus-logo-down.273a33b9.png"
+  },
+  {
+    "revision": "207939762c53dda50c06b1c55cf8037d",
+    "url": "/static/media/inversus-logo-up.20793976.png"
   },
   {
     "revision": "504f93d3c505773d913898f6149dd29a",
