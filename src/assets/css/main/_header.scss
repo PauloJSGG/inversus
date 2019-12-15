@@ -59,12 +59,14 @@ nav {
   &__logo{
     display: flex;
     justify-content: center;
+    width: 200px;
+
     &--up{
-      width: 25%;
+      width: 370px;
       animation: fadein 2s;
     }
     &--down{
-      width: 25%;
+      width: 370px;
       animation: fadeinlater 4s;
     }
   }

@@ -10,7 +10,7 @@ export default class Video extends Component {
   render() {
     return (
       <div>
-        <video autoplay id="myVideo"  >
+        <video autoplay playsinline autobuffer id="myVideo"  >
           <source src={video} type="video/mp4" />
         </video>
       </div>
