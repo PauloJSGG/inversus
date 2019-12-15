@@ -6,7 +6,7 @@ import Social from '../components/main/social'
 import Events from '../components/main/events'
 import Repertoire from '../components/main/repertoire'
 
-import video from '../assets/img/Intro Site.mp4'
+import Video from '../components/shared/Video'
 import audio from '../assets/img/intro website.mp3'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
@@ -68,8 +68,11 @@ class MainRoute extends Component {
         if (this.state.dynamicData.currentLanguage.length > 0)
           this.refreshData(Fire.language)
       })
-      // document.getElementById('myVideo').play()
-      // document.getElementById('myAudio').play()
+
+      // if (this.state.dynamicData.currentLanguage.length > 0){
+      //   console.log('wtf')
+      //   document.getElementById('myVideo').play()
+      // }
   }
 
   refreshData = (language) => {
@@ -108,17 +111,15 @@ class MainRoute extends Component {
 
   render() {
 
+    // if (this.state.dynamicData.currentLanguage.length > 0)
+    //   document.getElementById('myVideo').play()
+
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?
 
           <div className='header__logo flex flex-col justify-center items-center h-full'>
-            {/* <audio loop autoplay id="myAudio">
-              <source src={audio} type="audio/mpeg"/>
-            </audio>
-            <video autoplay muted id="myVideo"  >
-              <source src={video} type="video/mp4" />
-            </video> */}
+
             <img src={Logo} alt={'logo'} className='header__logo'/>
             <LanguageSelector
               handleSetLanguage = {this.handleSetLanguage}
@@ -127,6 +128,10 @@ class MainRoute extends Component {
           </div>
          :
           <>
+            {/* <audio loop autoplay id="myAudio">
+              <source src={audio} type="audio/mpeg"/>
+            </audio> */}
+            <Video/>
              <Header
                 handleSetLanguage = {this.handleSetLanguage}
                 languageList = {this.state.languageList}
