@@ -61,6 +61,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
+    videoEnded: false
   }
 
   componentDidMount() {
@@ -74,6 +75,10 @@ class MainRoute extends Component {
       //   console.log('wtf')
       //   document.getElementById('myVideo').play()
       // }
+  }
+
+  handleVideoEnded = () => {
+    this.setState({videoEnded: true})
   }
 
   refreshData = (language) => {
@@ -134,7 +139,7 @@ class MainRoute extends Component {
             {/* <audio loop autoplay id="myAudio">
               <source src={audio} type="audio/mpeg"/>
             </audio> */}
-            <Video/>
+            {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> : null}
              <Header
                 handleSetLanguage = {this.handleSetLanguage}
                 languageList = {this.state.languageList}
