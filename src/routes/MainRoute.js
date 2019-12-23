@@ -141,7 +141,7 @@ class MainRoute extends Component {
             </audio> */}
             {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> :
              (
-               <>
+               <div className = 'main'>
              <Header
               handleSetLanguage = {this.handleSetLanguage}
               languageList = {this.state.languageList}
@@ -172,7 +172,7 @@ class MainRoute extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               )} />
-              </>
+              </div>
               )
 
             }

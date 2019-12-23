@@ -9,7 +9,9 @@ import { NavLink, Link  } from "react-router-dom";
   return(
     <header className='header-main'>
       <div className='header-container'>
-        <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>
+        <div className='w-full justify-center flex'>
+          {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
+        </div>
         <nav>
           <ul className='flex justify-center'>
             {/* <NavLink to={'/news'} title="Social" className='m-2'>Sobre nós</NavLink>
@@ -20,7 +22,7 @@ import { NavLink, Link  } from "react-router-dom";
             <NavLink exact to={'/social'} title="Social" className='m-2'>{staticData.social}</NavLink>
           </ul>
         </nav>
-        <div className='header__border-bottom'></div>
+        {staticData.repertoire && <div className='header__border-bottom'></div>}
       </div>
     </header>
   )

@@ -21,6 +21,16 @@
   background-color: rgba(188,158,91,0.9);
 }
 
+.main {
+  animation: main 6s;
+}
+
+@keyframes main {
+  from { opacity: 0; }
+  50% { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .language-selector {
   animation: languagefadein 6s;
 }

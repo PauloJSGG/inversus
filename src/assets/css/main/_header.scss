@@ -23,6 +23,13 @@ nav {
   height: 240px;
   display: flex;
   flex-direction: column;
+  animation: headerfadein 6s;
+}
+
+@keyframes headerfadein {
+  from { opacity: 0; }
+  50% { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .header{
