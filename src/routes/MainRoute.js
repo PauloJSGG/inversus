@@ -139,13 +139,15 @@ class MainRoute extends Component {
             {/* <audio loop autoplay id="myAudio">
               <source src={audio} type="audio/mpeg"/>
             </audio> */}
-            {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> : null}
+            {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> :
+             (
+               <>
              <Header
-                handleSetLanguage = {this.handleSetLanguage}
-                languageList = {this.state.languageList}
-                currentLanguage = {this.state.dynamicData.currentLanguage}
-                staticData = {this.state.staticData}
-              />
+              handleSetLanguage = {this.handleSetLanguage}
+              languageList = {this.state.languageList}
+              currentLanguage = {this.state.dynamicData.currentLanguage}
+              staticData = {this.state.staticData}
+            />
               <Route render={({location}) => (
                 <TransitionGroup>
                   <CSSTransition
@@ -170,6 +172,11 @@ class MainRoute extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               )} />
+              </>
+              )
+
+            }
+
           </>
         }
 

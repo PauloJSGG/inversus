@@ -14,7 +14,7 @@ export default class Video extends Component {
 
     return (
       <div>
-        <video autoplay playsinline autobuffer id="myVideo" onEnded={handleVideoEnded} >
+        <video autoplay playsinline autobuffer id="myVideo" muted onEnded={handleVideoEnded} >
           <source src={video} type="video/mp4" />
         </video>
       </div>
