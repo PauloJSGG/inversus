@@ -11,6 +11,8 @@ import audio from '../assets/img/intro website.mp3'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
 
+import SwitchWithSlide from '../components/shared/SwitchWithSlide'
+
 import LogoUp from '../assets/img/inversus-logo-up.png'
 import LogoDown from '../assets/img/inversus-logo-down.png'
 
@@ -30,6 +32,7 @@ import AdminRoute from '../routes/AdminRoute'
 
 class MainRoute extends Component {
   state = {
+    animate: true,
     dynamicData: {
       homeText: '',
       repertoire: [],
@@ -117,6 +120,8 @@ class MainRoute extends Component {
 
   render() {
 
+    const SwitchComponent = this.state.animate ? SwitchWithSlide : Switch;
+
     // if (this.state.dynamicData.currentLanguage.length > 0)
     //   document.getElementById('myVideo').play()
 
@@ -149,12 +154,14 @@ class MainRoute extends Component {
               staticData = {this.state.staticData}
             />
               <Route render={({location}) => (
-                <TransitionGroup>
-                  <CSSTransition
-                  key={location.pathname}
-                  timeout={300}
-                  classNames="fade">
-                    <Switch>
+                // <TransitionGroup>
+                //   <CSSTransition
+                //   key={location.pathname}
+                //   timeout={300}
+                //   classNames="fade">
+
+
+                    <SwitchComponent>
                       <div className = 'content-container'>
                         <Route
                           path={'/repertoire'}
@@ -168,9 +175,11 @@ class MainRoute extends Component {
                         <Route path={'/social'} component={Social}/>
                         <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
                       </div>
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
+                    </SwitchComponent>
+
+
+                //   </CSSTransition>
+                // </TransitionGroup>
               )} />
               </div>
               )

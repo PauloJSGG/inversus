@@ -31,7 +31,7 @@ export const repertoire = (props) => {
 
   return (
     <div>
-      <div className = 'flex flex-row w-full'>
+      <div className = 'flex flex-row w-full justify-center'>
         <Divider classs='test' />
         <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
         <Divider classs='test test--flip'  />
