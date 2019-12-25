@@ -64,7 +64,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
-    videoEnded: false
+    videoEnded: true
   }
 
   componentDidMount() {
@@ -119,12 +119,6 @@ class MainRoute extends Component {
 
 
   render() {
-
-    const SwitchComponent = this.state.animate ? SwitchWithSlide : Switch;
-
-    // if (this.state.dynamicData.currentLanguage.length > 0)
-    //   document.getElementById('myVideo').play()
-
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?
@@ -147,40 +141,30 @@ class MainRoute extends Component {
             {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> :
              (
                <div className = 'main'>
-             <Header
-              handleSetLanguage = {this.handleSetLanguage}
-              languageList = {this.state.languageList}
-              currentLanguage = {this.state.dynamicData.currentLanguage}
-              staticData = {this.state.staticData}
-            />
-              <Route render={({location}) => (
-                // <TransitionGroup>
-                //   <CSSTransition
-                //   key={location.pathname}
-                //   timeout={300}
-                //   classNames="fade">
+                <Header
+                  handleSetLanguage = {this.handleSetLanguage}
+                  languageList = {this.state.languageList}
+                  currentLanguage = {this.state.dynamicData.currentLanguage}
+                  staticData = {this.state.staticData}
+                />
 
 
-                    <SwitchComponent>
-                      <div className = 'content-container'>
-                        <Route
-                          path={'/repertoire'}
-                          render={ () => <Repertoire
-                            {...this.state}
-                            handleSelectTrack = {this.handleSelectTrack}
-                            handleModalOpen = {this.handleModalOpen}
-                          />}
-                        />
-                        <Route path={'/events'} component={Events}/>
-                        <Route path={'/social'} component={Social}/>
-                        <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
-                      </div>
-                    </SwitchComponent>
+                  <div className = 'content-container'>
+                    <SwitchWithSlide>
+                      <Route
+                        path={'/repertoire'}
+                        render={ () => <Repertoire
+                          {...this.state}
+                          handleSelectTrack = {this.handleSelectTrack}
+                          handleModalOpen = {this.handleModalOpen}
+                        />}
+                      />
+                      <Route path={'/events'} component={Events}/>
+                      <Route path={'/social'} component={Social}/>
+                      <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
+                    </SwitchWithSlide>
+                  </div>
 
-
-                //   </CSSTransition>
-                // </TransitionGroup>
-              )} />
               </div>
               )
 
