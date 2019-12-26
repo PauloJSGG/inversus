@@ -27,8 +27,10 @@ const Events = () => {
 ]
 
   return(
-    <div className='event'>
-      {events.map(r => row(r))}
+    <div className='overflow-hidden fixed'>
+      <div className='event'>
+        {events.map(r => row(r))}
+      </div>
     </div>
   )
 }

@@ -30,7 +30,7 @@ export const repertoire = (props) => {
   } = props
 
   return (
-    <div>
+    <div className='overflow-hidden fixed'>
       <div className = 'flex flex-row w-full justify-center'>
         <Divider classs='test' />
         <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
@@ -55,7 +55,7 @@ export const repertoire = (props) => {
 
           </div>
         </Modal>
-      <div className = 'flex flex-row flex-wrap w-full'>
+      <div className = 'flex flex-row flex-wrap w-full overflow-hidden'>
         {dynamicData.repertoire.map(item => {
           return(
             <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>

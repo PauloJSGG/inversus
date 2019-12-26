@@ -1,0 +1,59 @@
+.animatable {
+  animation: fadeintest 2s
+
+}
+
+.animatable.prepare {
+  /* we do this so we can tell when the "preparing" was done
+     since there seems to be a browser bug where the preparation still takes
+     time, even with `transition: none;` */
+  transition-duration: 0.0000000000001s;
+  opacity: 0;
+}
+
+.animatable.fadein {
+  animation: fadeintest 2s linear;
+}
+.animatable.prepare.fadeout {
+  animation: fadeouttest 2s linear;
+}
+
+@keyframes fadeintest {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+
+@keyframes fadeouttest {
+  from {
+      opacity:1;
+  }
+  to {
+      opacity:0;
+  }
+}
+
+
+
+/* .animatable:not(.prepare).fadein {
+  animation: fadeintest 2s;
+}
+.animatable:not(.prepare).fadeout {
+  animation: fadeouttest 2s;
+} */
+
+/* .animatable:not(.prepare).to {
+  pointer-events: none;
+}
+.animatable:not(.prepare).to.left {
+  transform: translateX(-110%);
+}
+.animatable:not(.prepare).to.right {
+  transform: translateX(110%);
+}
+.animatable:not(.prepare).from {
+  transform: translateX(0);
+} */

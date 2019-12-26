@@ -123,7 +123,6 @@ class Fire {
     const trackData = track.data
 
     for (var key in trackData){
-      debugger
       if(trackData[key].length === 0)
         throw 'Fill in the blanks'
     }

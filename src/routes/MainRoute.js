@@ -11,7 +11,7 @@ import audio from '../assets/img/intro website.mp3'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
 
-import SwitchWithSlide from '../components/shared/SwitchWithSlide'
+import SwitchWithFade from '../components/shared/SwitchWithFade'
 
 import LogoUp from '../assets/img/inversus-logo-up.png'
 import LogoDown from '../assets/img/inversus-logo-down.png'
@@ -27,8 +27,9 @@ import {
 } from 'react-transition-group'
 import Fire from '../firebase/Fire'
 
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom'
 import AdminRoute from '../routes/AdminRoute'
+import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
 
 class MainRoute extends Component {
   state = {
@@ -140,6 +141,7 @@ class MainRoute extends Component {
             </audio> */}
             {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> :
              (
+
                <div className = 'main'>
                 <Header
                   handleSetLanguage = {this.handleSetLanguage}
@@ -150,7 +152,8 @@ class MainRoute extends Component {
 
 
                   <div className = 'content-container'>
-                    <SwitchWithSlide>
+                  <Route render={({location}) => (
+                    <AnimatedSwitch location={location}>
                       <Route
                         path={'/repertoire'}
                         render={ () => <Repertoire
@@ -162,8 +165,10 @@ class MainRoute extends Component {
                       <Route path={'/events'} component={Events}/>
                       <Route path={'/social'} component={Social}/>
                       <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
-                    </SwitchWithSlide>
+                    </AnimatedSwitch>
+                  )} />
                   </div>
+
 
               </div>
               )

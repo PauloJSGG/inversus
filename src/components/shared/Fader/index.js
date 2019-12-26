@@ -2,13 +2,13 @@ import React from "react";
 import classNames from "classnames";
 import "./styles.css";
 
-export default class Slider extends React.Component {
+export default class Fader extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       animating: false,
-      position: Slider.CENTER,
+      position: Fader.IN,
       animatePrepare: false
     };
 
@@ -37,13 +37,9 @@ export default class Slider extends React.Component {
   }
 
   startAnimation(position, animationCallback) {
-    const noAnimate = position === Slider.CENTER;
-    const animatingOut = [Slider.TO_LEFT, Slider.TO_RIGHT].includes(position);
-    const currentlyIn = [
-      Slider.CENTER,
-      Slider.FROM_LEFT,
-      Slider.FROM_RIGHT
-    ].includes(this.state.position);
+    const noAnimate = position === Fader.IN;
+    const animatingOut = Fader.OUT === position;
+    const currentlyIn = position
     if (noAnimate || (currentlyIn && animatingOut)) {
       // in these cases we don't need to prepare our animation at all, we can just
       // run straight into it
@@ -77,9 +73,9 @@ export default class Slider extends React.Component {
   }
 
   onTransitionEnd(e) {
-    // the Slider transitions the `transform` property. Any other transitions
+    // the Fader transitions the `transform` property. Any other transitions
     // that occur on the element we can just ignore.
-    if (e.propertyName !== "transform") return;
+    if (e.propertyName !== "animation") return;
 
     const callback = this._animationCallback;
     delete this._animationCallback;
@@ -92,24 +88,14 @@ export default class Slider extends React.Component {
 
   render() {
 
-    console.log('posicaoooo', this.state.position)
+    console.log('position: ', this.state)
 
     return (
       <div
         ref={node => (this.node = node)}
         className={classNames("animatable", {
-          ["to"]: [Slider.TO_LEFT, Slider.TO_RIGHT].includes(
-            this.state.position
-          ),
-          ["from"]: [Slider.FROM_LEFT, Slider.FROM_RIGHT].includes(
-            this.state.position
-          ),
-          ["right"]: [Slider.TO_RIGHT, Slider.FROM_RIGHT].includes(
-            this.state.position
-          ),
-          ["left"]: [Slider.TO_LEFT, Slider.FROM_LEFT].includes(
-            this.state.position
-          ),
+          ["fadein"]: Fader.IN === this.state.position,
+          ["fadeout"]: Fader.OUT === this.state.position,
           ["prepare"]: this.state.animatePrepare
         })}
         data-qa-loading={Boolean(
@@ -122,8 +108,10 @@ export default class Slider extends React.Component {
   }
 }
 
-Slider.CENTER = "CENTER";
-Slider.TO_LEFT = "TO_LEFT";
-Slider.TO_RIGHT = "TO_RIGHT";
-Slider.FROM_LEFT = "FROM_LEFT";
-Slider.FROM_RIGHT = "FROM_RIGHT";
+Fader.IN = "FADE_IN";
+Fader.OUT = "FADE_OUT";
+Fader.CENTER = "FADE_CENTER"
+// Fader.TO_LEFT = "TO_LEFT";
+// Fader.TO_RIGHT = "TO_RIGHT";
+// Fader.FROM_LEFT = "FROM_LEFT";
+// Fader.FROM_RIGHT = "FROM_RIGHT";

@@ -24,7 +24,6 @@ function App() {
   return (
     <>
       <div className="global-container">
-      <iframe src="https://raw.githubusercontent.com/anars/blank-audio/master/250-milliseconds-of-silence.mp3" allow="autoplay" id="audio" style={{display: 'none'}}></iframe>
         <BrowserRouter>
           <Switch>
             <Route path='/admin' component={AdminRoute} />
