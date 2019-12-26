@@ -65,7 +65,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
-    videoEnded: true
+    videoEnded: false
   }
 
   componentDidMount() {

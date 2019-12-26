@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 import posed, { PoseGroup } from "react-pose";
-import "./styles.css";
+
 
 /**
  * This component is used to control the routing animation.
