@@ -2,6 +2,8 @@ import React from 'react'
 import guitarImg from '../../../assets/img/FADO.jpg'
 import Divider from '../../shared/Divider.js'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root')
@@ -19,6 +21,15 @@ const customStyles = {
   overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0.2)' }
 };
 
+const getAudioIcon = () => {
+  if (document.getElementById('myAudio') && document.getElementById('myAudio').muted)
+    return  <FontAwesomeIcon icon={['fas','volume-up']} />
+  else
+    return  <FontAwesomeIcon icon={['fas','volume-mute']} />
+
+}
+
+
 export const repertoire = (props) => {
   const {
     staticData,
@@ -26,8 +37,10 @@ export const repertoire = (props) => {
     currentTrack,
     handleSelectTrack,
     handleModalOpen,
+    handleMute,
     isModalOpen
   } = props
+
 
   return (
     <div className='overflow-hidden fixed w-full'>
@@ -43,7 +56,12 @@ export const repertoire = (props) => {
           style={customStyles}
           contentLabel="Example Modal"
         >
+
+          <audio autoPlay loop id="myAudio" muted={props.muted} >
+            <source src={currentTrack.spotifyUrl}/>
+          </audio>
           <div className = 'repetoire-modal'>
+            <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} /> : <FontAwesomeIcon icon={['fas','volume-up']} />}</button>
             <div className = 'flex justify-between m-3'>
               <h1>{currentTrack.name}</h1>
             </div>

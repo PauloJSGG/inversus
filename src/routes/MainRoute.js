@@ -34,10 +34,11 @@ import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
 class MainRoute extends Component {
   state = {
     animate: true,
+    muted: false,
     dynamicData: {
       homeText: '',
       repertoire: [],
-      currentLanguage: '',
+      currentLanguage: 'pt',
     },
     isModalOpen: false,
 
@@ -65,7 +66,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
-    videoEnded: false
+    videoEnded: true
   }
 
   componentDidMount() {
@@ -100,6 +101,10 @@ class MainRoute extends Component {
 
   handleSetLanguage = (language) => {
     this.refreshData(language)
+  }
+
+  handleMute = () => {
+    this.setState({muted: !this.state.muted})
   }
 
   handleSelectTrack = (id) => {
@@ -160,6 +165,7 @@ class MainRoute extends Component {
                           {...this.state}
                           handleSelectTrack = {this.handleSelectTrack}
                           handleModalOpen = {this.handleModalOpen}
+                          handleMute = {this.handleMute}
                         />}
                       />
                       <Route path={'/events'} component={Events}/>
