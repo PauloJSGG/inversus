@@ -5,14 +5,19 @@ const LanguageSelector = (props) => {
   const {
     languageList,
     currentLanguage,
-    handleSetLanguage
+    handleSetLanguage,
+    isAdmin
   } = props
 
-  const display = props.displaySelected ? 'inline-block' : 'none'
+  const display = isAdmin ? 'inline-block' : 'none'
+
+  const styles = ['flex flex-row justify-center w-full my-5']
+
+  isAdmin && styles.concat('language-selector')
 
   return (
     <div>
-       <div className = 'language-selector flex flex-row justify-center w-full my-5'>
+       <div className = {styles}>
           {
             languageList.map((item) => {
               if (item.language === currentLanguage)

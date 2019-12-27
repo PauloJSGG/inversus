@@ -9,10 +9,6 @@ import pt from '../assets/img/pt.svg'
 import en from '../assets/img/gb.svg'
 import de from '../assets/img/de.svg'
 
-import {
-  CSSTransition,
-  TransitionGroup
-} from 'react-transition-group'
 import Fire from '../firebase/Fire'
 
 import { Route, Switch } from 'react-router-dom'
@@ -171,18 +167,13 @@ class AdminRoute extends Component{
       <>
         <AdminHeader/>
         <Route render={({location}) => (
-          <TransitionGroup>
-          <CSSTransition
-            key={location.key}
-            timeout={300}
-            classNames="fade">
             <Switch>
               <div className = "content-container flex-col">
                 <LanguageSelector
                   languageList = {this.state.languageList}
                   currentLanguage = {this.state.currentLanguage}
                   handleSetLanguage = {this.handleSetLanguage}
-                  displaySelected
+                  isAdmin = {true}
                 />
                 <Route
                   exact path = {`${url}`}
@@ -221,8 +212,6 @@ class AdminRoute extends Component{
                 />
               </div>
             </Switch>
-          </CSSTransition>
-        </TransitionGroup>
         )} />
       </>
     )

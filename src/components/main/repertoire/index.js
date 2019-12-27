@@ -61,7 +61,10 @@ export const repertoire = (props) => {
             <source src={currentTrack.spotifyUrl}/>
           </audio>
           <div className = 'repetoire-modal'>
-            <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} /> : <FontAwesomeIcon icon={['fas','volume-up']} />}</button>
+            <div className = 'flex w-full h-1/2 justify-center'>
+            <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> : <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />}</button>
+            <a href="https://www.google.pt" target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>
+            </div>
             <div className = 'flex justify-between m-3'>
               <h1>{currentTrack.name}</h1>
             </div>
