@@ -3,9 +3,9 @@ import React from 'react'
 const Main = ({text}) => {
 
   return (
-    <div className='overflow-hidden fixed'>
+    <div className=''>
       <div className='flex justify-center'>
-        <div className='shade1 '/>
+        <div className='shade1'/>
           <h1 className='home__text m-3'>
             {text}
           </h1>

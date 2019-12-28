@@ -10,8 +10,25 @@
 // @import url('https://fonts.googleapis.com/css?family=Great+Vibes&display=swap');
 
 .global-container{
-  overflow-x:hidden;
-  background-color: black
+  // overflow-x:hidden;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: black;
+  scrollbar-width: thin;
+  scrollbar-color: black black;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
 }
 
 html {
@@ -33,11 +50,51 @@ html, body, .global-container, #root {
 }
 
 .content-container{
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: fixed;
+  // overflow-y: auto;
+  // overflow-x: hidden;
+  // position: fixed;
   // display: flex;
   // justify-content: center;
   width: 100%;
   padding-top: 240px;
 }
+
+// html {
+//   --scrollbarBG: #CFD8DC;
+//   --thumbBG: #90A4AE;
+// }
+// body::-webkit-scrollbar {
+//   width: 11px;
+// }
+// body {
+//   scrollbar-width: thin;
+//   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+// }
+// body::-webkit-scrollbar-track {
+//   background: var(--scrollbarBG);
+// }
+// body::-webkit-scrollbar-thumb {
+//   background-color: var(--thumbBG) ;
+//   border-radius: 6px;
+//   border: 3px solid var(--scrollbarBG);
+// }
+
+
+// html {
+//   background: lightgrey;
+//   height: 100%;
+//   overflow: hidden;
+// }
+// body {
+//   height: 100%;
+//   background: whitesmoke;
+//   overflow: scroll;
+//   max-width: 250px;
+//   margin: 0 auto;
+//   padding: 3em;
+//   font: 100%/1.4 serif;
+//   border: 1px solid rgba(0, 0, 0, 0.25)
+// }
+// p {
+//   margin: 0 0 1.5em;
+// }
