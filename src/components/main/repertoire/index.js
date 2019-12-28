@@ -28,11 +28,11 @@ const getAudioIcon = () => {
     return  <FontAwesomeIcon icon={['fas','volume-mute']} />
 }
 
-const fade = (e, m) => {
+const fade = (e) => {
   if(e.volume >= 0 && e.volume < 1){
     if(((e.volume + 0.01) * 2) < 1){
-      e.volume =  (e.volume + 0.01) * 2;
-      setTimeout(() => fade(e), 500);
+      e.volume += 0.01;
+      setTimeout(() => fade(e), 75);
     }
   }
 }
@@ -69,13 +69,17 @@ export const repertoire = (props) => {
             id="myAudio"
             muted={props.muted}
             onLoadStart={e => {
-              e.target.volume = 0
-              fade(e.target, 'A Q U I')
+              const element = e.target
+              element.volume = 0
+              setTimeout(() => fade(element), 1000)
             }}
           >
             <source src={currentTrack.previewUrl}/>
           </audio>
           <div className = 'repetoire-modal'>
+            <div className='w-full flex justify-end'>
+              <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem',marginLeft: '10px' }} /></button>
+            </div>
             <div className = 'flex w-full h-1/2 justify-center'>
             <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> : <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />}</button>
             <a href={currentTrack.spotifyUrl} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>

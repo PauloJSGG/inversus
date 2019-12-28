@@ -24,10 +24,12 @@
 }
 
 .repetoire-modal {
+  width: 100%;
+  max-width: 500px;
   z-index: 99999;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  // width: 500px;
   color: white;
   input, textarea {
     width: 75%;
