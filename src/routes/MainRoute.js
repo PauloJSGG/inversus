@@ -38,7 +38,7 @@ class MainRoute extends Component {
     dynamicData: {
       homeText: '',
       repertoire: [],
-      currentLanguage: 'pt',
+      currentLanguage: '',
     },
     isModalOpen: false,
 
@@ -66,7 +66,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
-    videoEnded: true
+    videoEnded: false
   }
 
   componentDidMount() {
