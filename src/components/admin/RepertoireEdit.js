@@ -53,6 +53,10 @@ const RepertoireEdit = (props) => {
               <input name = "spotifyUrl" value = {currentTrack.spotifyUrl} onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
+              <label>URL Preview:</label>
+              <input name = "spotifyUrl" value = {currentTrack.previewUrl} onChange={e => handleTrackChange(e)}/>
+            </div>
+            <div className = 'flex justify-between m-3'>
               <label >Letra:</label>
               <textarea name = "lyrics" value = {currentTrack.lyrics} className='h-56 w-1/2' onChange={e => handleTrackChange(e)}/>
             </div>

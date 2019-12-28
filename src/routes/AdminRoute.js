@@ -26,7 +26,8 @@ class AdminRoute extends Component{
         name: '',
         lyrics: '',
         imgUrl: '',
-        spotifyUrl: ''
+        spotifyUrl: '',
+        previewUrl: '',
       }
     },
     languageList: [
