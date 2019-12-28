@@ -27,7 +27,7 @@ const Events = () => {
 ]
 
   return(
-    <div className='overflow-hidden fixed'>
+    <div className=' w-full flex flex-col items-center'>
       <div className='event'>
         {events.map(r => row(r))}
       </div>

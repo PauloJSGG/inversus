@@ -157,7 +157,6 @@ class MainRoute extends Component {
                 />
 
 
-                  <div className = 'content-container'>
                   <Route render={({location}) => (
                     <AnimatedSwitch location={location}>
                       <Route
@@ -174,7 +173,6 @@ class MainRoute extends Component {
                       <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
                     </AnimatedSwitch>
                   )} />
-                  </div>
 
 
               </div>
