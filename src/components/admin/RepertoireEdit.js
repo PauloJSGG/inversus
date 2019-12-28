@@ -54,7 +54,7 @@ const RepertoireEdit = (props) => {
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Preview:</label>
-              <input name = "spotifyUrl" value = {currentTrack.previewUrl} onChange={e => handleTrackChange(e)}/>
+              <input name = "previewUrl" value = {currentTrack.previewUrl} onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label >Letra:</label>
