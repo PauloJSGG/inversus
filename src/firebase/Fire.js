@@ -120,13 +120,6 @@ class Fire {
 			return alert('Not authorized')
     }
 
-    const trackData = track.data
-
-    for (var key in trackData){
-      if(trackData[key].length === 0)
-        throw 'Fill in the blanks'
-    }
-
     return this.db
       .collection(this.language)
       .doc('dynamic_values')
@@ -138,7 +131,6 @@ class Fire {
     if(!this.auth.currentUser) {
 			return alert('Not authorized')
     }
-    console.log('trackID::::: ', trackId)
     return this.db
       .collection(this.language)
       .doc('dynamic_values')
@@ -155,8 +147,9 @@ class Fire {
     return this.db
       .collection(this.language)
       .doc('dynamic_values')
-      .collection(track.id)
-      .update(track.data)
+      .collection('repertoire')
+      .doc(track.id)
+      .update(track)
   }
 
 	isInitialized() {

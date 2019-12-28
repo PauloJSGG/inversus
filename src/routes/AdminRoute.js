@@ -22,6 +22,7 @@ class AdminRoute extends Component{
     isModalOpen: false,
     repertoire: [],
     currentTrack: {
+      id: '',
       data: {
         name: '',
         lyrics: '',
@@ -81,7 +82,10 @@ class AdminRoute extends Component{
     this.setState({
       ...this.state,
       isModalOpen: true,
-      currentTrack: track.data
+      currentTrack: {
+        id: id,
+        data: track.data
+      }
     })
   }
 
@@ -92,7 +96,7 @@ class AdminRoute extends Component{
 
     this.setState({
       currentTrack: {
-        ...this.state.currentTrack.id,
+        id: this.state.currentTrack.id,
 
         data: {
           ...this.state.currentTrack.data,
@@ -109,12 +113,23 @@ class AdminRoute extends Component{
   }
 
   handleSubmitTrack = () => {
-    Fire.addTrack(this.state.currentTrack)
+    if (this.state.currentTrack.id.length > 0) {
+      Fire.editTrack(this.state.currentTrack)
       .then(() =>  alert('✔️Success✔️'))
       .then(() => Fire.getDynamicData())
       .then(r => this.setState(r))
       .catch((e) => alert('❌Error❌'))
       .finally(() => this.handleModalOpen(false))
+    }
+    else {
+      Fire.addTrack(this.state.currentTrack)
+      .then(() =>  alert('✔️Success✔️'))
+      .then(() => Fire.getDynamicData())
+      .then(r => this.setState(r))
+      .catch((e) => alert('❌Error❌'))
+      .finally(() => this.handleModalOpen(false))
+    }
+
   }
 
   handleRemoveTrack = (trackId) => {
@@ -163,6 +178,8 @@ class AdminRoute extends Component{
     }
 
     const { match: { url } } = this.props
+
+    console.log('estado', this.state)
 
     return(
       <>
