@@ -38,7 +38,7 @@ class MainRoute extends Component {
     dynamicData: {
       homeText: '',
       repertoire: [],
-      currentLanguage: '',
+      currentLanguage: 'pt',
     },
     isModalOpen: false,
 
@@ -66,7 +66,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
-    videoEnded: false
+    videoEnded: true
   }
 
   componentDidMount() {
@@ -135,6 +135,7 @@ class MainRoute extends Component {
             <img src={LogoUp} alt={'logo'} className='header__logo--up'/>
             <img src={LogoDown} alt={'logo'} className='header__logo--down'/>
             <LanguageSelector
+              isAdmin = {false}
               handleSetLanguage = {this.handleSetLanguage}
               {...this.state}
             />

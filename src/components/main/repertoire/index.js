@@ -26,9 +26,16 @@ const getAudioIcon = () => {
     return  <FontAwesomeIcon icon={['fas','volume-up']} />
   else
     return  <FontAwesomeIcon icon={['fas','volume-mute']} />
-
 }
 
+const fade = (e, m) => {
+  if(e.volume >= 0 && e.volume < 1){
+    if(((e.volume + 0.01) * 2) < 1){
+      e.volume =  (e.volume + 0.01) * 2;
+      setTimeout(() => fade(e), 500);
+    }
+  }
+}
 
 export const repertoire = (props) => {
   const {
@@ -41,9 +48,8 @@ export const repertoire = (props) => {
     isModalOpen
   } = props
 
-
   return (
-    <div className='overflow-hidden fixed w-full'>
+    <div className='fixed h-full overflow-y-scroll overflow-x-hidden w-full'>
       <div className = 'flex flex-row w-full justify-center'>
         <Divider classs='test' />
         <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
@@ -57,7 +63,16 @@ export const repertoire = (props) => {
           contentLabel="Example Modal"
         >
 
-          <audio autoPlay loop id="myAudio" muted={props.muted} >
+          <audio
+            autoPlay
+            loop
+            id="myAudio"
+            muted={props.muted}
+            onLoadStart={e => {
+              e.target.volume = 0
+              fade(e.target, 'A Q U I')
+            }}
+          >
             <source src={currentTrack.previewUrl}/>
           </audio>
           <div className = 'repetoire-modal'>
