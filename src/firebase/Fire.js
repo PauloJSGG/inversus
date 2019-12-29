@@ -35,6 +35,17 @@ class Fire {
     return data
   }
 
+  addMainText(text) {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .set({home_text: text})
+  }
+
   //STATIC DATA
   async getStaticData() {
     const staticData = await this.db
@@ -64,18 +75,6 @@ class Fire {
 		})
   }
 
-  addMainText(text) {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
-
-    debugger
-
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .set({home_text: text})
-  }
 
   async getHomeText() {
     const home_text = await this.db
@@ -161,7 +160,25 @@ class Fire {
 
 	getCurrentUsername() {
 		return this.auth.currentUser && this.auth.currentUser.displayName
-	}
+  }
+
+
+
+
+
+
+
+  addMember(member) {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection('repertoire')
+      .add(member)
+  }
 }
 
 export default new Fire()

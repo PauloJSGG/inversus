@@ -13,6 +13,7 @@ const AdminHeader = () => {
         <ul className='flex justify-center'>
           <NavLink to={'/admin/'} title="Social" className='m-2'>Texto página principal</NavLink>
           <NavLink to={'/admin/repertoire'} title="Social" className='m-2'>Editar reportorio</NavLink>
+          <NavLink to={'/admin/members'} title="Social" className='m-2'>Editar membros</NavLink>
         </ul>
       </nav>
       <div className='header__border-bottom'></div>

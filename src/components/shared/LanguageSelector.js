@@ -1,7 +1,6 @@
 import React from 'react'
 
 const LanguageSelector = (props) => {
-
   const {
     languageList,
     currentLanguage,
@@ -15,8 +14,6 @@ const LanguageSelector = (props) => {
 
   if(!isAdmin)
     styles = styles.concat('language-selector').join(' ')
-
-  console.log(styles)
 
   return (
     <div>

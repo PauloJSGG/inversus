@@ -5,6 +5,7 @@ import Footer from '../components/shared/Footer'
 import Social from '../components/main/social'
 import Events from '../components/main/events'
 import Repertoire from '../components/main/repertoire'
+import Members from '../components/main/members'
 
 import Video from '../components/shared/Video'
 import audio from '../assets/img/intro website.mp3'
@@ -169,6 +170,7 @@ class MainRoute extends Component {
                           handleMute = {this.handleMute}
                         />}
                       />
+                      <Route path={'/members'} component={Members}/>
                       <Route path={'/events'} component={Events}/>
                       <Route path={'/social'} component={Social}/>
                       <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>

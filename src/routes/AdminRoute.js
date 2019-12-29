@@ -2,6 +2,7 @@ import React, { useEffect, useState, Component } from 'react'
 import AdminHeader from '../components/admin/AdminHeader'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
+import MembersEdit from '../components/admin/MembersEdit'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
 
@@ -21,6 +22,7 @@ class AdminRoute extends Component{
     tracks: [],
     isModalOpen: false,
     repertoire: [],
+    members: [],
     currentTrack: {
       id: '',
       data: {
@@ -29,6 +31,14 @@ class AdminRoute extends Component{
         imgUrl: '',
         spotifyUrl: '',
         previewUrl: '',
+      }
+    },
+    currentMember: {
+      id: '',
+      data: {
+        name: '',
+        imgUrl: '',
+        text: '',
       }
     },
     languageList: [
@@ -89,7 +99,7 @@ class AdminRoute extends Component{
     })
   }
 
-  handleTrackChange = (event) => {
+    TrackChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -100,6 +110,23 @@ class AdminRoute extends Component{
 
         data: {
           ...this.state.currentTrack.data,
+          [name]: value
+        }
+      }
+    });
+  }
+
+  handleMemberChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      currentTrack: {
+        id: this.state.currentMember.id,
+
+        data: {
+          ...this.state.currentMember.data,
           [name]: value
         }
       }
@@ -129,7 +156,25 @@ class AdminRoute extends Component{
       .catch((e) => alert('❌Error❌'))
       .finally(() => this.handleModalOpen(false))
     }
+  }
 
+  handleSubmitMember = () => {
+    if (this.state.currentMember.id.length > 0) {
+      Fire.editMember(this.state.currentMember)
+      .then(() =>  alert('✔️Success✔️'))
+      .then(() => Fire.getDynamicData())
+      .then(r => this.setState(r))
+      .catch((e) => alert('❌Error❌'))
+      .finally(() => this.handleModalOpen(false))
+    }
+    else {
+      Fire.addMember(this.state.currentMember)
+      .then(() =>  alert('✔️Success✔️'))
+      .then(() => Fire.getDynamicData())
+      .then(r => this.setState(r))
+      .catch((e) => alert('❌Error❌'))
+      .finally(() => this.handleModalOpen(false))
+    }
   }
 
   handleRemoveTrack = (trackId) => {
@@ -227,6 +272,20 @@ class AdminRoute extends Component{
                       currentTrack = {this.state.currentTrack}
                     />
                   }
+                />
+                <Route
+                  exact path={`${url}/members`}
+                    render = {
+                      (props) =>
+                      <MembersEdit
+                        handleMemberChange = {this.handleMemberChange}
+                        handleSubmitMember = {this.handleSubmitMember}
+                        handleModalOpen = {this.handleModalOpen}
+                        currentMember = {this.state.currentMember}
+                        members = {this.state.members}
+                        isModalOpen = {this.state.isModalOpen}
+                      />
+                    }
                 />
               </div>
             </Switch>
