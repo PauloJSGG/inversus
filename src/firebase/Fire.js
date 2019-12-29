@@ -18,7 +18,7 @@ class Fire {
 	constructor(language) {
     app.initializeApp(fireConfig)
 
-    this.language = ''
+    this.language = 'pt'
 		this.auth = app.auth()
     this.db = app.firestore()
   }
@@ -69,6 +69,8 @@ class Fire {
 			return alert('Not authorized')
     }
 
+    debugger
+
     return this.db
       .collection(this.language)
       .doc('dynamic_values')
@@ -113,7 +115,6 @@ class Fire {
       }
     })
   }
-
 
   addTrack = async (track) => {
     if(!this.auth.currentUser) {

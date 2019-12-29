@@ -58,7 +58,7 @@ const RepertoireEdit = (props) => {
             </div>
             <div className = 'flex justify-between m-3'>
               <label >Letra:</label>
-              <textarea name = "lyrics" value = {currentTrack.data.lyrics} className='h-56 w-1/2' onChange={e => handleTrackChange(e)}/>
+              <textarea name = "lyrics" value = {currentTrack.data.lyrics} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleTrackChange(e)}/>
             </div>
             <div className = 'flex justify-end'>
               <button

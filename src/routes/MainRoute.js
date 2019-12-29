@@ -38,7 +38,7 @@ class MainRoute extends Component {
     dynamicData: {
       homeText: '',
       repertoire: [],
-      currentLanguage: '',
+      currentLanguage: 'pt',
     },
     isModalOpen: false,
 
@@ -66,7 +66,7 @@ class MainRoute extends Component {
       }
     },
     staticData: {},
-    videoEnded: false
+    videoEnded: true
   }
 
   componentDidMount() {
@@ -125,6 +125,7 @@ class MainRoute extends Component {
 
 
   render() {
+    console.log('HOME TEXT: ', this.state.dynamicData.homeText)
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?

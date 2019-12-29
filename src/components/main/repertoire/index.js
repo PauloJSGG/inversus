@@ -88,7 +88,7 @@ export const repertoire = (props) => {
               <h1>{currentTrack.name}</h1>
             </div>
 
-            <div className = 'flex justify-between m-3'>
+            <div className = 'flex justify-between m-3 whitespace-pre-line'>
               <h1>{currentTrack.lyrics}</h1>
             </div>
 
