@@ -1,12 +1,15 @@
 import React from 'react'
 
 const Members = (props) => {
-  const {members} = props
+  debugger
+  const {dynamicData} = props
+
+
 
   return (
     <div className="content-container">
       {
-        members.map((data, i) => {
+        dynamicData.members.map((data, i) => {
           return(
             <>
               <img src={data.src}/>

@@ -99,7 +99,7 @@ class AdminRoute extends Component{
     })
   }
 
-    TrackChange = (event) => {
+  TrackChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -121,8 +121,12 @@ class AdminRoute extends Component{
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
+    console.log('valor', value)
+    console.log('name', name)
+
+
     this.setState({
-      currentTrack: {
+      currentMember: {
         id: this.state.currentMember.id,
 
         data: {

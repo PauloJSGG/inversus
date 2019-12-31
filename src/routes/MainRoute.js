@@ -39,6 +39,7 @@ class MainRoute extends Component {
     dynamicData: {
       homeText: '',
       repertoire: [],
+      members: [],
       currentLanguage: 'pt',
     },
     isModalOpen: false,
@@ -170,7 +171,12 @@ class MainRoute extends Component {
                           handleMute = {this.handleMute}
                         />}
                       />
-                      <Route path={'/members'} component={Members}/>
+                      <Route
+                        path={'/members'}
+                        render = {() => <Members
+                          {...this.state}
+                        />}
+                      />
                       <Route path={'/events'} component={Events}/>
                       <Route path={'/social'} component={Social}/>
                       <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>

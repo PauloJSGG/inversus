@@ -22,12 +22,14 @@ const MembersEdit = (props) => {
   const {
     handleModalOpen,
     handleSubmitMember,
-    handleMembersChange,
+    handleMemberChange,
     handleEditClick,
     isModalOpen,
     members,
     currentMember
   } = props
+
+  console.log('currentMember: ', currentMember)
 
   return (
     <>
@@ -42,15 +44,15 @@ const MembersEdit = (props) => {
           <div className = 'repetoire-modal'>
             <div className = 'flex justify-between m-3'>
               <label>Nome:</label>
-              <input name = "name" value = {currentMember.data.name} onChange={e => handleMembersChange(e)}/>
+              <input name = "name" value = {currentMember.data.name} onChange={e => handleMemberChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Imagem:</label>
-              <input name = "imgUrl" value = {currentMember.data.imgUrl} onChange={e => handleMembersChange(e)}/>
+              <input name = "imgUrl" value = {currentMember.data.imgUrl} onChange={e => handleMemberChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label >Texto:</label>
-              <textarea name = "text" value = {currentMember.data.text} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleMembersChange(e)}/>
+              <textarea name = "text" value = {currentMember.data.text} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleMemberChange(e)}/>
             </div>
             <div className = 'flex justify-end'>
               <button

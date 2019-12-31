@@ -27,9 +27,11 @@ class Fire {
   async getDynamicData() {
     const homeText = await this.getHomeText()
     const repertoire = await this.getRepertoire()
+    const members = await this.getMembers()
     const data = {
       homeText: homeText,
       repertoire: repertoire,
+      members: members,
       currentLanguage: this.language
     }
     return data
@@ -115,6 +117,32 @@ class Fire {
     })
   }
 
+  async getMembers() {
+    const data = {
+      name: '',
+      imgUrl: '',
+      text: ''
+    }
+    const snapshot = await this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection('members')
+      .get()
+
+    return snapshot.docs.map(doc => {
+
+      const docData = doc.data().data
+
+      return {
+        id: doc.id,
+        data:{
+          ...data,
+          ...docData
+        }
+      }
+    })
+  }
+
   addTrack = async (track) => {
     if(!this.auth.currentUser) {
 			return alert('Not authorized')
@@ -152,6 +180,19 @@ class Fire {
       .update(track)
   }
 
+  editMember(member) {
+    if(!this.auth.currentUser) {
+			return alert('Not authorized')
+    }
+
+    return this.db
+      .collection(this.language)
+      .doc('dynamic_values')
+      .collection('members')
+      .doc(member.id)
+      .update(member)
+  }
+
 	isInitialized() {
 		return new Promise(resolve => {
 			this.auth.onAuthStateChanged(resolve)
@@ -176,7 +217,7 @@ class Fire {
     return this.db
       .collection(this.language)
       .doc('dynamic_values')
-      .collection('repertoire')
+      .collection('members')
       .add(member)
   }
 }
