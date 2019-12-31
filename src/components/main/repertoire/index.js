@@ -76,14 +76,16 @@ export const repertoire = (props) => {
           >
             <source src={currentTrack.previewUrl}/>
           </audio>
-          <div className='w-full flex justify-end fixed' style={{paddingRight: '5px',width: '91%'}}>
-            <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem',marginLeft: '10px', color: 'white' }} /></button>
-          </div>
-          <div className = 'flex w-full h-1/2 justify-center fixed' style={{width: '89%'}}>
-            <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> : <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />}</button>
-            <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>
-          </div>
           <div className = 'repetoire-modal overflow-y-scroll'>
+            <div className = 'repertoire-header'>
+              <div className='w-full flex justify-end'>
+                <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem',marginLeft: '10px', color: 'white' }} /></button>
+              </div>
+              <div className = 'flex w-full h-1/2 justify-center'>
+                <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> : <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />}</button>
+                <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>
+              </div>
+            </div>
             <div className = 'flex w-full h-1/2 justify-center'>
 
             </div>
