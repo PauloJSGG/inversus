@@ -12,10 +12,10 @@
   }
 }
 
-// .members__img{
-//   width: 40%;
-//   height: 40%;
-// }
+.members__img{
+  display: inline-block;
+  width: 80%;
+}
 
 // .members__text{
 //   width: 100%;
@@ -28,53 +28,72 @@
   -webkit-perspective-origin-x: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-}
-.parallax__layer {
   color: white;
-  position: absolute;
-  top: -200px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.parallax__layer--base {
-  text-shadow: 2px 2px #000000;
-  padding: 100vh 0;
-  width: 75%;
-  transform: translateZ(0) scale(1);
-}
-.parallax__layer--back {
-  // padding: 1vh 0;
-  // width: 50%;
-  -webkit-perspective-origin-x: 0%;
-  transform: translateZ(-1px);
 }
 
-.parallax__group {
+.parallax__group--left {
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  justify-content: start;
   position: relative;
+  // height: 500px;
+  height: 100vh;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  .parallax__layer {
+    color: white;
+    position: absolute;
+    top: -200px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .parallax__layer--base {
+    margin-left: 10px;
+    text-shadow: 2px 2px #000000;
+    padding: 78vh 0;
+    width: 65%;
+    transform: translateZ(0) scale(1);
+  }
+  .parallax__layer--back {
+    // padding: 1vh 0;
+    // width: 50%;
+    -webkit-perspective-origin-x: 0%;
+    transform: translate(-100%, 0%) translateZ(-1px);
+  }
+}
+
+.parallax__group--right {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: end;
   height: 500px;
   height: 100vh;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+
+  .parallax__layer {
+    color: white;
+    position: absolute;
+    top: -200px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .parallax__layer--base {
+    text-align: right;
+    text-shadow: 2px 2px #000000;
+    padding: 100vh 0;
+    width: 75%;
+    transform: translate(33%, -17%)  translateZ(0) scale(1);
+  }
+  .parallax__layer--back {
+    // padding: 1vh 0;
+    // width: 50%;
+    -webkit-perspective-origin-x: 0%;
+    transform: translateZ(-1px);
+  }
 }
-
-.parallax--left{
-
-}
-
-.parallax--right{
-
-}
-
-// #caralho{
-//   background-color: red;
-// }
-
-#group_0 {
-  z-index: 99;
-}
-
-// #2group
-
-
-

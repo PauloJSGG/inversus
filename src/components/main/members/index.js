@@ -8,14 +8,13 @@ const Members = (props) => {
       <div className="parallax">
         {
           dynamicData.members.map((item, i) => {
-            const leftOrRight = i % 2 == 0 ? 'parallax--left' : 'parallax--right';
-            const color = leftOrRight == 'members--left' ? 'red' : 'green'
+            const leftOrRight = i % 2 == 0 ? 'left' : 'right';
             return(
-              <div className="parallax__group" id={'group_'.concat(i.toString())} >
-                <div className={leftOrRight.concat(" parallax__layer parallax__layer--base")}>
+              <div className={'parallax__group--'.concat(leftOrRight)}>
+                <div className=" parallax__layer parallax__layer--base">
                   <p className="members__text">{item.data.text}</p>
                 </div>
-                <div className={leftOrRight.concat(" parallax__layer parallax__layer--back")}>
+                <div className="parallax__layer parallax__layer--back">
                   <img src={item.data.imgUrl} className="members__img"/>
                 </div>
               </div>
