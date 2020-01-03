@@ -15,9 +15,17 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faVolumeMute, faVolumeUp, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import { faSpotify } from '@fortawesome/free-brands-svg-icons'
-// import { fab } from '@fortawesome/free-brands-svg-icons'
-library.add(faPlus, faVolumeMute, faVolumeUp, faSpotify, faWindowClose)
+import { faSpotify, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+
+library.add(
+  faPlus,
+  faVolumeMute,
+  faVolumeUp,
+  faSpotify,
+  faWindowClose,
+  faFacebook,
+  faInstagram,
+)
 
 function App() {
 

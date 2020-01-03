@@ -13,10 +13,33 @@ header.header-main {
   top: 0;
   width: 100%;
   background-color: black;
+  color: red;
+  &:hover{
+    color: red;
+  }
 }
 
 nav {
-  color: white;
+  ul {
+    a {
+      color: #f2f2f2;
+      transition: 0.3s;;
+      opacity: 0.8;
+
+      @media (max-width: 600px) {
+        opacity: 1;
+        color: white;
+      }
+
+    }:hover{
+      opacity: 1;
+      color: #ffffff;
+    }
+  }
+  // color: #e2e2e2;
+  // &:hover{
+  //   color: red;
+  // }
 }
 
 // .header-container{
@@ -37,7 +60,7 @@ nav {
   flex-direction: column;
   justify-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: red;
   height: 100px;
 
   &__border-bottom{

@@ -18,7 +18,7 @@ import { NavLink, Link  } from "react-router-dom";
             <NavLink to={'/discography'} title="Reportório" className='m-2'>Reportório</NavLink> */}
             {/* <a href={'https://open.spotify.com/artist/68hqv7bUIw71HHJExldzLZ'} target="_blank" rel="noopener noreferrer" title="Events" className='m-2'>Spotify</a> */}
             <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
-            <NavLink exact to={'/events'} title="Events" className='m-2'>{staticData.events}</NavLink>
+            {/* <NavLink exact to={'/events'} title="Events" className='m-2'>{staticData.events}</NavLink> */}
             <NavLink exact to={'/members'} title="members" className='m-2'>{staticData.members}</NavLink>
             <NavLink exact to={'/social'} title="Social" className='m-2'>{staticData.social}</NavLink>
           </ul>
