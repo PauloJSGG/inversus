@@ -21,9 +21,10 @@ const customStyles = {
 const RepertoireEdit = (props) => {
   const {
     handleModalOpen,
-    handleSubmitTrack,
+    handleSubmit,
     handleTrackChange,
     handleEditClick,
+
     isModalOpen,
     repertoire,
     currentTrack
@@ -63,7 +64,7 @@ const RepertoireEdit = (props) => {
             <div className = 'flex justify-end'>
               <button
                 className = 'shared-button shared-button--second'
-                onClick = {handleSubmitTrack}
+                onClick = {handleSubmit}
                 type='submit'
                 title='submit'
               >
@@ -76,13 +77,12 @@ const RepertoireEdit = (props) => {
           {repertoire.map((item => {
               return(
                 <>
-                  <div key={item.id} onClick = {() => handleEditClick(item.id) } className = "repetoire-card" >
+                  <div key={item.id} onClick = {() => handleEditClick('currentTrack',item) } className = "repetoire-card" >
                     <h1>
                       {item.data.name}
                     </h1>
-                    {/* <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button> */}
                   </div>
-                  <button onClick = {() => props.handleRemoveTrack(item.id)}>❌</button>
+                  <button onClick = {() => props.handleDelete(item.id)}>❌</button>
                 </>
               )
           }))}

@@ -23,6 +23,47 @@ class Fire {
     this.db = app.firestore()
   }
 
+  //DOCUMENTS
+
+  getDocument = async (path) => await this.db
+    .doc(this.language.concat(`/${path}`))
+    .get()
+
+  updateDocument = async (path, data) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+
+    return await this.db
+      .doc(this.language.concat(`/${path}`))
+      .update(data)
+  }
+
+  deleteDocument = async (path) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+
+    return await this.db
+      .doc(this.language.concat(`/${path}`))
+      .delete()
+  }
+
+  //COLLECTIONS
+
+  addToCollection = async (path, data) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+
+    return await this.db
+      .collection(this.language.concat(`/${path}`))
+      .add(data)
+  }
+
+
+
+
   //DYNAMIC DATA
   async getDynamicData() {
     const homeText = await this.getHomeText()
@@ -35,6 +76,14 @@ class Fire {
       currentLanguage: this.language
     }
     return data
+  }
+
+  login(email, password) {
+    return this.auth.signInWithEmailAndPassword(email, password)
+  }
+
+  logout() {
+    return this.auth.signOut()
   }
 
   addMainText(text) {
@@ -58,13 +107,7 @@ class Fire {
     return staticData.data()
   }
 
-	login(email, password) {
-		return this.auth.signInWithEmailAndPassword(email, password)
-	}
 
-	logout() {
-		return this.auth.signOut()
-  }
 
   setLanguage(language) {
     this.language = language
@@ -143,55 +186,55 @@ class Fire {
     })
   }
 
-  addTrack = async (track) => {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
+  // addTrack = async (track) => {
+  //   if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+  //   }
 
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('repertoire')
-      .add(track)
-  }
+  //   return this.db
+  //     .collection(this.language)
+  //     .doc('dynamic_values')
+  //     .collection('repertoire')
+  //     .add(track)
+  // }
 
-  removeTrack(trackId) {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('repertoire')
-      .doc(trackId)
-      .delete()
-  }
+  // removeTrack(trackId) {
+  //   if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+  //   }
+  //   return this.db
+  //     .collection(this.language)
+  //     .doc('dynamic_values')
+  //     .collection('repertoire')
+  //     .doc(trackId)
+  //     .delete()
+  // }
 
-  editTrack(track) {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
+  // editTrack(track) {
+  //   if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+  //   }
 
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('repertoire')
-      .doc(track.id)
-      .update(track)
-  }
+  //   return this.db
+  //     .collection(this.language)
+  //     .doc('dynamic_values')
+  //     .collection('repertoire')
+  //     .doc(track.id)
+  //     .update(track)
+  // }
 
-  editMember(member) {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
+  // editMember(member) {
+  //   if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+  //   }
 
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('members')
-      .doc(member.id)
-      .update(member)
-  }
+  //   return this.db
+  //     .collection(this.language)
+  //     .doc('dynamic_values')
+  //     .collection('members')
+  //     .doc(member.id)
+  //     .update(member)
+  // }
 
 	isInitialized() {
 		return new Promise(resolve => {
@@ -203,23 +246,17 @@ class Fire {
 		return this.auth.currentUser && this.auth.currentUser.displayName
   }
 
+  // addMember(member) {
+  //   if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+  //   }
 
-
-
-
-
-
-  addMember(member) {
-    if(!this.auth.currentUser) {
-			return alert('Not authorized')
-    }
-
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('members')
-      .add(member)
-  }
+  //   return this.db
+  //     .collection(this.language)
+  //     .doc('dynamic_values')
+  //     .collection('members')
+  //     .add(member)
+  // }
 }
 
 export default new Fire()

@@ -11,6 +11,10 @@ import en from '../assets/img/gb.svg'
 import de from '../assets/img/de.svg'
 
 import Fire from '../firebase/Fire'
+// import {getRepertoire, addTrack, updateTrack, deleteTrack} from '../firebase/repertoire'
+// import addTrack from '../firebase/repertoire'
+// import updateTrack from '../firebase/repertoire'
+// import deleteTrack from '../firebase/repertoire'
 
 import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
@@ -58,6 +62,12 @@ class AdminRoute extends Component{
     currentLanguage: ''
   }
 
+  constructor() {
+    super()
+    this.rootRepertoire = 'dynamic_values/repertoire'
+    this.rootMembers = 'dynamic_values/members'
+  }
+
   componentDidMount() {
     Fire.isInitialized()
     .then(val => this.setState({firebaseInitialized: val}))
@@ -86,55 +96,33 @@ class AdminRoute extends Component{
     })
   }
 
-  handleEditClick = (id) => {
-    const track = this.state.repertoire.filter(item => item.id === id)[0]
+  handleEditClick = (key, object) => {
+    debugger
 
     this.setState({
       ...this.state,
       isModalOpen: true,
-      currentTrack: {
-        id: id,
-        data: track.data
+      [key]: {
+        id: object.id,
+        data: object.data
       }
     })
   }
 
-  TrackChange = (event) => {
+  handleDataChange = (event, key) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      currentTrack: {
+    this.setState((prevState) => ({
+      [key]: {
         id: this.state.currentTrack.id,
-
         data: {
-          ...this.state.currentTrack.data,
+          ...prevState[key].data,
           [name]: value
         }
-      }
-    });
-  }
-
-  handleMemberChange = (event) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    console.log('valor', value)
-    console.log('name', name)
-
-
-    this.setState({
-      currentMember: {
-        id: this.state.currentMember.id,
-
-        data: {
-          ...this.state.currentMember.data,
-          [name]: value
-        }
-      }
-    });
+      },
+    }))
   }
 
   handleSetLanguage = (language) => {
@@ -143,50 +131,50 @@ class AdminRoute extends Component{
       .then(r => this.setState(r))
   }
 
-  handleSubmitTrack = () => {
+  handleAddDocument = (path, data) => {
     if (this.state.currentTrack.id.length > 0) {
-      Fire.editTrack(this.state.currentTrack)
-      .then(() =>  alert('✔️Success✔️'))
-      .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
-      .catch((e) => alert('❌Error❌'))
-      .finally(() => this.handleModalOpen(false))
+      Fire.updateDocument(path, data)
+        .then(() =>  alert('✔️Success✔️'))
+        .then(() => Fire.getDynamicData())
+        .then(r => this.setState(r))
+        .catch((e) => alert('❌Error❌'))
+        .finally(() => this.handleModalOpen(false))
     }
     else {
-      Fire.addTrack(this.state.currentTrack)
-      .then(() =>  alert('✔️Success✔️'))
-      .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
-      .catch((e) => alert('❌Error❌'))
-      .finally(() => this.handleModalOpen(false))
+      Fire.addToCollection(path, data)
+        .then(() =>  alert('✔️Success✔️'))
+        .then(() => Fire.getDynamicData())
+        .then(r => this.setState(r))
+        .catch((e) => alert('❌Error❌'))
+        .finally(() => this.handleModalOpen(false))
     }
   }
 
-  handleSubmitMember = () => {
-    if (this.state.currentMember.id.length > 0) {
-      Fire.editMember(this.state.currentMember)
-      .then(() =>  alert('✔️Success✔️'))
-      .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
-      .catch((e) => alert('❌Error❌'))
-      .finally(() => this.handleModalOpen(false))
-    }
-    else {
-      Fire.addMember(this.state.currentMember)
-      .then(() =>  alert('✔️Success✔️'))
-      .then(() => Fire.getDynamicData())
-      .then(r => this.setState(r))
-      .catch((e) => alert('❌Error❌'))
-      .finally(() => this.handleModalOpen(false))
-    }
-  }
+  // handleSubmitMember = () => {
+  //   if (this.state.currentMember.id.length > 0) {
+  //     Fire.editMember(this.state.currentMember)
+  //       .then(() =>  alert('✔️Success✔️'))
+  //       .then(() => Fire.getDynamicData())
+  //       .then(r => this.setState(r))
+  //       .catch((e) => alert('❌Error❌'))
+  //       .finally(() => this.handleModalOpen(false))
+  //   }
+  //   else {
+  //     Fire.addMember(this.state.currentMember)
+  //       .then(() =>  alert('✔️Success✔️'))
+  //       .then(() => Fire.getDynamicData())
+  //       .then(r => this.setState(r))
+  //       .catch((e) => alert('❌Error❌'))
+  //       .finally(() => this.handleModalOpen(false))
+  //   }
+  // }
 
-  handleRemoveTrack = (trackId) => {
-    Fire.removeTrack(trackId)
+  handleDeleteDocument = (path, trackId) => {
+    Fire.deleteDocument(`${path}/${trackId}`)
       .then((e) => alert('✅Success✅'))
       .then(() => Fire.getDynamicData())
       .then(r => this.setState(r))
-      .catch((e) => alert('❌Error❌'))
+      .catch((e) => alert(e))
   }
 
   handleModalOpen = (val) => {
@@ -262,14 +250,10 @@ class AdminRoute extends Component{
                     (props) =>
                     <RepertoireEdit
                       handleEditClick = {this.handleEditClick}
-                      handleTrackChange = {this.handleTrackChange}
+                      handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
                       handleModalOpen = {this.handleModalOpen}
-                      handleSubmitTrack = {this.handleSubmitTrack}
-                      handleRemoveTrack = {this.handleRemoveTrack}
-
-                      handleSetLanguage = {this.handleSetLanguage}
-                      languageList = {this.state.languageList}
-                      currentLanguage = {this.state.currentLanguage}
+                      handleSubmit = {() => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack)}
+                      handleDelete = {(id) => this.handleDeleteDocument(this.rootRepertoire, id)}
 
                       isModalOpen = {this.state.isModalOpen}
                       repertoire = {this.state.repertoire}
@@ -282,9 +266,12 @@ class AdminRoute extends Component{
                     render = {
                       (props) =>
                       <MembersEdit
-                        handleMemberChange = {this.handleMemberChange}
-                        handleSubmitMember = {this.handleSubmitMember}
+                        handleEditClick = {this.handleEditClick}
+                        handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
+                        handleSubmit = {() => this.handleAddDocument(this.rootMembers, this.state.currentMember)}
+                        handleDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
                         handleModalOpen = {this.handleModalOpen}
+
                         currentMember = {this.state.currentMember}
                         members = {this.state.members}
                         isModalOpen = {this.state.isModalOpen}

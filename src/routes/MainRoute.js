@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import Header from '../components/shared/Header'
-import Body from '../components/shared/Body'
-import Footer from '../components/shared/Footer'
 import Social from '../components/main/social'
-import Events from '../components/main/events'
 import Repertoire from '../components/main/repertoire'
 import Members from '../components/main/members'
+import Albums from '../components/main/albums'
 
 import Video from '../components/shared/Video'
-import audio from '../assets/img/intro website.mp3'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
-
-import SwitchWithFade from '../components/shared/SwitchWithFade'
 
 import LogoUp from '../assets/img/inversus-logo-up.png'
 import LogoDown from '../assets/img/inversus-logo-down.png'
@@ -22,14 +17,14 @@ import en from '../assets/img/gb.svg'
 import de from '../assets/img/de.svg'
 
 import Home from '../components/main/'
-import {
-  CSSTransition,
-  TransitionGroup
-} from 'react-transition-group'
-import Fire from '../firebase/Fire'
 
-import { Route, withRouter, Switch, Redirect } from 'react-router-dom'
-import AdminRoute from '../routes/AdminRoute'
+import Fire from '../firebase/Fire'
+import getRepertoire from '../firebase/repertoire'
+import addTrack from '../firebase/repertoire'
+import updateTrack from '../firebase/repertoire'
+import deleteTrack from '../firebase/repertoire'
+
+import { Route } from 'react-router-dom'
 import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
 
 class MainRoute extends Component {
@@ -77,11 +72,6 @@ class MainRoute extends Component {
         if (this.state.dynamicData.currentLanguage.length > 0)
           this.refreshData(Fire.language)
       })
-
-      // if (this.state.dynamicData.currentLanguage.length > 0){
-      //   console.log('wtf')
-      //   document.getElementById('myVideo').play()
-      // }
   }
 
   handleVideoEnded = () => {
@@ -121,20 +111,12 @@ class MainRoute extends Component {
 
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
-  submitMain() {
-    Fire.addMainText(this.state.mainText)
-  }
-
-
   render() {
     console.log('HOME TEXT: ', this.state.dynamicData.homeText)
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?
-
           <div className='flex flex-col justify-center items-center h-full'>
-
-            {/* <img src={Logo} alt={'logo'} className='header__logo'/> */}
             <img src={LogoUp} alt={'logo'} className='header__logo--up'/>
             <img src={LogoDown} alt={'logo'} className='header__logo--down'/>
             <LanguageSelector
@@ -143,52 +125,42 @@ class MainRoute extends Component {
               {...this.state}
             />
           </div>
-         :
+          :
           <>
-            {/* <audio loop autoplay id="myAudio">
-              <source src={audio} type="audio/mpeg"/>
-            </audio> */}
             {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> :
-             (
-
-               <div className = 'main'>
-                <Header
-                  handleSetLanguage = {this.handleSetLanguage}
-                  languageList = {this.state.languageList}
-                  currentLanguage = {this.state.dynamicData.currentLanguage}
-                  staticData = {this.state.staticData}
-                />
-
-
-                  <Route render={({location}) => (
-                    <AnimatedSwitch location={location}>
-                      <Route
-                        path={'/repertoire'}
-                        render={ () => <Repertoire
-                          {...this.state}
-                          handleSelectTrack = {this.handleSelectTrack}
-                          handleModalOpen = {this.handleModalOpen}
-                          handleMute = {this.handleMute}
-                        />}
-                      />
-                      <Route
-                        path={'/members'}
-                        render = {() => <Members
-                          {...this.state}
-                        />}
-                      />
-                      <Route path={'/events'} component={Events}/>
-                      <Route path={'/social'} component={Social}/>
-                      <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
-                    </AnimatedSwitch>
-                  )} />
-
-
+            (
+              <div className = 'main'>
+              <Header
+                handleSetLanguage = {this.handleSetLanguage}
+                languageList = {this.state.languageList}
+                currentLanguage = {this.state.dynamicData.currentLanguage}
+                staticData = {this.state.staticData}
+              />
+                <Route render={({location}) => (
+                  <AnimatedSwitch location={location}>
+                    <Route
+                      path={'/repertoire'}
+                      render={ () => <Repertoire
+                        {...this.state}
+                        handleSelectTrack = {this.handleSelectTrack}
+                        handleModalOpen = {this.handleModalOpen}
+                        handleMute = {this.handleMute}
+                      />}
+                    />
+                    <Route
+                      path={'/members'}
+                      render = {() => <Members
+                        {...this.state}
+                      />}
+                    />
+                    <Route path={'/albums'} component={Albums}/>
+                    <Route path={'/social'} component={Social}/>
+                    <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
+                  </AnimatedSwitch>
+                )} />
               </div>
-              )
-
+            )
             }
-
           </>
         }
 

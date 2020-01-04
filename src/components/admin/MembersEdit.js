@@ -21,15 +21,14 @@ const customStyles = {
 const MembersEdit = (props) => {
   const {
     handleModalOpen,
-    handleSubmitMember,
-    handleMemberChange,
+    handleSubmit,
+    handleChange,
     handleEditClick,
+
     isModalOpen,
     members,
     currentMember
   } = props
-
-  console.log('currentMember: ', currentMember)
 
   return (
     <>
@@ -44,20 +43,20 @@ const MembersEdit = (props) => {
           <div className = 'repetoire-modal'>
             <div className = 'flex justify-between m-3'>
               <label>Nome:</label>
-              <input name = "name" value = {currentMember.data.name} onChange={e => handleMemberChange(e)}/>
+              <input name = "name" value = {currentMember.data.name} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Imagem:</label>
-              <input name = "imgUrl" value = {currentMember.data.imgUrl} onChange={e => handleMemberChange(e)}/>
+              <input name = "imgUrl" value = {currentMember.data.imgUrl} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label >Texto:</label>
-              <textarea name = "text" value = {currentMember.data.text} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleMemberChange(e)}/>
+              <textarea name = "text" value = {currentMember.data.text} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-end'>
               <button
                 className = 'shared-button shared-button--second'
-                onClick = {handleSubmitMember}
+                onClick = {handleSubmit}
                 type='submit'
                 title='submit'
               >
@@ -70,13 +69,12 @@ const MembersEdit = (props) => {
           {members.map((item => {
               return(
                 <>
-                  <div key={item.id} onClick = {() => handleEditClick(item.id) } className = "repetoire-card" >
+                  <div key={item.id} onClick = {() => handleEditClick('currentMember',item) } className = "repetoire-card" >
                     <h1>
                       {item.data.name}
                     </h1>
-                    {/* <button data-id={item.id} onClick = {() => handleEditClick(item.id) }><FontAwesomeIcon icon={['fas','edit']} /></button> */}
                   </div>
-                  {/* <button onClick = {() => props.handleRemoveTrack(item.id)}>❌</button> */}
+                  <button onClick = {() => props.handleDelete(item.id)}>❌</button>
                 </>
               )
           }))}
