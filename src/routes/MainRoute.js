@@ -19,10 +19,6 @@ import de from '../assets/img/de.svg'
 import Home from '../components/main/'
 
 import Fire from '../firebase/Fire'
-import getRepertoire from '../firebase/repertoire'
-import addTrack from '../firebase/repertoire'
-import updateTrack from '../firebase/repertoire'
-import deleteTrack from '../firebase/repertoire'
 
 import { Route } from 'react-router-dom'
 import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
@@ -32,7 +28,7 @@ class MainRoute extends Component {
     animate: true,
     muted: false,
     dynamicData: {
-      homeText: '',
+      texts: {},
       repertoire: [],
       members: [],
       currentLanguage: 'pt',
@@ -55,12 +51,10 @@ class MainRoute extends Component {
     ],
 
     currentTrack: {
-      data: {
-        name: '',
-        lyrics: '',
-        imgUrl: '',
-        spotifyUrl: ''
-      }
+      name: '',
+      lyrics: '',
+      imgUrl: '',
+      spotifyUrl: ''
     },
     staticData: {},
     videoEnded: true
@@ -112,7 +106,6 @@ class MainRoute extends Component {
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   render() {
-    console.log('HOME TEXT: ', this.state.dynamicData.homeText)
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?
@@ -131,9 +124,6 @@ class MainRoute extends Component {
             (
               <div className = 'main'>
               <Header
-                handleSetLanguage = {this.handleSetLanguage}
-                languageList = {this.state.languageList}
-                currentLanguage = {this.state.dynamicData.currentLanguage}
                 staticData = {this.state.staticData}
               />
                 <Route render={({location}) => (
@@ -155,7 +145,7 @@ class MainRoute extends Component {
                     />
                     <Route path={'/albums'} component={Albums}/>
                     <Route path={'/social'} component={Social}/>
-                    <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
+                    <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.texts.homeText}></Home>}/>
                   </AnimatedSwitch>
                 )} />
               </div>

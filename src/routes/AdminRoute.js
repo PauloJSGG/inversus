@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from 'react'
+import React, { Component } from 'react'
 import AdminHeader from '../components/admin/AdminHeader'
 import MainEdit from '../components/admin/MainEdit'
 import RepertoireEdit from '../components/admin/RepertoireEdit'
@@ -11,10 +11,6 @@ import en from '../assets/img/gb.svg'
 import de from '../assets/img/de.svg'
 
 import Fire from '../firebase/Fire'
-// import {getRepertoire, addTrack, updateTrack, deleteTrack} from '../firebase/repertoire'
-// import addTrack from '../firebase/repertoire'
-// import updateTrack from '../firebase/repertoire'
-// import deleteTrack from '../firebase/repertoire'
 
 import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
@@ -28,22 +24,16 @@ class AdminRoute extends Component{
     repertoire: [],
     members: [],
     currentTrack: {
-      id: '',
-      data: {
-        name: '',
-        lyrics: '',
-        imgUrl: '',
-        spotifyUrl: '',
-        previewUrl: '',
-      }
+      name: '',
+      lyrics: '',
+      imgUrl: '',
+      spotifyUrl: '',
+      previewUrl: '',
     },
     currentMember: {
-      id: '',
-      data: {
-        name: '',
-        imgUrl: '',
-        text: '',
-      }
+      name: '',
+      imgUrl: '',
+      text: '',
     },
     languageList: [
       {
@@ -85,9 +75,9 @@ class AdminRoute extends Component{
   }
 
   handleSubmitHomeText = () => {
-    Fire.addMainText(this.state.homeText)
+    Fire.addOrEditDocument('dynamic_values', {homeText: this.state.homeText})
     .then(r => alert('✅Success✅'))
-    .catch(e => alert('❌Error❌'))
+    .catch(e => alert(e))
   }
 
   handleFormChange = (txt) => {
@@ -97,14 +87,11 @@ class AdminRoute extends Component{
   }
 
   handleEditClick = (key, object) => {
-    debugger
-
     this.setState({
       ...this.state,
       isModalOpen: true,
       [key]: {
-        id: object.id,
-        data: object.data
+        ...object
       }
     })
   }
@@ -114,13 +101,11 @@ class AdminRoute extends Component{
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
+
     this.setState((prevState) => ({
       [key]: {
-        id: this.state.currentTrack.id,
-        data: {
-          ...prevState[key].data,
-          [name]: value
-        }
+        ...prevState[key],
+        [name]: value
       },
     }))
   }
@@ -132,7 +117,8 @@ class AdminRoute extends Component{
   }
 
   handleAddDocument = (path, data) => {
-    if (this.state.currentTrack.id.length > 0) {
+    debugger
+    if (data.id) {
       Fire.updateDocument(path, data)
         .then(() =>  alert('✔️Success✔️'))
         .then(() => Fire.getDynamicData())
@@ -150,25 +136,6 @@ class AdminRoute extends Component{
     }
   }
 
-  // handleSubmitMember = () => {
-  //   if (this.state.currentMember.id.length > 0) {
-  //     Fire.editMember(this.state.currentMember)
-  //       .then(() =>  alert('✔️Success✔️'))
-  //       .then(() => Fire.getDynamicData())
-  //       .then(r => this.setState(r))
-  //       .catch((e) => alert('❌Error❌'))
-  //       .finally(() => this.handleModalOpen(false))
-  //   }
-  //   else {
-  //     Fire.addMember(this.state.currentMember)
-  //       .then(() =>  alert('✔️Success✔️'))
-  //       .then(() => Fire.getDynamicData())
-  //       .then(r => this.setState(r))
-  //       .catch((e) => alert('❌Error❌'))
-  //       .finally(() => this.handleModalOpen(false))
-  //   }
-  // }
-
   handleDeleteDocument = (path, trackId) => {
     Fire.deleteDocument(`${path}/${trackId}`)
       .then((e) => alert('✅Success✅'))
@@ -177,16 +144,24 @@ class AdminRoute extends Component{
       .catch((e) => alert(e))
   }
 
-  handleModalOpen = (val) => {
+  cleanState = () => this.setState((prevState) => ({
+    currentTrack: {
+      name: '',
+      lyrics: '',
+      imgUrl: '',
+      spotifyUrl: '',
+      previewUrl: '',
+    },
+    currentMember: {
+      name: '',
+      imgUrl: '',
+      text: '',
+    }
+  }))
+
+  handleModalOpen = val => {
     if (!val)
-    this.setState({currentTrack: {
-      data: {
-        name: '',
-        lyrics: '',
-        imgUrl: '',
-        spotifyUrl: ''
-      }
-    }})
+      this.cleanState()
 
     this.setState({isModalOpen: val})
   }
@@ -250,7 +225,7 @@ class AdminRoute extends Component{
                     (props) =>
                     <RepertoireEdit
                       handleEditClick = {this.handleEditClick}
-                      handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
+                      handleChange = {(e) => this.handleDataChange(e, 'currentTrack')}
                       handleModalOpen = {this.handleModalOpen}
                       handleSubmit = {() => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack)}
                       handleDelete = {(id) => this.handleDeleteDocument(this.rootRepertoire, id)}

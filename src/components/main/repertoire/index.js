@@ -104,7 +104,7 @@ export const repertoire = (props) => {
           return(
             <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
               {/* <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/> */}
-              <h1>{item.data.name}</h1>
+              <h1>{item.name}</h1>
             </div>
           )
         })}

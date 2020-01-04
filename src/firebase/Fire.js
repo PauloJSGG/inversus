@@ -24,10 +24,14 @@ class Fire {
   }
 
   //DOCUMENTS
-
   getDocument = async (path) => await this.db
     .doc(this.language.concat(`/${path}`))
     .get()
+    .then(r => r.data())
+
+  addOrEditDocument = async (path, data) => await this.db
+    .doc(this.language.concat(`/${path}`))
+    .set(data)
 
   updateDocument = async (path, data) => {
     if(!this.auth.currentUser) {
@@ -50,6 +54,16 @@ class Fire {
   }
 
   //COLLECTIONS
+  getCollection = async (path) => {
+    const snapshot = await this.db
+      .collection(this.language.concat(`/${path}`))
+      .get()
+
+    return snapshot.docs.map(item => ({
+      id: item.id,
+      ...item.data()
+    }))
+  }
 
   addToCollection = async (path, data) => {
     if(!this.auth.currentUser) {
@@ -61,22 +75,23 @@ class Fire {
       .add(data)
   }
 
-
-
-
   //DYNAMIC DATA
   async getDynamicData() {
-    const homeText = await this.getHomeText()
-    const repertoire = await this.getRepertoire()
-    const members = await this.getMembers()
+    const repertoire = await this.getCollection('dynamic_values/repertoire')
+    const texts = await this.getDocument('dynamic_values')
+    const members = await this.getCollection('dynamic_values/members')
     const data = {
-      homeText: homeText,
+      texts: texts,
       repertoire: repertoire,
       members: members,
       currentLanguage: this.language
     }
+
     return data
   }
+
+  //STATIC DATA
+  getStaticData = async () => await this.getDocument('static_values')
 
   login(email, password) {
     return this.auth.signInWithEmailAndPassword(email, password)
@@ -85,29 +100,6 @@ class Fire {
   logout() {
     return this.auth.signOut()
   }
-
-  addMainText(text) {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
-    }
-
-    return this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .set({home_text: text})
-  }
-
-  //STATIC DATA
-  async getStaticData() {
-    const staticData = await this.db
-      .collection(this.language)
-      .doc('static_values')
-      .get()
-
-    return staticData.data()
-  }
-
-
 
   setLanguage(language) {
     this.language = language
@@ -120,122 +112,6 @@ class Fire {
 		})
   }
 
-
-  async getHomeText() {
-    const home_text = await this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .get()
-
-    if (home_text.get('home_text'))
-      return home_text.get('home_text')
-    else
-      return ''
-  }
-
-  async getRepertoire() {
-    const data = {
-      name: '',
-      lyrics: '',
-      imgUrl: '',
-      spotifyUrl: ''
-    }
-    const snapshot = await this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('repertoire')
-      .get()
-
-    return snapshot.docs.map(doc => {
-
-      const docData = doc.data().data
-
-      return {
-        id: doc.id,
-        data:{
-          ...data,
-          ...docData
-        }
-      }
-    })
-  }
-
-  async getMembers() {
-    const data = {
-      name: '',
-      imgUrl: '',
-      text: ''
-    }
-    const snapshot = await this.db
-      .collection(this.language)
-      .doc('dynamic_values')
-      .collection('members')
-      .get()
-
-    return snapshot.docs.map(doc => {
-
-      const docData = doc.data().data
-
-      return {
-        id: doc.id,
-        data:{
-          ...data,
-          ...docData
-        }
-      }
-    })
-  }
-
-  // addTrack = async (track) => {
-  //   if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-  //   }
-
-  //   return this.db
-  //     .collection(this.language)
-  //     .doc('dynamic_values')
-  //     .collection('repertoire')
-  //     .add(track)
-  // }
-
-  // removeTrack(trackId) {
-  //   if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-  //   }
-  //   return this.db
-  //     .collection(this.language)
-  //     .doc('dynamic_values')
-  //     .collection('repertoire')
-  //     .doc(trackId)
-  //     .delete()
-  // }
-
-  // editTrack(track) {
-  //   if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-  //   }
-
-  //   return this.db
-  //     .collection(this.language)
-  //     .doc('dynamic_values')
-  //     .collection('repertoire')
-  //     .doc(track.id)
-  //     .update(track)
-  // }
-
-  // editMember(member) {
-  //   if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-  //   }
-
-  //   return this.db
-  //     .collection(this.language)
-  //     .doc('dynamic_values')
-  //     .collection('members')
-  //     .doc(member.id)
-  //     .update(member)
-  // }
-
 	isInitialized() {
 		return new Promise(resolve => {
 			this.auth.onAuthStateChanged(resolve)
@@ -245,18 +121,6 @@ class Fire {
 	getCurrentUsername() {
 		return this.auth.currentUser && this.auth.currentUser.displayName
   }
-
-  // addMember(member) {
-  //   if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-  //   }
-
-  //   return this.db
-  //     .collection(this.language)
-  //     .doc('dynamic_values')
-  //     .collection('members')
-  //     .add(member)
-  // }
 }
 
 export default new Fire()

@@ -22,13 +22,15 @@ const RepertoireEdit = (props) => {
   const {
     handleModalOpen,
     handleSubmit,
-    handleTrackChange,
+    handleChange,
     handleEditClick,
 
     isModalOpen,
     repertoire,
     currentTrack
   } = props
+
+  console.log('modalOpen', currentTrack)
 
   return (
     <>
@@ -43,23 +45,23 @@ const RepertoireEdit = (props) => {
           <div className = 'repetoire-modal'>
             <div className = 'flex justify-between m-3'>
               <label>Nome:</label>
-              <input name = "name" value = {currentTrack.data.name} onChange={e => handleTrackChange(e)}/>
+              <input name = "name" value = {currentTrack.name} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Imagem:</label>
-              <input name = "imgUrl" value = {currentTrack.data.imgUrl} onChange={e => handleTrackChange(e)}/>
+              <input name = "imgUrl" value = {currentTrack.imgUrl} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Spotify:</label>
-              <input name = "spotifyUrl" value = {currentTrack.data.spotifyUrl} onChange={e => handleTrackChange(e)}/>
+              <input name = "spotifyUrl" value = {currentTrack.spotifyUrl} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Preview:</label>
-              <input name = "previewUrl" value = {currentTrack.data.previewUrl} onChange={e => handleTrackChange(e)}/>
+              <input name = "previewUrl" value = {currentTrack.previewUrl} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label >Letra:</label>
-              <textarea name = "lyrics" value = {currentTrack.data.lyrics} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleTrackChange(e)}/>
+              <textarea name = "lyrics" value = {currentTrack.lyrics} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-end'>
               <button
@@ -79,7 +81,7 @@ const RepertoireEdit = (props) => {
                 <>
                   <div key={item.id} onClick = {() => handleEditClick('currentTrack',item) } className = "repetoire-card" >
                     <h1>
-                      {item.data.name}
+                      {item.name}
                     </h1>
                   </div>
                   <button onClick = {() => props.handleDelete(item.id)}>❌</button>

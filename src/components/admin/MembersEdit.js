@@ -30,6 +30,8 @@ const MembersEdit = (props) => {
     currentMember
   } = props
 
+  console.log('members', currentMember)
+
   return (
     <>
       <div className = 'w-full flex flex-col justify-center my-5 items-center'>
@@ -43,15 +45,15 @@ const MembersEdit = (props) => {
           <div className = 'repetoire-modal'>
             <div className = 'flex justify-between m-3'>
               <label>Nome:</label>
-              <input name = "name" value = {currentMember.data.name} onChange={e => handleChange(e)}/>
+              <input name = "name" value = {currentMember.name} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label>URL Imagem:</label>
-              <input name = "imgUrl" value = {currentMember.data.imgUrl} onChange={e => handleChange(e)}/>
+              <input name = "imgUrl" value = {currentMember.imgUrl} onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-between m-3'>
               <label >Texto:</label>
-              <textarea name = "text" value = {currentMember.data.text} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleChange(e)}/>
+              <textarea name = "text" value = {currentMember.text} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleChange(e)}/>
             </div>
             <div className = 'flex justify-end'>
               <button
@@ -71,7 +73,7 @@ const MembersEdit = (props) => {
                 <>
                   <div key={item.id} onClick = {() => handleEditClick('currentMember',item) } className = "repetoire-card" >
                     <h1>
-                      {item.data.name}
+                      {item.name}
                     </h1>
                   </div>
                   <button onClick = {() => props.handleDelete(item.id)}>❌</button>

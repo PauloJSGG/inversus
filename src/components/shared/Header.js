@@ -6,6 +6,8 @@ import { NavLink, Link  } from "react-router-dom";
 
   const {staticData} = props
 
+  console.log('static',staticData)
+
   return(
     <header className='header-main'>
       <div className='header-container'>
