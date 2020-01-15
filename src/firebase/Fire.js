@@ -18,7 +18,7 @@ class Fire {
 	constructor(language) {
     app.initializeApp(fireConfig)
 
-    this.language = 'pt'
+    this.language = ''
 		this.auth = app.auth()
     this.db = app.firestore()
   }

@@ -31,7 +31,7 @@ class MainRoute extends Component {
       texts: {},
       repertoire: [],
       members: [],
-      currentLanguage: 'pt',
+      currentLanguage: '',
     },
     isModalOpen: false,
 
@@ -57,7 +57,7 @@ class MainRoute extends Component {
       spotifyUrl: ''
     },
     staticData: {},
-    videoEnded: true
+    videoEnded: false,
   }
 
   componentDidMount() {
