@@ -166,6 +166,12 @@ class AdminRoute extends Component{
     this.setState({isModalOpen: val})
   }
 
+  logout = () => {
+    Fire.logout()
+    this.props.history.replace('/login')
+  }
+
+
 
   handleRepertoireChange(txt, param) {
     this.setState({
@@ -195,7 +201,7 @@ class AdminRoute extends Component{
 
     return(
       <>
-        <AdminHeader/>
+        <AdminHeader logout={this.logout}/>
         <Route render={({location}) => (
             <Switch>
               <div className = "content-container flex-col">
