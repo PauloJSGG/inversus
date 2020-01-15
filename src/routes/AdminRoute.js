@@ -187,7 +187,7 @@ class AdminRoute extends Component{
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
     if (this.state.firebaseInitialized === false)
-    return <h1 style={{color: 'red'}}>LOADIIIINNNGGGGGGG</h1>
+      return null
 
     if(!Fire.getCurrentUsername()) {
       // not logged in

@@ -14,7 +14,7 @@ const AdminHeader = (props) => {
           <NavLink to={'/admin/'} title="Social" className='m-2'>Texto página principal</NavLink>
           <NavLink to={'/admin/repertoire'} title="Social" className='m-2'>Editar reportorio</NavLink>
           <NavLink to={'/admin/members'} title="Social" className='m-2'>Editar membros</NavLink>
-          <button onClick={props.logout} title="Sair" className='m-2'>Sair</button>
+          <button onClick={props.logout} title="Sair" className='m-2' style={{color: 'white'}}>Sair</button>
         </ul>
       </nav>
       <div className='header__border-bottom'></div>
