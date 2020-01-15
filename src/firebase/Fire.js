@@ -119,7 +119,7 @@ class Fire {
 	}
 
 	getCurrentUsername() {
-		return this.auth.currentUser && this.auth.currentUser.displayName
+		return this.auth.currentUser
   }
 }
 

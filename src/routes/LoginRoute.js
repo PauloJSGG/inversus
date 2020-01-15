@@ -32,8 +32,10 @@ export default class LoginContainer extends Component {
     return (
       <>
         <header className='header-admin'>
-          <div className='header__logo'>
-            <img src={Logo}></img>
+          <div className='header-container'>
+            <div className='w-full justify-center flex'>
+              <img className='header__logo' src={Logo}></img>
+            </div>
           </div>
         </header>
         <div className="login-container">
