@@ -20,6 +20,7 @@ class AdminRoute extends Component{
     firebaseInitialized: false,
     homeText: '',
     tracks: [],
+    texts: {},
     isModalOpen: false,
     repertoire: [],
     members: [],
@@ -60,10 +61,10 @@ class AdminRoute extends Component{
 
   componentDidMount() {
     Fire.isInitialized()
-    .then(val => this.setState({firebaseInitialized: val}))
-    .then(val => this.handleSetLanguage('pt'))
-    .then(() => Fire.getDynamicData())
-    .then(r => this.setState(r))
+      .then(val => this.setState({firebaseInitialized: val}))
+      .then(val => this.handleSetLanguage('pt'))
+      .then(() => Fire.getDynamicData())
+      .then(r => this.setState(r))
   }
 
   login = async () => {

@@ -80,8 +80,9 @@ class Fire {
     const repertoire = await this.getCollection('dynamic_values/repertoire')
     const texts = await this.getDocument('dynamic_values')
     const members = await this.getCollection('dynamic_values/members')
+    const homeText = texts ? texts.homeText : ''
     const data = {
-      texts: texts,
+      homeText,
       repertoire: repertoire,
       members: members,
       currentLanguage: this.language
