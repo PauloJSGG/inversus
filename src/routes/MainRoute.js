@@ -59,6 +59,12 @@ class MainRoute extends Component {
     videoEnded: true,
   }
 
+  // constructor(props) {
+  //   super(props)
+
+  //   this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : InitialState;
+  // }
+
   componentDidMount() {
     Fire.isInitialized()
       .then(() => {
@@ -66,6 +72,10 @@ class MainRoute extends Component {
           this.refreshData(Fire.language)
       })
   }
+
+  // componentWillUnmount() {
+  //   localStorage.setItem('appState', JSON.stringify(this.state));
+  // }
 
   handleVideoEnded = () => {
     this.setState({videoEnded: true})

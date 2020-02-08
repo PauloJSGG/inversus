@@ -39,7 +39,7 @@ class Fire {
     }
 
     return await this.db
-      .doc(this.language.concat(`/${path}`))
+      .doc(this.language.concat(`/${path}/${data.id}`))
       .update(data)
   }
 

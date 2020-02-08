@@ -119,7 +119,6 @@ class AdminRoute extends Component{
   }
 
   handleAddDocument = (path, data) => {
-    debugger
     if (data.id) {
       Fire.updateDocument(path, data)
         .then(() =>  alert('✔️Success✔️'))
