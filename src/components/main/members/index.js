@@ -13,7 +13,7 @@ const Members = (props) => {
             return(
               <div className={'parallax__group--'.concat(leftOrRight)}>
                 <div className=" parallax__layer parallax__layer--base">
-                  <p className="members__text">{item.text}</p>
+                  <p className="members__text whitespace-pre-wrap">{item.text}</p>
                 </div>
                 <div className="parallax__layer parallax__layer--back">
                   <img src={item.imgUrl} className="members__img"/>

@@ -23,59 +23,55 @@ import Fire from '../firebase/Fire'
 import { Route } from 'react-router-dom'
 import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
 
+const defaultState = {
+  animate: true,
+  muted: false,
+  dynamicData: {
+    repertoire: [],
+    members: [],
+    currentLanguage: '',
+  },
+  isModalOpen: false,
+
+  languageList: [
+    {
+      language: 'pt',
+      imgSrc: pt
+    },
+    {
+      language: 'en',
+      imgSrc: en
+    },
+    {
+      language: 'de',
+      imgSrc: de
+    },
+  ],
+
+  currentTrack: {
+    name: '',
+    lyrics: '',
+    imgUrl: '',
+    spotifyUrl: ''
+  },
+  staticData: {},
+  videoEnded: true,
+}
 class MainRoute extends Component {
-  state = {
-    animate: true,
-    muted: false,
-    dynamicData: {
-      repertoire: [],
-      members: [],
-      currentLanguage: '',
-    },
-    isModalOpen: false,
 
-    languageList: [
-      {
-        language: 'pt',
-        imgSrc: pt
-      },
-      {
-        language: 'en',
-        imgSrc: en
-      },
-      {
-        language: 'de',
-        imgSrc: de
-      },
-    ],
-
-    currentTrack: {
-      name: '',
-      lyrics: '',
-      imgUrl: '',
-      spotifyUrl: ''
-    },
-    staticData: {},
-    videoEnded: true,
+  constructor(props) {
+    super(props)
+    console.log('wtf',JSON.parse(localStorage.getItem("appState")))
+    this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : defaultState;
   }
-
-  // constructor(props) {
-  //   super(props)
-
-  //   this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : InitialState;
-  // }
 
   componentDidMount() {
     Fire.isInitialized()
       .then(() => {
         if (this.state.dynamicData.currentLanguage.length > 0)
-          this.refreshData(Fire.language)
+          this.refreshData(this.state.dynamicData.currentLanguage)
       })
   }
-
-  // componentWillUnmount() {
-  //   localStorage.setItem('appState', JSON.stringify(this.state));
-  // }
 
   handleVideoEnded = () => {
     this.setState({videoEnded: true})
@@ -83,9 +79,7 @@ class MainRoute extends Component {
 
   refreshData = (language) => {
     let dynamicData = {}
-    Fire.setLanguage(language)
-    Fire.getDynamicData()
-      .then(() => Fire.getDynamicData())
+    Fire.getDynamicData(language)
       .then(r => {
         dynamicData = r
         return null
@@ -103,18 +97,22 @@ class MainRoute extends Component {
   }
 
   handleSelectTrack = (id) => {
+    debugger
     const track = this.state.dynamicData.repertoire.filter(item => item.id === id)[0]
+
+
 
     this.setState({
       ...this.state,
       isModalOpen: true,
-      currentTrack: track.data
+      currentTrack: track
     })
   }
 
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   render() {
+    localStorage.setItem('appState', JSON.stringify(this.state))
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?

@@ -15,12 +15,14 @@
 .members__img{
   display: inline-block;
   width: 80%;
+  height: 75%;
+  object-fit: cover;
+  filter: grayscale(1);
 }
 
-// .members__text{
-//   width: 100%;
-//   color: white;
-// }
+.members__text{
+  font-size: 20px;
+}
 
 .parallax {
   perspective: 1px;
@@ -51,9 +53,9 @@
     left: 0;
   }
   .parallax__layer--base {
-    margin-left: 10px;
+    margin-left: 600px;
     text-shadow: 2px 2px #000000;
-    padding: 78vh 0;
+    padding: 60vh 0;
     width: 65%;
     transform: translateZ(0) scale(1);
   }

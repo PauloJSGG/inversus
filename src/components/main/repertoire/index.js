@@ -38,6 +38,8 @@ const fade = (e) => {
 }
 
 export const repertoire = (props) => {
+
+  console.log('propa', props)
   const {
     staticData,
     dynamicData,

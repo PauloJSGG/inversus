@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Main = ({text}) => {
+
   return (
     <div className='content-container'>
       <div className='flex justify-center w-1/2 text-center'>
