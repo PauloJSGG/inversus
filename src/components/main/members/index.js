@@ -5,6 +5,7 @@ const Members = (props) => {
 
   return (
     <div className="content-container content-container--no-flex">
+      <div className='shade1'/>
       <div className="parallax">
         {
           dynamicData.members.map((item, i) => {
@@ -22,6 +23,7 @@ const Members = (props) => {
           })
         }
       </div>
+      <div className='shade2'/>
     </div>
   )
 }

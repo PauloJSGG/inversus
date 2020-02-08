@@ -50,11 +50,11 @@ export const repertoire = (props) => {
 
   return (
     <div className='content-container'>
-      <div className = 'flex flex-row w-full justify-center'>
+      {/* <div className = 'flex flex-row w-full justify-center'>
         <Divider classs='test' />
         <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
         <Divider classs='test test--flip'  />
-      </div>
+      </div> */}
       <Modal
           isOpen={isModalOpen}
           // onAfterOpen={afterOpenModal}
