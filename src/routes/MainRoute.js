@@ -28,7 +28,6 @@ class MainRoute extends Component {
     animate: true,
     muted: false,
     dynamicData: {
-      texts: {},
       repertoire: [],
       members: [],
       currentLanguage: '',
@@ -57,7 +56,7 @@ class MainRoute extends Component {
       spotifyUrl: ''
     },
     staticData: {},
-    videoEnded: false,
+    videoEnded: true,
   }
 
   componentDidMount() {
@@ -145,7 +144,7 @@ class MainRoute extends Component {
                     />
                     <Route path={'/albums'} component={Albums}/>
                     <Route path={'/social'} component={Social}/>
-                    <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.texts.homeText}></Home>}/>
+                    <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
                   </AnimatedSwitch>
                 )} />
               </div>
