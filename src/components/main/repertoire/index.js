@@ -39,7 +39,6 @@ const fade = (e) => {
 
 export const repertoire = (props) => {
 
-  console.log('propa', props)
   const {
     staticData,
     dynamicData,
@@ -50,8 +49,13 @@ export const repertoire = (props) => {
     isModalOpen
   } = props
 
+  const repertoire = dynamicData.repertoire.sort()
+
   return (
     <div className='content-container'>
+      <br/>
+      <br/>
+      <br/>
       {/* <div className = 'flex flex-row w-full justify-center'>
         <Divider classs='test' />
         <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
@@ -102,7 +106,8 @@ export const repertoire = (props) => {
           </div>
         </Modal>
       <div className = 'repertoire-grid flex flex-wrap justify-center w-1/2'>
-        {dynamicData.repertoire.map(item => {
+        <div className = 'shade1'/>
+        {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(item => {
           return(
             <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
               {/* <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/> */}
@@ -110,6 +115,7 @@ export const repertoire = (props) => {
             </div>
           )
         })}
+        <div className = 'shade2'/>
       </div>
     </div>
   )
