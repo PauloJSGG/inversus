@@ -12,11 +12,11 @@ const Members = (props) => {
             const leftOrRight = i % 2 == 0 ? 'left' : 'right';
             return(
               <div className={'parallax__group--'.concat(leftOrRight)}>
-                <div className=" parallax__layer parallax__layer--base">
-                  <p className="members__text whitespace-pre-wrap">{item.text}</p>
-                </div>
                 <div className="parallax__layer parallax__layer--back">
                   <img src={item.imgUrl} className="members__img"/>
+                </div>
+                <div className=" parallax__layer parallax__layer--base">
+                  <p className="members__text whitespace-pre-wrap">{item.text}</p>
                 </div>
               </div>
             )

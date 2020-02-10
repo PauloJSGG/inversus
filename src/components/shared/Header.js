@@ -12,7 +12,7 @@ import { NavLink, Link  } from "react-router-dom";
     <header className='header-main'>
       <div className='header-container'>
         <div className='w-full justify-center flex'>
-          {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
+          {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img style={{maxWidth: '100%'}} src={Logo} alt={'logo'}></img></Link>}
         </div>
         <nav>
           <ul className='flex justify-center'>

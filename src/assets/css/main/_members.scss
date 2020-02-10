@@ -14,14 +14,13 @@
 
 .members__img{
   display: inline-block;
-  width: 80%;
-  height: 75%;
+  min-width: 100px;
   object-fit: cover;
   filter: grayscale(1);
 }
 
 .members__text{
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .parallax {
@@ -37,8 +36,6 @@
   z-index: 2;
   display: flex;
   width: 100%;
-  justify-content: start;
-  position: relative;
   // height: 500px;
   height: 100vh;
   -webkit-transform-style: preserve-3d;
@@ -46,24 +43,24 @@
 
   .parallax__layer {
     color: white;
-    position: absolute;
-    top: -200px;
     right: 0;
     bottom: 0;
     left: 0;
   }
   .parallax__layer--base {
-    margin-left: 600px;
+    width: 53%;
     text-shadow: 2px 2px #000000;
-    padding: 60vh 0;
-    width: 65%;
-    transform: translateZ(0) scale(1);
+    padding: 49vh;
+    // width: 65%;
+    // transform: translateZ(0) scale(1);
   }
   .parallax__layer--back {
     // padding: 1vh 0;
-    // width: 50%;
-    -webkit-perspective-origin-x: 0%;
-    transform: translate(-100%, 0%) translateZ(-1px);
+    // width: 100%;
+    // width: 30%;
+    // -webkit-perspective-origin-x: 0%;
+
+    transform: translate(-80%, -3%) translateZ(-1px);
   }
 }
 

@@ -576,11 +576,11 @@ object {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-img,
+/* img,
 video {
   max-width: 100%;
   height: auto;
-}
+} */
 
 .container {
   width: 100%;
