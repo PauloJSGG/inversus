@@ -7,6 +7,8 @@ import LoginRoute from './routes/LoginRoute'
 
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 
+import './assets/css/index.scss'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faVolumeMute, faVolumeUp, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { faSpotify, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
