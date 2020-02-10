@@ -46,7 +46,18 @@ header.header-admin {
       max-width: 100%;
       height: auto;
     }
+
+    &--up{
+      width: 370px;
+      animation: fadein 2s;
+    }
+    &--down{
+      width: 370px;
+      animation: fadeinlater 4s;
+    }
   }
+
+
 }
 
 nav {

@@ -117,8 +117,8 @@ class MainRoute extends Component {
       <>
         {!this.state.dynamicData.currentLanguage ?
           <div className='header-container'>
-            <img src={LogoUp} alt={'logo'} className='header__logo--up'/>
-            <img src={LogoDown} alt={'logo'} className='header__logo--down'/>
+            <img src={LogoUp} alt={'logo'} className='header__image--up'/>
+            <img src={LogoDown} alt={'logo'} className='header__image--down'/>
             <LanguageSelector
               isAdmin = {false}
               handleSetLanguage = {this.handleSetLanguage}
