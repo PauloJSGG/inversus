@@ -33,19 +33,15 @@ export default class LoginContainer extends Component {
       <>
         <header className='header-admin'>
           <div className='header-container'>
-            <div className='w-full justify-center flex'>
-              <img className='header__logo' src={Logo}></img>
-            </div>
+            <img className='header__logo' src={Logo}></img>
           </div>
         </header>
-        <div className="login-container">
-          <LoginForm
-            login={this.login}
-            emailValue={this.state.email}
-            passwordValue={this.state.password}
-            handleInputChange={this.handleInputChange}
+        <LoginForm
+          login={this.login}
+          emailValue={this.state.email}
+          passwordValue={this.state.password}
+          handleInputChange={this.handleInputChange}
           />
-        </div>
       </>
     )
   }

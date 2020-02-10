@@ -10,7 +10,7 @@ const LanguageSelector = (props) => {
 
   const display = isAdmin ? 'inline-block' : 'none'
 
-  let styles = ['flex flex-row justify-center w-full my-5']
+  let styles = ['language-selector']
 
   if(!isAdmin)
     styles = styles.concat('language-selector').join(' ')

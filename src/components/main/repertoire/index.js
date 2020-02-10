@@ -16,9 +16,10 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    backgroundColor       : 'black'
+    backgroundColor       : 'black',
+    animation             : 'repertoire 1s'
   },
-  overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0.2)' }
+  overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0)' }
 };
 
 const getAudioIcon = () => {
@@ -82,32 +83,29 @@ export const repertoire = (props) => {
           >
             <source src={currentTrack.previewUrl}/>
           </audio>
-          <div className = 'repetoire-modal overflow-y-scroll'>
+          <div className = 'repertoire-modal'>
             <div className = 'repertoire-header'>
-              <div className='w-full flex justify-end'>
+              <div className='repertoire-header__icon-close'>
                 <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem',marginLeft: '10px', color: 'white' }} /></button>
               </div>
-              <div className = 'flex w-full h-1/2 justify-center'>
+              <div className = 'repertoire-header__icon-center'>
                 <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> : <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />}</button>
                 <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>
               </div>
             </div>
-            <div className = 'flex w-full h-1/2 justify-center'>
+            <div className='repertoire-body'>
+              <div className = 'repertoire-body__title'>
+                <h1>{currentTrack.name}</h1>
+              </div>
 
+              <div className = 'repertoire-body__lyrics whitespace-pre-line'>
+                <h1>{currentTrack.lyrics}</h1>
+              </div>
             </div>
-            <div className = 'flex justify-between m-3'>
-              <h1>{currentTrack.name}</h1>
-            </div>
-
-            <div className = 'flex justify-between m-3 whitespace-pre-line'>
-              <h1>{currentTrack.lyrics}</h1>
-            </div>
-
           </div>
         </Modal>
-      <div className = 'repertoire-grid flex flex-wrap justify-center w-1/2'>
-        <div className = 'shade1'/>
-        {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(item => {
+      <div className = 'repertoire'>
+        {dynamicData.repertoire.map(item => {
           return(
             <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
               {/* <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/> */}

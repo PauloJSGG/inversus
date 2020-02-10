@@ -1,11 +1,90 @@
 .repertoire {
   display: flex;
-
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 50%;
 
   &__track-logo{
     width: 100px;
     height: 100px;
   }
+}
+
+.repetoire-card {
+  // margin: 2px 0px;
+  border: 3px solid black;
+  // display: flex;
+  // justify-content: space-around;
+  width: 44%;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px 5px;
+  color: white;
+  box-shadow: 2px;
+  background-color: rgba(188,158,91,0.5);
+  border-radius: 15px 0px 15px 0px;
+  // flex-basis: 100%;
+  transition: 0.3s;
+  // :hover{
+  //   background-color: rgba(188,158,91,0.9);
+  //   // background-color: red
+  // }
+}
+
+.repertoire-modal {
+  overflow-y: scroll;
+  margin-top: 50px;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  max-height: 500px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  // width: 500px;
+  color: white;
+  input, textarea {
+    width: 75%;
+    color: black
+  }
+
+  .repertoire-header {
+    background: rgba(0, 0, 0, 1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5px 5px;
+
+    &__icon-close {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      padding-right: 5px;
+    }
+
+    &__icon-center {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  .repertoire-body {
+
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem;
+    }
+
+    &__lyrics {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem;
+    }
+  }
+
 }
 
 .test {
@@ -30,11 +109,17 @@
   }
 }
 
-// @keyframes dash {
-//   from {
-//     stroke-dashoffset: 2500;
-//   }
-//   to {
-//     stroke-dashoffset: 100;
-//   }
-// }
+@keyframes letter-animation {
+  0% {
+      stroke-dashoffset: 0;
+  }
+  100% {
+      stroke-dashoffset: 2600;
+  }
+}
+
+
+@keyframes repertoire {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,4 +1,4 @@
-.login-container{
+.login{
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -8,23 +8,20 @@
   align-items: center;
 }
 
-.login-form-container{
+.login-form {
   display: flex;
   flex-direction: column;
-}
 
-.login-form__label{
-  display: inline-block;
-  padding: 9px 5px;
-  text-align: right;
-  color: white;
-  width: 35%;
-}
+  &__label{
+    display: inline-block;
+    padding: 9px 5px;
+    text-align: right;
+    color: white;
+    width: 35%;
+  }
 
-.login-form__input{
-  display: inline-block;
-  width: 65%;
-  // height: 35px;
-  // font-size: 5px;
-  // height: 100%;
+  &__input{
+    display: inline-block;
+    width: 65%;
+  }
 }

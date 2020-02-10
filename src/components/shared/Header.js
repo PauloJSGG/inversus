@@ -6,16 +6,13 @@ import { NavLink, Link  } from "react-router-dom";
 
   const {staticData} = props
 
-  console.log('static',staticData)
-
   return(
-    <header className='header-main'>
-      <div className='header-container'>
-        <div className='w-full justify-center flex'>
-          {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img style={{maxWidth: '100%'}} src={Logo} alt={'logo'}></img></Link>}
+    <header className='header'>
+        <div className='header__image'>
+          {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
         </div>
         <nav>
-          <ul className='flex justify-center'>
+          <ul className='nav-list'>
             <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
             <NavLink exact to={'/members'} title="members" className='m-2'>{staticData.members}</NavLink>
             <NavLink exact to={'/albums'} title="albums" className='m-2'>{staticData.albums}</NavLink>
@@ -23,7 +20,6 @@ import { NavLink, Link  } from "react-router-dom";
           </ul>
         </nav>
         {staticData.repertoire && <div className='header__border-bottom'></div>}
-      </div>
     </header>
   )
 }

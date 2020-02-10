@@ -116,7 +116,7 @@ class MainRoute extends Component {
     return(
       <>
         {!this.state.dynamicData.currentLanguage ?
-          <div className='flex flex-col justify-center items-center h-full'>
+          <div className='header-container'>
             <img src={LogoUp} alt={'logo'} className='header__logo--up'/>
             <img src={LogoDown} alt={'logo'} className='header__logo--down'/>
             <LanguageSelector
