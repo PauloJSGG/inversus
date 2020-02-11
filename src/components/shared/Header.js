@@ -8,6 +8,7 @@ import { NavLink, Link  } from "react-router-dom";
 
   return(
     <header className='header'>
+      <div>
         <div className='header__image'>
           {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
         </div>
@@ -20,6 +21,7 @@ import { NavLink, Link  } from "react-router-dom";
           </ul>
         </nav>
         {staticData.repertoire && <div className='header__border-bottom'></div>}
+      </div>
     </header>
   )
 }
