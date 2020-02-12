@@ -8,20 +8,18 @@ import { NavLink, Link  } from "react-router-dom";
 
   return(
     <header className='header'>
-      <div>
-        <div className='header__image'>
-          {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
-        </div>
-        <nav>
-          <ul className='nav-list'>
-            <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
-            <NavLink exact to={'/members'} title="members" className='m-2'>{staticData.members}</NavLink>
-            <NavLink exact to={'/albums'} title="albums" className='m-2'>{staticData.albums}</NavLink>
-            <NavLink exact to={'/social'} title="Social" className='m-2'>{staticData.social}</NavLink>
-          </ul>
-        </nav>
-        {staticData.repertoire && <div className='header__border-bottom'></div>}
+      <div className='header__image'>
+        {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
       </div>
+      <nav>
+        <ul className='header-nav-list'>
+          <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
+          <NavLink exact to={'/members'} title="members" className='m-2'>{staticData.members}</NavLink>
+          <NavLink exact to={'/albums'} title="albums" className='m-2'>{staticData.albums}</NavLink>
+          <NavLink exact to={'/social'} title="Social" className='m-2'>{staticData.social}</NavLink>
+        </ul>
+      </nav>
+      {staticData.repertoire && <div className='header__border-bottom'></div>}
     </header>
   )
 }

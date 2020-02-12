@@ -103,14 +103,16 @@ export const repertoire = (props) => {
         </Modal>
       <div className = 'repertoire'>
         <div className = 'shade1'/>
-        {dynamicData.repertoire.map(item => {
-          return(
-            <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
-              {/* <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/> */}
-              <h1>{item.name}</h1>
-            </div>
-          )
-        })}
+        <div className = 'repertoire-container'>
+          {dynamicData.repertoire.map(item => {
+            return(
+              <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
+                {/* <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/> */}
+                <h1>{item.name}</h1>
+              </div>
+            )
+          })}
+        </div>
         <div className = 'shade2'/>
       </div>
     </div>
