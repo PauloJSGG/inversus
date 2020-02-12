@@ -15,6 +15,7 @@
   z-index: 1;
   top: 0;
   width: 100%;
+  height: 10rem;
   background-color: #000;
 
   &__border-bottom{
@@ -32,6 +33,16 @@
         no-repeat;
         background-size:100% 5px
       }
+      a {
+        // display: flex;
+        // justify-content: center;
+        // width: 9rem;
+        height: 100%;
+
+        img {
+          height: 100%;
+        }
+      }
 
   &__image{
     display: flex;
@@ -39,16 +50,7 @@
 
     justify-content: center;
 
-    a {
-      // display: flex;
-      // justify-content: center;
-      // width: 9rem;
 
-      // img {
-      //   width: 9rem;
-      //   height: auto;
-      // }
-    }
 
     // img {
     //   width: 9rem;

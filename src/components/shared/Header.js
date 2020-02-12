@@ -8,9 +8,7 @@ import { NavLink, Link  } from "react-router-dom";
 
   return(
     <header className='header'>
-      <div className='header__image'>
         {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
-      </div>
       <nav>
         <ul className='header-nav-list'>
           <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
