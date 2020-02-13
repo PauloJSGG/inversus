@@ -99,10 +99,7 @@ class MainRoute extends Component {
   }
 
   handleSelectTrack = (id) => {
-    debugger
     const track = this.state.dynamicData.repertoire.filter(item => item.id === id)[0]
-
-
 
     this.setState({
       ...this.state,

@@ -53,7 +53,6 @@ class Fire {
 
   //COLLECTIONS
   getCollection = async (path) => {
-    debugger
     const snapshot = await this.db
       .collection(this.language.concat(`/${path}`))
       .get()

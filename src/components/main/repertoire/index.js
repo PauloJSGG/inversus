@@ -40,15 +40,9 @@ export const repertoire = (props) => {
   } = props
 
   return (
-    <div className='content-container'>
-      {/* <div className = 'flex flex-row w-full justify-center'>
-        <Divider classs='test' />
-        <h2 style = {{color: 'white', marginTop: '60px', fontSize: '20px'}} >{staticData.repertoire}</h2>
-        <Divider classs='test test--flip'  />
-      </div> */}
+    <div className="content-container">
       <Modal
           isOpen={isModalOpen}
-          // onAfterOpen={afterOpenModal}
           onRequestClose={() => handleModalOpen(false)}
           style={customStyles}
           contentLabel="Example Modal"
@@ -67,18 +61,23 @@ export const repertoire = (props) => {
           >
             <source src={currentTrack.previewUrl}/>
           </audio>
-          <div className = 'repertoire-modal'>
-            <div className = 'repertoire-header'>
-              <div className='repertoire-header__icon-close'>
+          <div className="repertoire-modal">
+            <div className="repertoire-header">
+              <div className="repertoire-header__icon-close">
                 <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem',marginLeft: '10px', color: 'white' }} /></button>
               </div>
-              <div className = 'repertoire-header__icon-center'>
-                <button onClick = { handleMute } style={{color: 'white'}}>{props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> : <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />}</button>
+              <div className="repertoire-header__icon-center">
+                <button onClick = { handleMute } style={{color: 'white'}}>
+                  {
+                    props.muted ? <FontAwesomeIcon icon={['fas','volume-mute']} style={{height: '2rem', width: '2rem'}} /> :
+                      <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />
+                  }
+                </button>
                 <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>
               </div>
             </div>
-            <div className='repertoire-body'>
-              <div className = 'repertoire-body__title'>
+            <div className="repertoire-body">
+              <div className="repertoire-body__title">
                 <h1>{currentTrack.name}</h1>
               </div>
 
@@ -91,10 +90,9 @@ export const repertoire = (props) => {
       <div className = 'repertoire'>
         <div className = 'shade1'/>
         <div className = 'repertoire-container'>
-          {dynamicData.repertoire.map(item => {
+          {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(item => {
             return(
               <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
-                {/* <img className = "repertoire__track-logo" src = {item.data.imgUrl === "" ? guitarImg : item.data.imgUrl } alt = "track"/> */}
                 <h1>{item.name}</h1>
               </div>
             )
