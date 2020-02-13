@@ -30,8 +30,6 @@ const MembersEdit = (props) => {
     currentMember
   } = props
 
-  console.log('members', currentMember)
-
   return (
     <>
       <div className = 'w-full flex flex-col justify-center my-5 items-center'>
@@ -76,7 +74,7 @@ const MembersEdit = (props) => {
                       {item.name}
                     </h1>
                   </div>
-                  <button onClick = {() => props.handleDelete(item.id)}>❌</button>
+                  <button onClick = {() => props.handleDelete(item.id)}><span role="img" aria-label="out">❌</span></button>
                 </>
               )
           }))}

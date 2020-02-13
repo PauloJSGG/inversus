@@ -51,26 +51,27 @@ class AdminRoute extends Component{
         imgSrc: de
       },
     ],
-    currentLanguage: ''
+    currentLanguage: 'pt'
   }
 
   constructor() {
     super()
+    this.fire = new Fire(this.state.currentLanguage)
     this.rootRepertoire = 'dynamic_values/repertoire'
     this.rootMembers = 'dynamic_values/members'
   }
 
   componentDidMount() {
-    Fire.isInitialized()
+    this.fire.isInitialized()
       .then(val => this.setState({firebaseInitialized: val}))
-      .then(val => this.handleSetLanguage('pt'))
-      .then(() => Fire.getDynamicData())
+      // .then(val => this.handleSetLanguage('pt'))
+      .then(() => this.fire.getDynamicData())
       .then(r => this.setState(r))
   }
 
   login = async () => {
     try {
-      await Fire.login(this.state.Email, this.state.Password);
+      await this.fire.login(this.state.Email, this.state.Password);
       this.props.history.replace('/admin')
     } catch(e) {
       console.log(e)
@@ -78,7 +79,7 @@ class AdminRoute extends Component{
   }
 
   handleSubmitHomeText = () => {
-    Fire.addOrEditDocument('dynamic_values', {homeText: this.state.homeText})
+    this.fire.addOrEditDocument('dynamic_values', {homeText: this.state.homeText})
     .then(r => alert('✅Success✅'))
     .catch(e => alert(e))
   }
@@ -114,24 +115,24 @@ class AdminRoute extends Component{
   }
 
   handleSetLanguage = (language) => {
-    Fire.setLanguage(language)
-    Fire.getDynamicData()
+    this.fire.setLanguage(language)
+    this.fire.getDynamicData()
       .then(r => this.setState(r))
   }
 
   handleAddDocument = (path, data) => {
     if (data.id) {
-      Fire.updateDocument(path, data)
+      this.fire.updateDocument(path, data)
         .then(() =>  alert('✔️Success✔️'))
-        .then(() => Fire.getDynamicData())
+        .then(() => this.fire.getDynamicData())
         .then(r => this.setState(r))
         .catch((e) => alert('❌Error❌'))
         .finally(() => this.handleModalOpen(false))
     }
     else {
-      Fire.addToCollection(path, data)
+      this.fire.addToCollection(path, data)
         .then(() =>  alert('✔️Success✔️'))
-        .then(() => Fire.getDynamicData())
+        .then(() => this.fire.getDynamicData())
         .then(r => this.setState(r))
         .catch((e) => alert('❌Error❌'))
         .finally(() => this.handleModalOpen(false))
@@ -139,9 +140,9 @@ class AdminRoute extends Component{
   }
 
   handleDeleteDocument = (path, trackId) => {
-    Fire.deleteDocument(`${path}/${trackId}`)
+    this.fire.deleteDocument(`${path}/${trackId}`)
       .then((e) => alert('✅Success✅'))
-      .then(() => Fire.getDynamicData())
+      .then(() => this.fire.getDynamicData())
       .then(r => this.setState(r))
       .catch((e) => alert(e))
   }
@@ -169,7 +170,7 @@ class AdminRoute extends Component{
   }
 
   logout = () => {
-    Fire.logout()
+    this.fire.logout()
     this.props.history.replace('/login')
   }
 
@@ -191,7 +192,7 @@ class AdminRoute extends Component{
     if (this.state.firebaseInitialized === false)
       return null
 
-    if(!Fire.getCurrentUsername()) {
+    if(!this.fire.getCurrentUsername()) {
       // not logged in
       this.props.history.replace('/login')
       return null
@@ -199,71 +200,69 @@ class AdminRoute extends Component{
 
     const { match: { url } } = this.props
 
-    console.log('estado', this.state)
-
     return(
       <>
         <AdminHeader logout={this.logout}/>
         <Route render={({location}) => (
-            <Switch>
-              <div className = "content-container flex-col">
-                <LanguageSelector
-                  languageList = {this.state.languageList}
-                  currentLanguage = {this.state.currentLanguage}
-                  handleSetLanguage = {this.handleSetLanguage}
-                  isAdmin = {true}
-                />
-                <Route
-                  exact path = {`${url}`}
-                  render = {
-                    (props) =>
-                    <MainEdit
-                      handleSubmitHomeText = {this.handleSubmitHomeText}
-                      handleFormChange = {this.handleFormChange}
-                      handleSetLanguage = {this.handleSetLanguage}
-                      languageList = {this.state.languageList}
-                      currentLanguage = {this.state.currentLanguage}
-                      formValue = {this.state.homeText}
-                    />
-                  }
-                />
-                <Route
-                  exact path={`${url}/repertoire`}
-                  render = {
-                    (props) =>
-                    <RepertoireEdit
-                      handleEditClick = {this.handleEditClick}
-                      handleChange = {(e) => this.handleDataChange(e, 'currentTrack')}
-                      handleModalOpen = {this.handleModalOpen}
-                      handleSubmit = {() => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack)}
-                      handleDelete = {(id) => this.handleDeleteDocument(this.rootRepertoire, id)}
+          <Switch>
+            <div className = "content-container flex-col">
+              <LanguageSelector
+                languageList = {this.state.languageList}
+                currentLanguage = {this.state.currentLanguage}
+                handleSetLanguage = {this.handleSetLanguage}
+                isAdmin = {true}
+              />
+              <Route
+                exact path = {`${url}`}
+                render = {
+                  (props) =>
+                  <MainEdit
+                    handleSubmitHomeText = {this.handleSubmitHomeText}
+                    handleFormChange = {this.handleFormChange}
+                    handleSetLanguage = {this.handleSetLanguage}
+                    languageList = {this.state.languageList}
+                    currentLanguage = {this.state.currentLanguage}
+                    formValue = {this.state.homeText}
+                  />
+                }
+              />
+              <Route
+                exact path={`${url}/repertoire`}
+                render = {
+                  (props) =>
+                  <RepertoireEdit
+                    handleEditClick = {this.handleEditClick}
+                    handleChange = {(e) => this.handleDataChange(e, 'currentTrack')}
+                    handleModalOpen = {this.handleModalOpen}
+                    handleSubmit = {() => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack)}
+                    handleDelete = {(id) => this.handleDeleteDocument(this.rootRepertoire, id)}
 
-                      isModalOpen = {this.state.isModalOpen}
-                      repertoire = {this.state.repertoire}
-                      currentTrack = {this.state.currentTrack}
-                    />
-                  }
-                />
-                <Route
-                  exact path={`${url}/members`}
-                    render = {
-                      (props) =>
-                      <MembersEdit
-                        handleEditClick = {this.handleEditClick}
-                        handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
-                        handleSubmit = {() => this.handleAddDocument(this.rootMembers, this.state.currentMember)}
-                        handleDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
-                        handleModalOpen = {this.handleModalOpen}
+                    isModalOpen = {this.state.isModalOpen}
+                    repertoire = {this.state.repertoire}
+                    currentTrack = {this.state.currentTrack}
+                  />
+                }
+              />
+              <Route
+                exact path={`${url}/members`}
+                render = {
+                  (props) =>
+                  <MembersEdit
+                    handleEditClick = {this.handleEditClick}
+                    handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
+                    handleSubmit = {() => this.handleAddDocument(this.rootMembers, this.state.currentMember)}
+                    handleDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
+                    handleModalOpen = {this.handleModalOpen}
 
-                        currentMember = {this.state.currentMember}
-                        members = {this.state.members}
-                        isModalOpen = {this.state.isModalOpen}
-                      />
-                    }
-                />
-              </div>
-            </Switch>
-        )} />
+                    currentMember = {this.state.currentMember}
+                    members = {this.state.members}
+                    isModalOpen = {this.state.isModalOpen}
+                  />
+                }
+              />
+            </div>
+          </Switch>
+        )}/>
       </>
     )
   }

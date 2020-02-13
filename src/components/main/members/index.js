@@ -9,11 +9,11 @@ const Members = (props) => {
       <div className="parallax">
         {
           dynamicData.members.map((item, i) => {
-            const leftOrRight = i % 2 == 0 ? 'left' : 'right';
+            const leftOrRight = i % 2 === 0 ? 'left' : 'right';
             return(
               <div className={'parallax__group--'.concat(leftOrRight)}>
                 <div className="parallax__layer parallax__layer--back">
-                  <img src={item.imgUrl} className="members__img"/>
+                  <img src={item.imgUrl} className="members__img" alt="paralax"/>
                 </div>
                 <div className=" parallax__layer parallax__layer--base">
                   <p className="members__text whitespace-pre-wrap">{item.text}</p>
@@ -29,9 +29,3 @@ const Members = (props) => {
 }
 
 export default Members;
-
-
-{/* <div className={leftOrRight.concat(' members')}>
-  <img src={item.data.imgUrl} className="members__img"/>
-  <p className="members__text">{item.data.text}</p>
-</div> */}

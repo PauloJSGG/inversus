@@ -91,9 +91,6 @@ export default class Slider extends React.Component {
   }
 
   render() {
-
-    console.log('posicaoooo', this.state.position)
-
     return (
       <div
         ref={node => (this.node = node)}

@@ -11,7 +11,7 @@ import './assets/css/index.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faVolumeMute, faVolumeUp, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import { faSpotify, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faSpotify, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   faPlus,
@@ -21,10 +21,10 @@ library.add(
   faWindowClose,
   faFacebook,
   faInstagram,
+  faYoutube
 )
 
 function App() {
-
   return (
     <>
       <div className="global-container">

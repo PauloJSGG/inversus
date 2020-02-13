@@ -29,8 +29,8 @@ const defaultState = {
   dynamicData: {
     repertoire: [],
     members: [],
-    currentLanguage: '',
   },
+  currentLanguage: '',
   isModalOpen: false,
 
   languageList: [
@@ -61,15 +61,15 @@ class MainRoute extends Component {
 
   constructor(props) {
     super(props)
-    console.log('wtf',JSON.parse(localStorage.getItem("appState")))
-    this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : defaultState;
+    this.state = sessionStorage.getItem("appState") ? JSON.parse(sessionStorage.getItem("appState")) : defaultState;
+    this.fire = new Fire(this.state.currentLanguage)
   }
 
   componentDidMount() {
-    Fire.isInitialized()
+    this.fire.isInitialized()
       .then(() => {
-        if (this.state.dynamicData.currentLanguage.length > 0)
-          this.refreshData(this.state.dynamicData.currentLanguage)
+        if (this.state.currentLanguage.length > 0)
+          this.refreshData(this.state.currentLanguage)
       })
   }
 
@@ -77,19 +77,21 @@ class MainRoute extends Component {
     this.setState({videoEnded: true})
   }
 
-  refreshData = (language) => {
+  refreshData = () => {
     let dynamicData = {}
-    Fire.getDynamicData(language)
+    this.fire.getDynamicData()
       .then(r => {
         dynamicData = r
         return null
       })
-      .then(() => Fire.getStaticData())
-      .then(r => this.setState({dynamicData, staticData: r}))
+      .then(() => this.fire.getStaticData())
+      .then(r => this.setState({dynamicData, staticData: r,}))
   }
 
   handleSetLanguage = (language) => {
-    this.refreshData(language)
+    this.fire.setLanguage(language)
+    this.setState({currentLanguage: language})
+    this.refreshData()
   }
 
   handleMute = () => {
@@ -112,10 +114,10 @@ class MainRoute extends Component {
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   render() {
-    localStorage.setItem('appState', JSON.stringify(this.state))
+    sessionStorage.setItem('appState', JSON.stringify(this.state))
     return(
       <>
-        {!this.state.dynamicData.currentLanguage ?
+        {!this.state.currentLanguage ?
           <div className='header-container'>
             <img src={LogoUp} alt={'logo'} className='header__image--up'/>
             <img src={LogoDown} alt={'logo'} className='header__image--down'/>

@@ -31,9 +31,9 @@ export default class LoginContainer extends Component {
   render() {
     return (
       <>
-        <header className='header-admin'>
-          <div className='header-container'>
-            <img className='header__logo' src={Logo}></img>
+        <header className="header-admin">
+          <div className="header-container">
+            <img className="header__logo" src={Logo} alt="header"/>
           </div>
         </header>
         <LoginForm

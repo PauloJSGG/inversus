@@ -20,13 +20,6 @@ const customStyles = {
   overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0)' }
 };
 
-const getAudioIcon = () => {
-  if (document.getElementById('myAudio') && document.getElementById('myAudio').muted)
-    return  <FontAwesomeIcon icon={['fas','volume-up']} />
-  else
-    return  <FontAwesomeIcon icon={['fas','volume-mute']} />
-}
-
 const fade = (e) => {
   if(e.volume >= 0 && e.volume < 1){
     if(((e.volume + 0.01) * 2) < 1){
@@ -37,9 +30,7 @@ const fade = (e) => {
 }
 
 export const repertoire = (props) => {
-
   const {
-    staticData,
     dynamicData,
     currentTrack,
     handleSelectTrack,
@@ -47,8 +38,6 @@ export const repertoire = (props) => {
     handleMute,
     isModalOpen
   } = props
-
-  const repertoire = dynamicData.repertoire.sort()
 
   return (
     <div className='content-container'>

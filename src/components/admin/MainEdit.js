@@ -1,7 +1,4 @@
-import React, { Component } from 'react'
-import LanguageSelector from '../shared/LanguageSelector'
-import Fire from '../../firebase/Fire'
-
+import React from 'react'
 
 const MainEdit = (props) => {
 
@@ -20,16 +17,5 @@ const MainEdit = (props) => {
     </>
   )
 }
-// class MainEdit extends Component {
-//   constructor(props){
-//     super(props);
-//     this.submitMain = this.submitMain.bind(this);
-
-//     this.state = {
-//       mainText: null
-//     }
-//   }
-
-// }
 
 export default MainEdit

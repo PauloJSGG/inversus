@@ -87,9 +87,6 @@ export default class Fader extends React.Component {
   }
 
   render() {
-
-    console.log('position: ', this.state)
-
     return (
       <div
         ref={node => (this.node = node)}

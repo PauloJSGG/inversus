@@ -1,24 +1,22 @@
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
-// import fireConfig from './fireConfig'
 
 const fireConfig = {
-  apiKey: "AIzaSyAcHlKFPl_VDbeOHWNZDsVr20AfedkUg1I",
-  authDomain: "inversus-af0a6.firebaseapp.com",
-  databaseURL: "https://inversus-af0a6.firebaseio.com",
-  projectId: "inversus-af0a6",
-  storageBucket: "inversus-af0a6.appspot.com",
-  messagingSenderId: "247795252791",
-  appId: "1:247795252791:web:28826135cbf003cf"
+  apiKey: process.env.REACT_APP_FIRE_API_KEY,
+  authDomain: process.env.REACT_APP_FIRE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIRE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIRE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIRE_APP_ID
 };
-
 
 class Fire {
 	constructor(language) {
     app.initializeApp(fireConfig)
 
-    this.language = ''
+    this.language = language
 		this.auth = app.auth()
     this.db = app.firestore()
   }
@@ -55,6 +53,7 @@ class Fire {
 
   //COLLECTIONS
   getCollection = async (path) => {
+    debugger
     const snapshot = await this.db
       .collection(this.language.concat(`/${path}`))
       .get()
@@ -76,8 +75,7 @@ class Fire {
   }
 
   //DYNAMIC DATA
-  async getDynamicData(language) {
-    this.language = language
+  async getDynamicData() {
     const repertoire = await this.getCollection('dynamic_values/repertoire')
     const texts = await this.getDocument('dynamic_values')
     const members = await this.getCollection('dynamic_values/members')
@@ -86,7 +84,6 @@ class Fire {
       homeText,
       repertoire: repertoire,
       members: members,
-      currentLanguage: this.language
     }
 
     return data
@@ -125,4 +122,4 @@ class Fire {
   }
 }
 
-export default new Fire()
+export default Fire;
