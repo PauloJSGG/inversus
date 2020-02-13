@@ -7,9 +7,11 @@ const Main = ({text}) => {
       <div className='home'>
         <div className='home__text'>
           <div className='shade1'/>
-            {text}
+            <p>
+              {text}
+            </p>
           <div className='shade2'/>
-          </div>
+        </div>
       </div>
     </div>
   )

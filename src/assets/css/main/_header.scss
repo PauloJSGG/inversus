@@ -10,6 +10,7 @@
   background-color: #000;
 
   &__border-bottom {
+    height: 1%;
     width: 100%;
     padding-bottom:1px;
     background:
@@ -50,7 +51,7 @@
 }
 
 nav.header__nav {
-  height: 20%;
+  height: 19%;
   ul {
     a {
       font-size: 1rem;
