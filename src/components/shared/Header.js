@@ -8,8 +8,9 @@ import { NavLink, Link  } from "react-router-dom";
 
   return(
     <header className='header'>
-        {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
-      <nav>
+      {staticData.repertoire && <Link to={'/'} title="Home" className='header__logo'><img src={Logo} alt={'logo'}></img></Link>}
+      {/* <div style={{display: 'inline-block',height: '1rem', width: '100%', backgroundColor: 'red', color: 'red'}}>asdfasdf</div> */}
+      <nav className='header__nav'>
         <ul className='header-nav-list'>
           <NavLink exact to={'/repertoire'} title="Events" className='m-2'>{staticData.repertoire}</NavLink>
           <NavLink exact to={'/members'} title="members" className='m-2'>{staticData.members}</NavLink>

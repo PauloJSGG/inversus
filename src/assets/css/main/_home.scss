@@ -1,17 +1,18 @@
 .home{
-  display: block  ;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 50%;
   text-align: center;
-  overflow-y: auto;
   height: 60%;
   color: white;
   white-space: pre-line;
 
+
   // padding: 1% 0 25% 0;
 
   &__text{
-    margin-bottom: 5rem;
+    overflow: scroll;
         // text-align: center;
         // opacity: 1;
         // color: white;
@@ -39,11 +40,10 @@
 }
 
 .shade2 {
-  position: fixed;
+  position: sticky;
   width: 100%;
-  left: 0;
-  height: 2rem;
   bottom: 0;
+  height: 2rem;
   background-image: linear-gradient(transparent, #000);
   pointer-events: none;
 }

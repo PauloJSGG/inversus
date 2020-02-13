@@ -1,6 +1,4 @@
 import React from 'react'
-import guitarImg from '../../../assets/img/FADO.jpg'
-import Divider from '../../shared/Divider.js'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

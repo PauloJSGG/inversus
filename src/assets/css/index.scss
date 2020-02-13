@@ -16,7 +16,13 @@
   all: unset;
 }
 
-style {
+head {
+  display: none;
+  height:auto;
+  width:auto;
+}
+
+style  {
   display: none;
 }
 
@@ -30,6 +36,10 @@ html {
 ::-webkit-scrollbar {
   width: 0px;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+div {
+  display: block;
 }
 
 body {
@@ -46,15 +56,15 @@ body {
   font-size: 15px;
 
   @media screen and (min-width: 600px) {
-    font-size: 15px;
-  }
-
-  @media screen and (min-width: 900px) {
     font-size: 18px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 900px) {
     font-size: 20px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    font-size: 23px;
   }
 }
 
