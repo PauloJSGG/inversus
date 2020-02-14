@@ -89,6 +89,10 @@ a {
 }
 
 p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
   font-size: 1.3rem;
   word-spacing: 0.1rem;
   line-height: 2rem ;

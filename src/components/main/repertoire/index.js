@@ -64,7 +64,7 @@ export const repertoire = (props) => {
           <div className="repertoire-modal">
             <div className="repertoire-header">
               <div className="repertoire-header__icon-close">
-                <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem',marginLeft: '10px', color: 'white' }} /></button>
+                <button onClick={() => handleModalOpen(false)}><FontAwesomeIcon icon={['fas','window-close']} style={{height: '1rem', width: '1rem', color: 'white' }} /></button>
               </div>
               <div className="repertoire-header__icon-center">
                 <button onClick = { handleMute } style={{color: 'white'}}>
@@ -73,7 +73,7 @@ export const repertoire = (props) => {
                       <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />
                   }
                 </button>
-                <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem',marginLeft: '10px' }} icon={['fab','spotify']} /></a>
+                <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem'}} icon={['fab','spotify']} /></a>
               </div>
             </div>
             <div className="repertoire-body">
@@ -81,8 +81,8 @@ export const repertoire = (props) => {
                 <h1>{currentTrack.name}</h1>
               </div>
 
-              <div className = 'repertoire-body__lyrics whitespace-pre-line'>
-                <h1>{currentTrack.lyrics}</h1>
+              <div className = 'repertoire-body__lyrics whitespace-pre-wrap'>
+                <p>{currentTrack.lyrics}</p>
               </div>
             </div>
           </div>
