@@ -64,7 +64,6 @@ class AdminRoute extends Component{
   componentDidMount() {
     this.fire.isInitialized()
       .then(val => this.setState({firebaseInitialized: val}))
-      // .then(val => this.handleSetLanguage('pt'))
       .then(() => this.fire.getDynamicData())
       .then(r => this.setState(r))
   }
