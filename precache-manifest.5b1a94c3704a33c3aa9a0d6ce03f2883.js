@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5037007ecc9a5839c63f1294fd55d85d",
+    "revision": "4aab43ed15a95302d00b30f00e56282f",
     "url": "/index.html"
   },
   {
-    "revision": "493390072cf2940f79d6",
-    "url": "/static/css/main.f1a848fd.chunk.css"
+    "revision": "06f92017da3318dde059",
+    "url": "/static/css/main.b4cfffd9.chunk.css"
   },
   {
-    "revision": "7e7d63079209d928fc5d",
-    "url": "/static/js/2.2978a3d7.chunk.js"
+    "revision": "30451c48e406e18b4744",
+    "url": "/static/js/2.3b5a5f3f.chunk.js"
   },
   {
-    "revision": "493390072cf2940f79d6",
-    "url": "/static/js/main.2d1b821e.chunk.js"
+    "revision": "06f92017da3318dde059",
+    "url": "/static/js/main.fce02688.chunk.js"
   },
   {
     "revision": "e5d96460de81fbf97663",
@@ -34,6 +34,22 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e6bdb5ba8c75ab9e156043150d02d097",
     "url": "/static/media/guitar1.e6bdb5ba.jpg"
+  },
+  {
+    "revision": "6398cab85c00458b71b87a40df88eb63",
+    "url": "/static/media/guitar2.6398cab8.jpg"
+  },
+  {
+    "revision": "a4a54994bea7c43272d674c1dddeca49",
+    "url": "/static/media/guitar3.a4a54994.jpg"
+  },
+  {
+    "revision": "669613c9800dd9ff432b35d9414f702a",
+    "url": "/static/media/guitar4.669613c9.jpg"
+  },
+  {
+    "revision": "3e533d7b6316efc7ed9101bfd99b2d48",
+    "url": "/static/media/guitar5.3e533d7b.jpg"
   },
   {
     "revision": "273a33b97baa240bfd4b350d72f277d4",
