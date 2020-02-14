@@ -12,7 +12,7 @@
     width: 55%;
   }
 
-  &__text{
+  &__text {
     overflow: scroll;
 
     p {
@@ -20,6 +20,12 @@
     }::first-letter{
       font-size: 3rem;
     }
+  }
+
+  &__image {
+    object-fit: cover;
+    height: 25rem;
+    width: 100%;
   }
 }
 

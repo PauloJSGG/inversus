@@ -4,8 +4,11 @@ import LoginForm from '../components/admin/LoginForm'
 import Logo from '../assets/img/logo_black_small.png'
 
 export default class LoginContainer extends Component {
-  state = {
-    logged: false
+  constructor() {
+    super()
+
+    this.fire = new Fire('')
+    this.state = {logged: false}
   }
 
   handleInputChange = (event) => {
@@ -21,7 +24,7 @@ export default class LoginContainer extends Component {
 
   login = async () => {
     try {
-      await Fire.login(this.state.Email, this.state.Password);
+      await this.fire.login(this.state.Email, this.state.Password);
       this.props.history.replace('/admin')
     } catch(e) {
       alert('❌Failed to login❌')

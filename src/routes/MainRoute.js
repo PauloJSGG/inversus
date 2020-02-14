@@ -29,6 +29,7 @@ const defaultState = {
   dynamicData: {
     repertoire: [],
     members: [],
+    homeText: '',
   },
   currentLanguage: '',
   isModalOpen: false,
