@@ -130,9 +130,9 @@ class MainRoute extends Component {
             {!this.state.videoEnded ? <Video handleVideoEnded={this.handleVideoEnded} /> :
             (
               <div className = 'main'>
-              <Header
-                staticData = {this.state.staticData}
-              />
+                <Header
+                  staticData = {this.state.staticData}
+                />
                 <Route render={({location}) => (
                   <AnimatedSwitch location={location}>
                     <Route

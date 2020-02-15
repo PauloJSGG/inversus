@@ -6,6 +6,7 @@ import RepertoireEdit from '../components/admin/RepertoireEdit'
 import MembersEdit from '../components/admin/MembersEdit'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
+import Header from '../components/shared/Header'
 
 import pt from '../assets/img/pt.svg'
 import en from '../assets/img/gb.svg'
@@ -15,6 +16,24 @@ import Fire from '../firebase/Fire'
 
 import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+
+const headerLinks = [
+  {
+    to: '/admin/',
+    text: 'Texto página principal',
+    title: 'Texto principal',
+  },
+  {
+    to: '/admin/repertoire',
+    text: 'Repertório',
+    title: 'Repertório',
+  },
+  {
+    to: '/admin/members',
+    text: 'Membros',
+    title: 'Membros',
+  },
+]
 
 class AdminRoute extends Component{
   state = {
@@ -76,6 +95,9 @@ class AdminRoute extends Component{
       console.log(e)
     }
   }
+
+
+
 
   handleSubmitHomeText = () => {
     this.fire.addOrEditDocument('dynamic_values', {homeText: this.state.homeText})
@@ -201,7 +223,10 @@ class AdminRoute extends Component{
 
     return(
       <>
-        <AdminHeader logout={this.logout}/>
+        <Header
+          links={headerLinks}
+          // logout={this.logout}
+        />
         <Route render={({location}) => (
           <Switch>
             <div className = "content-container flex-col">
