@@ -78,7 +78,8 @@ class MainRoute extends Component {
     this.setState({videoEnded: true})
   }
 
-  refreshData = () => {
+  refreshData = (language) => {
+
     let dynamicData = {}
     this.fire.getDynamicData()
       .then(r => {
@@ -86,13 +87,13 @@ class MainRoute extends Component {
         return null
       })
       .then(() => this.fire.getStaticData())
-      .then(r => this.setState({dynamicData, staticData: r,}))
+      .then(r => this.setState({dynamicData, staticData: r, currentLanguage: language}))
   }
 
   handleSetLanguage = (language) => {
     this.fire.setLanguage(language)
-    this.setState({currentLanguage: language})
-    this.refreshData()
+    // this.setState({currentLanguage: language})
+    this.refreshData(language)
   }
 
   handleMute = () => {
@@ -131,7 +132,7 @@ class MainRoute extends Component {
             (
               <div className = 'main'>
                 <Header
-                  staticData = {this.state.staticData}
+                  links = {this.state.staticData}
                 />
                 <Route render={({location}) => (
                   <AnimatedSwitch location={location}>
