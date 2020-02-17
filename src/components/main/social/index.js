@@ -5,6 +5,7 @@ const Social = () => {
   return (
     <div className="content-container">
       <div className="social">
+        <div className="shade1"/>
         <a
           href="https://www.facebook.com/inversusfado/"
           target="_blank"

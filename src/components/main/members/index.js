@@ -14,11 +14,11 @@ const Members = (props) => {
                 return leftOrRight === 'left' ? (
                   <div>
                     <img src={item.imgUrl} className="members__img" alt="paralax"/>
-                    <p className="members__text whitespace-pre-wrap">{item.text}</p>
+                    <p className="members__text whitespace-pre-wrap" >{item.text}</p>
                   </div>
                 ) : (
                   <div>
-                   <p className="members__text whitespace-pre-wrap">{item.text}</p>
+                   <p className="members__text whitespace-pre-wrap" style={{textAlign: 'right'}}>{item.text}</p>
                    <img src={item.imgUrl} className="members__img" alt="paralax"/>
                   </div>
                 )

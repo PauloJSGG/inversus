@@ -2,9 +2,13 @@
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   color: white;
-  justify-content: center;
-  padding-top: 25px;
+
+  path {
+    fill: white;
+  }
 
   @media (max-width: 600px) {
     flex-direction: column;
