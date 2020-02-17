@@ -75,15 +75,18 @@ export const repertoire = (props) => {
                 </button>
                 <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem'}} icon={['fab','spotify']} /></a>
               </div>
+              <h1 style={{textAlign: 'center'}}>{currentTrack.name}</h1>
             </div>
             <div className="repertoire-body">
-              <div className="repertoire-body__title">
+              <div className = 'shade1'/>
+              {/* <div className="repertoire-body__title">
                 <h1>{currentTrack.name}</h1>
-              </div>
+              </div> */}
 
               <div className = 'repertoire-body__lyrics whitespace-pre-wrap'>
                 <p>{currentTrack.lyrics}</p>
               </div>
+              <div className = 'shade2'/>
             </div>
           </div>
         </Modal>

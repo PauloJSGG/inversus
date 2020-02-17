@@ -122,6 +122,7 @@
   }
 
   .repertoire-body {
+    overflow-y: scroll;
 
     &__title {
       display: flex;
