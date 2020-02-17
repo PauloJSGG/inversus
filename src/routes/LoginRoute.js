@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Fire from '../firebase/Fire'
-import LoginForm from '../components/admin/LoginForm'
+import LoginForm from '../components/login/LoginForm'
 import Logo from '../assets/img/logo_black_small.png'
 
 export default class LoginContainer extends Component {

@@ -1,9 +1,8 @@
 
 import React, { Component } from 'react'
-import AdminHeader from '../components/admin/AdminHeader'
-import MainEdit from '../components/admin/MainEdit'
-import RepertoireEdit from '../components/admin/RepertoireEdit'
-import MembersEdit from '../components/admin/MembersEdit'
+import MainEdit from '../components/admin/main/MainEdit'
+import RepertoireEdit from '../components/admin/repertoire/RepertoireEdit'
+import MembersEdit from '../components/admin/members/MembersEdit'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
 import Header from '../components/shared/Header'
@@ -19,19 +18,20 @@ import { withRouter } from 'react-router-dom'
 
 const headerLinks = [
   {
-    to: '/admin/',
-    text: 'Texto página principal',
-    title: 'Texto principal',
+    to: '/admin',
+    label: 'logo',
+  },
+  {
+    to: '/admin',
+    label: 'Texto principal',
   },
   {
     to: '/admin/repertoire',
-    text: 'Repertório',
-    title: 'Repertório',
+    label: 'Repertório',
   },
   {
     to: '/admin/members',
-    text: 'Membros',
-    title: 'Membros',
+    label: 'Membros',
   },
 ]
 

@@ -90,10 +90,12 @@ export const repertoire = (props) => {
       <div className = 'repertoire'>
         <div className = 'shade1'/>
         <div className = 'repertoire-container'>
-          {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(item => {
+          {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item, i) => {
             return(
-              <div key = {item.id} className = "repetoire-card" onClick = {() => handleSelectTrack(item.id)}>
-                <h1>{item.name}</h1>
+              <div key = {item.id} className={`repertoire-card`} onClick = {() => handleSelectTrack(item.id)}>
+                <div className="repertoire-card__background">
+                  <h1>{item.name}</h1>
+                </div>
               </div>
             )
           })}

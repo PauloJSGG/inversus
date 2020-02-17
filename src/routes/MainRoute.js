@@ -55,9 +55,10 @@ const defaultState = {
     imgUrl: '',
     spotifyUrl: ''
   },
-  staticData: {},
+  headerLinks: [],
   videoEnded: true,
 }
+
 class MainRoute extends Component {
 
   constructor(props) {
@@ -78,22 +79,18 @@ class MainRoute extends Component {
     this.setState({videoEnded: true})
   }
 
-  refreshData = (language) => {
-
-    let dynamicData = {}
+  refreshData = () => {
+    let state = {currentLanguage: this.fire.language}
     this.fire.getDynamicData()
-      .then(r => {
-        dynamicData = r
-        return null
-      })
+      .then(result => (state = {...state, dynamicData: result}))
       .then(() => this.fire.getStaticData())
-      .then(r => this.setState({dynamicData, staticData: r, currentLanguage: language}))
+      .then(result => (state = {...state, headerLinks: result.header_links}))
+      .then(() => this.setState(state))
   }
 
   handleSetLanguage = (language) => {
     this.fire.setLanguage(language)
-    // this.setState({currentLanguage: language})
-    this.refreshData(language)
+    this.refreshData()
   }
 
   handleMute = () => {
@@ -113,6 +110,7 @@ class MainRoute extends Component {
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   render() {
+    console.log('state',this.state)
     sessionStorage.setItem('appState', JSON.stringify(this.state))
     return(
       <>
@@ -132,7 +130,7 @@ class MainRoute extends Component {
             (
               <div className = 'main'>
                 <Header
-                  links = {this.state.staticData}
+                  links = {this.state.headerLinks}
                 />
                 <Route render={({location}) => (
                   <AnimatedSwitch location={location}>
