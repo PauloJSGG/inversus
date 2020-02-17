@@ -11,11 +11,19 @@ const Members = (props) => {
             {
               dynamicData.members.map((item, i) => {
                 const leftOrRight = i % 2 === 0 ? 'left' : 'right';
-                return(
+                return leftOrRight === 'left' ? (
                   <div>
                     <img src={item.imgUrl} className="members__img" alt="paralax"/>
                     <p className="members__text whitespace-pre-wrap">{item.text}</p>
                   </div>
+                ) : (
+                  <div>
+                   <p className="members__text whitespace-pre-wrap">{item.text}</p>
+                   <img src={item.imgUrl} className="members__img" alt="paralax"/>
+                  </div>
+                )
+                }
+
                 )
               })
             }
