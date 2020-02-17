@@ -1,0 +1,16 @@
+.albums {
+  width: 75%;
+  overflow-y: auto;
+  height: 72%;
+
+  .albums-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img {
+    width: 20rem;
+    height: 20rem;
+  }
+}
