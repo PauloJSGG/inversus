@@ -56,7 +56,7 @@ const defaultState = {
     spotifyUrl: ''
   },
   headerLinks: [],
-  videoEnded: true,
+  videoEnded: false,
 }
 
 class MainRoute extends Component {
@@ -115,7 +115,7 @@ class MainRoute extends Component {
     return(
       <>
         {!this.state.currentLanguage ?
-          <div className='header-container'>
+          <div className='initial'>
             <img src={LogoUp} alt={'logo'} className='header__image--up'/>
             <img src={LogoDown} alt={'logo'} className='header__image--down'/>
             <LanguageSelector
