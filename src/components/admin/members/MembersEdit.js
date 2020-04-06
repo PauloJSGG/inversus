@@ -73,7 +73,7 @@ const MembersEdit = (props) => {
                       {item.name}
                     </h1>
                   </div>
-                  {/* <button onClick = {() => props.handleDelete(item.id)}><span role="img" aria-label="out">❌</span></button> */}
+                  <button style={{color: 'red'}} onClick={() => props.handleDelete(item.id)}><span role="img" aria-label="out">❌</span></button>
                 </>
               )
           }))}
