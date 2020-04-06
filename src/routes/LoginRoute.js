@@ -36,7 +36,7 @@ export default class LoginContainer extends Component {
       <>
         <header>
           <div className="header-container">
-            <img className="header__logo" src={Logo} alt="header"/>
+            <img className="login__logo" src={Logo} alt="header"/>
           </div>
         </header>
         <LoginForm
@@ -44,7 +44,7 @@ export default class LoginContainer extends Component {
           emailValue={this.state.email}
           passwordValue={this.state.password}
           handleInputChange={this.handleInputChange}
-          />
+        />
       </>
     )
   }
