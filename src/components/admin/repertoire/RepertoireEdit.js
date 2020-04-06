@@ -32,62 +32,66 @@ const RepertoireEdit = (props) => {
 
   return (
     <>
-      <div className = 'w-full flex flex-col justify-center my-5 items-center'>
-        <Modal
-          isOpen={isModalOpen}
-          // onAfterOpen={afterOpenModal}
-          onRequestClose={() => handleModalOpen(false)}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <div className = 'repetoire-modal'>
-            <div className = 'flex justify-between m-3'>
-              <label>Nome:</label>
-              <input name = "name" value = {currentTrack.name} onChange={e => handleChange(e)}/>
-            </div>
-            <div className = 'flex justify-between m-3'>
-              <label>URL Imagem:</label>
-              <input name = "imgUrl" value = {currentTrack.imgUrl} onChange={e => handleChange(e)}/>
-            </div>
-            <div className = 'flex justify-between m-3'>
-              <label>URL Spotify:</label>
-              <input name = "spotifyUrl" value = {currentTrack.spotifyUrl} onChange={e => handleChange(e)}/>
-            </div>
-            <div className = 'flex justify-between m-3'>
-              <label>URL Preview:</label>
-              <input name = "previewUrl" value = {currentTrack.previewUrl} onChange={e => handleChange(e)}/>
-            </div>
-            <div className = 'flex justify-between m-3'>
-              <label >Letra:</label>
-              <textarea name = "lyrics" value = {currentTrack.lyrics} className='h-56 w-1/2 whitespace-pre-line' onChange={e => handleChange(e)}/>
-            </div>
-            <div className = 'flex justify-end'>
-              <button
-                className = 'shared-button shared-button--second'
-                onClick = {handleSubmit}
-                type='submit'
-                title='submit'
-              >
-                <FontAwesomeIcon icon={['fas','plus']} />
-              </button>
-            </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => handleModalOpen(false)}
+        style={customStyles}
+      >
+        <div className='admin-modal'>
+          <div className='admin-modal__row'>
+            <label className='admin-modal__label'>Nome:</label>
+            <input className='admin-modal__input' name="name" value = {currentTrack.name} onChange={e => handleChange(e)}/>
           </div>
-        </Modal>
-        <div className = 'flex flex-row flex-wrap w-1/4'>
+          <div className='admin-modal__row'>
+            <label className='admin-modal__label'>URL Imagem:</label>
+            <input className='admin-modal__input' name="imgUrl" value = {currentTrack.imgUrl} onChange={e => handleChange(e)}/>
+          </div>
+          <div className='admin-modal__row'>
+            <label className='admin-modal__label'>URL Spotify:</label>
+            <input className='admin-modal__input' name="spotifyUrl" value = {currentTrack.spotifyUrl} onChange={e => handleChange(e)}/>
+          </div>
+          <div className='admin-modal__row'>
+            <label className='admin-modal__label'>URL Preview:</label>
+            <input className='admin-modal__input' name="previewUrl" value = {currentTrack.previewUrl} onChange={e => handleChange(e)}/>
+          </div>
+          <div className='admin-modal__row'>
+            <label className='admin-modal__label'>Letra:</label>
+            <textarea className='admin-modal__textarea' name='lyrics' value = {currentTrack.lyrics} onChange={e => handleChange(e)}/>
+          </div>
+          <div className='admin-modal__button'>
+            <button
+              className='shared-button shared-button--second'
+              onClick = {handleSubmit}
+              type='submit'
+              title='submit'
+            >
+              <FontAwesomeIcon icon={['fas','plus']} />
+            </button>
+          </div>
+        </div>
+      </Modal>
+      <div className='admin-repertoire'>
+        <div className = 'admin-repertoire__list'>
           {repertoire.map((item => {
               return(
                 <>
-                  <div key={item.id} onClick = {() => handleEditClick('currentTrack',item) } className = "repetoire-card" >
+                  <div key={item.id} onClick = {() => handleEditClick('currentTrack',item) } className="admin-repertoire__row">
                     <h1>
                       {item.name}
                     </h1>
                   </div>
-                  <button onClick = {() => props.handleDelete(item.id)}><span role="img" aria-label="out">❌</span></button>
+                  {/* <button onClick = {() => props.handleDelete(item.id)}><span role="img" aria-label="out">❌</span></button> */}
                 </>
               )
           }))}
         </div>
-        <button className = 'shared-button shared-button--second' onClick = { () => handleModalOpen(true)}>Adicionar</button>
+        <button
+          style={{}}
+          className='shared-button shared-button--second'
+          onClick = { () => handleModalOpen(true)}
+        >
+          Adicionar
+        </button>
       </div>
     </>
   )

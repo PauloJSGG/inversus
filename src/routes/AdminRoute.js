@@ -75,7 +75,8 @@ class AdminRoute extends Component{
 
   constructor() {
     super()
-    this.fire = new Fire(this.state.currentLanguage)
+    this.fire = Fire
+    Fire.setLanguage('pt')
     this.rootRepertoire = 'dynamic_values/repertoire'
     this.rootMembers = 'dynamic_values/members'
   }
@@ -95,9 +96,6 @@ class AdminRoute extends Component{
       console.log(e)
     }
   }
-
-
-
 
   handleSubmitHomeText = () => {
     this.fire.addOrEditDocument('dynamic_values', {homeText: this.state.homeText})
@@ -194,8 +192,6 @@ class AdminRoute extends Component{
     this.fire.logout()
     this.props.history.replace('/login')
   }
-
-
 
   handleRepertoireChange(txt, param) {
     this.setState({

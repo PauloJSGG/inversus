@@ -7,7 +7,7 @@ export default class LoginContainer extends Component {
   constructor() {
     super()
 
-    this.fire = new Fire('')
+    this.fire = Fire
     this.state = {logged: false}
   }
 
@@ -34,7 +34,7 @@ export default class LoginContainer extends Component {
   render() {
     return (
       <>
-        <header className="header-admin">
+        <header>
           <div className="header-container">
             <img className="header__logo" src={Logo} alt="header"/>
           </div>

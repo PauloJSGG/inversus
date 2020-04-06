@@ -4,13 +4,13 @@ const LoginForm = (props) => {
   const {login, emailValue, passwordValue, handleInputChange} = props
   return (
     <div className="login">
-      <div className="login-form">
-        <div>
-          <label className="login-form__label">
+      {/* <div className="login-container"> */}
+        <div class="login__row">
+          <label className="login__label">
             Email
           </label>
           <input
-              className="login-form__input"
+              className="login__input"
               style={{color: 'black'}}
               value={emailValue}
               name="Email"
@@ -18,12 +18,12 @@ const LoginForm = (props) => {
             />
         </div>
 
-        <div>
-          <label className="login-form__label">
+        <div className="login__row">
+          <label className="login__label">
             Password
           </label>
           <input
-              className="login-form__input"
+              className="login__input"
               style={{color: 'black'}}
               value={passwordValue}
               name="Password"
@@ -31,8 +31,8 @@ const LoginForm = (props) => {
               type="password"
             />
         </div>
-        <button type="submit" className="shared-button--second" onClick={login}>submit</button>
-      </div>
+        <button type="submit" className="login__button" onClick={login}>submit</button>
+      {/* </div> */}
     </div>
   )
 }

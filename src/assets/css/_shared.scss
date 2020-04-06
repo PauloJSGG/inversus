@@ -71,7 +71,10 @@
   justify-content: center;
   width: 100%;
   margin: 1rem;
-  animation: languagefadein 6s;
+
+  &--animated {
+    animation: languagefadein 6s;
+  }
 
   &__button {
     display: contents;
@@ -80,6 +83,99 @@
 
   &--admin {
     display: inline-block;
+  }
+}
+
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  &__input {
+    width: 50%;
+    height: 300px;
+    font-size: 14px;
+    white-space: pre-wrap;
+
+    br {
+      margin-bottom: 2em
+    }
+  }
+}
+
+.admin-repertoire {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  &__list {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__row {
+    width: 49%;
+    border: 3px solid black;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    box-shadow: 2px;
+    background-color: rgba(188,158,91,0.5);
+    border-radius: 15px 0px 15px 0px;
+    transition: 0.3s;
+    &:hover {
+      background-color: rgba(188,158,91,1);
+    }
+  }
+}
+
+.admin-modal {
+  overflow-y: scroll;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  max-height: 500px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  // input, textarea {
+  //   width: 75%;
+  //   color: black
+  // }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    width: 500px;
+  }
+
+  &__label {
+    font-size: 10px;
+    width: 25%;
+  }
+
+  &__textarea {
+    height: 200px;
+    width: 75%;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__input {
+    width: 75%;
   }
 }
 

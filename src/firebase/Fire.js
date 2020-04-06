@@ -13,10 +13,10 @@ const fireConfig = {
 };
 
 class Fire {
-	constructor(language) {
+	constructor() {
     app.initializeApp(fireConfig)
 
-    this.language = language
+    this.language = ''
 		this.auth = app.auth()
     this.db = app.firestore()
   }
@@ -83,6 +83,7 @@ class Fire {
       homeText,
       repertoire: repertoire,
       members: members,
+      currentLanguage: this.language
     }
 
     return data
@@ -100,6 +101,7 @@ class Fire {
   }
 
   setLanguage(language) {
+    console.log('wtf',language)
     this.language = language
   }
 
@@ -121,4 +123,4 @@ class Fire {
   }
 }
 
-export default Fire;
+export default new Fire();

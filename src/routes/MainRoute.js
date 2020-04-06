@@ -60,11 +60,10 @@ const defaultState = {
 }
 
 class MainRoute extends Component {
-
   constructor(props) {
     super(props)
     this.state = sessionStorage.getItem("appState") ? JSON.parse(sessionStorage.getItem("appState")) : defaultState;
-    this.fire = new Fire(this.state.currentLanguage)
+    this.fire = Fire
   }
 
   componentDidMount() {

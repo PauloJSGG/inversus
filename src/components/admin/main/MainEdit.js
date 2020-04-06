@@ -1,5 +1,17 @@
 import React from 'react'
 
+// const addNewLine = (text) => {
+//   const split = text.split('\n')
+//   let added = []
+//   split.forEach(item => added.push(`${item}\n\n`))
+//   console.log('2:',added)
+//   return added.reduce((a, b) => a.concat(b))
+// }
+
+// const removeNewLine = (text) => {
+
+// }
+
 const MainEdit = (props) => {
 
   const {
@@ -8,11 +20,24 @@ const MainEdit = (props) => {
     formValue
   } = props
 
+  // const formValueWithNewLine = addNewLine(formValue)
+
   return(
     <>
-      <div className='flex flex-col justify-center my-5 items-center w-full'>
-        <textarea onChange={e => handleFormChange(e.target.value)} className='h-56 w-1/2 whitespace-pre-line' value={formValue}></textarea>
-        <button className='shared-button shared-button--second' type='submit'  title='submit' onClick={handleSubmitHomeText}>enviar</button>
+      <div className='admin-main'>
+        <textarea
+          onChange={e => handleFormChange(e.target.value)}
+          className='admin-main__input'
+          value={formValue}
+        />
+        <button
+          className='shared-button shared-button--second'
+          type='submit'
+          title='submit'
+          onClick={handleSubmitHomeText}
+        >
+          enviar
+        </button>
       </div>
     </>
   )
