@@ -20,7 +20,7 @@ const Main = ({text}) => {
       <div className="home">
         <div className="home__text">
           <div className="shade1"/>
-            {text.split('\n').map((item, i) => (
+            {text.replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
               <>
                 <p>{item}</p>
                 <img src={guitars[i]} className="home__image"/>
