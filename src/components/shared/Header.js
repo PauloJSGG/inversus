@@ -2,6 +2,8 @@ import React from 'react'
 import Logo from '../../assets/img/logo_black_small.png'
 import { NavLink, Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const Header = (props) => {
 
   const {links} = props
@@ -16,6 +18,13 @@ const Header = (props) => {
           {
             nav.map(item => <NavLink exact to={item.to} title="Events" className='m-2'>{item.label}</NavLink>)
           }
+          <a>
+            SAIR
+            {/* <FontAwesomeIcon
+              icon={['fas','faSignOutAlt']}
+              style={{height: '4em',  width: '4rem', margin:'5px'}}
+             /> */}
+          </a>
         </ul>
       </nav>
       <div className='header__border-bottom'/>

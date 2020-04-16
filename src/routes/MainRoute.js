@@ -66,13 +66,13 @@ class MainRoute extends Component {
     this.fire = Fire
   }
 
-  componentDidMount() {
-    this.fire.isInitialized()
-      .then(() => {
-        if (this.state.currentLanguage.length > 0)
-          this.refreshData(this.state.currentLanguage)
-      })
-  }
+  // componentDidMount() {
+  //   this.fire.isInitialized()
+  //     .then(() => {
+  //       if (this.state.currentLanguage.length > 0)
+  //         this.refreshData(this.state.currentLanguage)
+  //     })
+  // }
 
   handleVideoEnded = () => {
     this.setState({videoEnded: true})
