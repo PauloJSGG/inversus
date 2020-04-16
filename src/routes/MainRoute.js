@@ -129,7 +129,8 @@ class MainRoute extends Component {
             (
               <div className = 'main'>
                 <Header
-                  links = {this.state.headerLinks}
+                  links={this.state.headerLinks}
+                  signOut={() => this.setState({currentLanguage: ""})}
                 />
                 <Route render={({location}) => (
                   <AnimatedSwitch location={location}>

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Header = (props) => {
 
-  const {links} = props
+  const {links, signOut} = props
   const logo = links.filter(item => item.label === 'logo')[0]
   const nav = links.filter(item => item.label !== 'logo')
 
@@ -18,12 +18,11 @@ const Header = (props) => {
           {
             nav.map(item => <NavLink exact to={item.to} title="Events" className='m-2'>{item.label}</NavLink>)
           }
-          <a>
-            SAIR
-            {/* <FontAwesomeIcon
-              icon={['fas','faSignOutAlt']}
-              style={{height: '4em',  width: '4rem', margin:'5px'}}
-             /> */}
+          <a className="m-2" onClick={signOut}>
+            <FontAwesomeIcon
+              icon={['fas','sign-out-alt']}
+              style={{height: '1.5em',  width: '1.5em'}}
+             />
           </a>
         </ul>
       </nav>
