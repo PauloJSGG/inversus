@@ -96,7 +96,7 @@ export const repertoire = (props) => {
           {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item, i) => {
             return(
               <div key = {item.id} className={`repertoire-card`} onClick = {() => handleSelectTrack(item.id)}>
-                <div className="repertoire-card__background">
+                <div className="repertoire-card__background" style={{backgroundImage: `url(${item.imgUrl})`, filter: `grayscale(1)`}}>
                   <h1>{item.name}</h1>
                 </div>
               </div>

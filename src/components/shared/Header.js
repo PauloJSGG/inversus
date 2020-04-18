@@ -9,6 +9,7 @@ const Header = (props) => {
   const {links, signOut} = props
   const logo = links.filter(item => item.label === 'logo')[0]
   const nav = links.filter(item => item.label !== 'logo')
+                   .sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0))
 
   return(
     <header className="header">
