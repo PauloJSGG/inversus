@@ -64,8 +64,10 @@
     background-position: center;
     background-size: cover;
     transition: all .5s;
-  }:hover{
-    transform: scale(1.2);
+
+    &:hover{
+      transform: scale(1.2);
+    }
   }
 }
 
