@@ -23,7 +23,7 @@ const Main = ({text}) => {
             {text.replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
               <>
                 <p>{item}</p>
-                <img src={guitars[i]} className="home__image"/>
+                <img src={guitars[i]} className="home__image" alt="home"/>
               </>
             ))}
           <div className="shade2"/>
