@@ -79,10 +79,6 @@ export const repertoire = (props) => {
             </div>
             <div className="repertoire-body">
               <div className = 'shade1'/>
-              {/* <div className="repertoire-body__title">
-                <h1>{currentTrack.name}</h1>
-              </div> */}
-
               <div className = 'repertoire-body__lyrics whitespace-pre-wrap'>
                 <p>{currentTrack.lyrics}</p>
               </div>
