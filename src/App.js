@@ -10,7 +10,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import './assets/css/index.scss'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faVolumeMute, faVolumeUp, faWindowClose, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faVolumeMute, faVolumeUp, faWindowClose, faSignOutAlt, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSpotify, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
@@ -22,7 +22,8 @@ library.add(
   faWindowClose,
   faFacebook,
   faInstagram,
-  faYoutube
+  faYoutube,
+  faCalendarAlt
 )
 
 function App() {

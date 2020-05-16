@@ -19,6 +19,12 @@ const Header = (props) => {
           {
             nav.map(item => <NavLink exact to={item.to} title="Events" className='m-2'>{item.label}</NavLink>)
           }
+          <a className="m-2" href="https://www.facebook.com/inversusfado/events/?ref=page_internal" target="_blank">
+            <FontAwesomeIcon
+              icon={['fas','calendar-alt']}
+              style={{height: '1.5em',  width: '1.5em'}}
+             />
+          </a>
           <a className="m-2" onClick={signOut}>
             <FontAwesomeIcon
               icon={['fas','sign-out-alt']}
