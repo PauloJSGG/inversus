@@ -3,6 +3,24 @@
   overflow-y: auto;
   height: 72%;
 
+  &__spotify {
+    position: sticky;
+    top: 30px;
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  &__inside1 {
+    object-position: 0% 0;
+    object-fit: cover;
+  }
+
+  &__inside2 {
+    object-position: 100% 0;
+    object-fit: cover;
+  }
+
   .albums-container {
     display: flex;
     flex-direction: column;
