@@ -1,6 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
+import 'firebase/storage'
 
 const fireConfig = {
   apiKey: process.env.REACT_APP_FIRE_API_KEY,
@@ -19,7 +20,43 @@ class Fire {
     this.language = ''
 		this.auth = app.auth()
     this.db = app.firestore()
+    this.storage = app.storage()
   }
+
+  addGalleryImages = async (url) => {
+    debugger
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+    debugger
+    return await this.db
+      .collection('galleries')
+      .add(url)
+  }
+
+  getGalleryImages = async () => {
+    const snapshot = await this.db
+      .collection('galleries')
+      .get()
+
+    return snapshot.docs.map(item => ({
+      ...item.data()
+    }))
+  }
+
+
+
+
+
+  //UPLOAD IMAGES
+  // uploadImage = async (image) => {
+  //   const uploadTask = await this.fire.storage.ref(`images/${image.name}`).put(image)
+  //   await uploadTask.on('state_changed', snapshot => console.log('progress'),
+  //                                        error => alert(error),
+  //                                        () => {
+  //                                         this.fire.storage.ref('images').child(image.name).getDownloadURL().then(url => imgUrl = url)
+  //                                        })
+  //   }
 
   //DOCUMENTS
   getDocument = async (path) => await this.db
@@ -78,12 +115,14 @@ class Fire {
     const repertoire = await this.getCollection('dynamic_values/repertoire')
     const texts = await this.getDocument('dynamic_values')
     const members = await this.getCollection('dynamic_values/members')
+    const gallery = await this.getGalleryImages('gallery')
     const homeText = texts ? texts.homeText : ''
     const data = {
       homeText,
       repertoire: repertoire,
       members: members,
-      currentLanguage: this.language
+      currentLanguage: this.language,
+      gallery: gallery
     }
 
     return data

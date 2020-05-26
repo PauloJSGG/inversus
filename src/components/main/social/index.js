@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Social = () => {
   return (
     <div className="content-container">
+      <div class="fb-page" data-href="https://www.facebook.com/inversusfado" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/inversusfado" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/inversusfado">In Versus - Grupo de Fados e Guitarradas de Coimbra</a></blockquote></div>
+      <iframe src="http://www.youtube.com/embed/videoseries?list=UUbYgNYLv-PDjDbsMqLdu5eA" width="400px" height="400px"></iframe>
       <div className="social">
         <div className="shade1"/>
         <a

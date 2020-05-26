@@ -24,6 +24,7 @@ const MembersEdit = (props) => {
     handleSubmit,
     handleChange,
     handleEditClick,
+    handleUpload,
 
     isModalOpen,
     members,
@@ -44,8 +45,8 @@ const MembersEdit = (props) => {
             <input className='admin-modal__input' name = "name" value = {currentMember.name} onChange={e => handleChange(e)}/>
           </div>
           <div className = 'admin-modal__row'>
-            <label className='admin-modal__label'>URL Imagem:</label>
-            <input className='admin-modal__input' name = "imgUrl" value = {currentMember.imgUrl} onChange={e => handleChange(e)}/>
+            <label className='admin-modal__label'>Imagem:</label>
+            <input type="file" name="file"  onChange={e => handleUpload(e)}/>
           </div>
           <div className = 'admin-modal__row'>
             <label    className='admin-modal__label'>Texto:</label>
