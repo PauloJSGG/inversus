@@ -1,23 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e230978bcefbbe6db0deb5b349b7c0ca",
+    "revision": "8df9588ae1b4ab3b9a04bcea76d9416c",
     "url": "/index.html"
   },
   {
-    "revision": "8fd6e6373d5a6ce5792f",
-    "url": "/static/css/main.578a8ec3.chunk.css"
+    "revision": "5008243b2f601bfe4d74",
+    "url": "/static/css/main.da97de7a.chunk.css"
   },
   {
-    "revision": "a5884d8fae23b2308bff",
-    "url": "/static/js/2.f296e5c6.chunk.js"
+    "revision": "ba2f918e3e76e2071ca8",
+    "url": "/static/js/2.5fadf842.chunk.js"
   },
   {
-    "revision": "8fd6e6373d5a6ce5792f",
-    "url": "/static/js/main.d02ae471.chunk.js"
+    "revision": "5008243b2f601bfe4d74",
+    "url": "/static/js/main.e62631a4.chunk.js"
   },
   {
     "revision": "e5d96460de81fbf97663",
     "url": "/static/js/runtime~main.9148483b.js"
+  },
+  {
+    "revision": "8ae6123dcddab7edfef96f93339a88aa",
+    "url": "/static/media/FADO.8ae6123d.jpg"
   },
   {
     "revision": "c011d0db0254dacaf7552e9a173c464c",
