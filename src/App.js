@@ -15,6 +15,8 @@ import { faSpotify, faFacebook, faInstagram, faYoutube } from '@fortawesome/free
 
 console.log('111')
 
+console.log('444')
+
 library.add(
   faPlus,
   faVolumeMute,
