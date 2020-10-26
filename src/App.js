@@ -14,6 +14,7 @@ import { faPlus, faVolumeMute, faVolumeUp, faWindowClose, faSignOutAlt, faCalend
 import { faSpotify, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 console.log('111')
+console.log('222')
 
 library.add(
   faPlus,
