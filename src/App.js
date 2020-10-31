@@ -13,11 +13,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faVolumeMute, faVolumeUp, faWindowClose, faSignOutAlt, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSpotify, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
-console.log('111')
-
-console.log('444')
-console.log('555')
-
 library.add(
   faPlus,
   faVolumeMute,
