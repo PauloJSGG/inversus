@@ -44,17 +44,22 @@ class AdminRoute extends Component{
   state = {
     firebaseInitialized: false,
     homeText: '',
-    tracks: [],
+    songs: [],
     texts: {},
     isModalOpen: false,
     repertoire: [],
     members: [],
+    currentLyric: {
+      language: '',
+      text: '',
+      songId: ''
+    },
     currentTrack: {
+      id: '',
       name: '',
-      lyrics: '',
-      imgUrl: '',
+      imageUrl: '',
       spotifyUrl: '',
-      previewUrl: '',
+      songUrl: '',
     },
     currentMember: {
       name: '',
@@ -99,10 +104,17 @@ class AdminRoute extends Component{
   componentDidMount() {
     this.fire.isInitialized()
       .then(val => this.setState({firebaseInitialized: val}))
-      .then(() => this.fire.getDynamicData())
-      .then(r => this.setState(r))
+      .then(() => this.fire.getSongs())
+      .then(r => {
+        this.setState({songs: r})
+      })
   }
 
+  // componentDidUpdate() {
+  //   this.fire.getSongs()
+  //     .then(data => this.setState({songs: data}))
+  // }
+ 
   login = async () => {
     try {
       await this.fire.login(this.state.Email, this.state.Password);
@@ -167,11 +179,7 @@ class AdminRoute extends Component{
   // }
 
   handleAddDocument = (path, data) => {
-
-
-
     if (data.id) {
-
       this.fire.updateDocument(path, data)
         .then(() =>  alert('✔️Success✔️'))
         .then(() => this.fire.getDynamicData())
@@ -229,11 +237,16 @@ class AdminRoute extends Component{
     }
   }
 
-  handleModalOpen = val => {
-    if (!val)
-      this.cleanState()
+  handleModalLyricOpen = val => this.setState({isModalLyricOpen: val})
 
-    this.setState({isModalOpen: val})
+  handleModalSongOpen = (open, val) => {
+    debugger;
+    this.setState((prevState) => ({
+      currentLyric: {
+        ...prevState["currentLyric"],
+        id: val.id
+      },
+    }))
   }
 
   logout = () => {
@@ -273,7 +286,13 @@ class AdminRoute extends Component{
         }
       }))
     }
+  }
 
+  handleSongSubmit = (val) => {
+    if (val.target.files) {
+      const song = val.target.files[0];
+      this.setState({ currentSong: song })
+    }
   }
 
   handleCategoryChange = val => {
@@ -306,6 +325,7 @@ class AdminRoute extends Component{
                                     })
   }
 
+  handleRepertoireSubmit = (values) => this.fire.addSong(values)
 
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
@@ -354,15 +374,20 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <RepertoireEdit
-                    handleEditClick = {this.handleEditClick}
-                    handleChange = {(e) => this.handleDataChange(e, 'currentTrack')}
-                    handleModalOpen = {this.handleModalOpen}
-                    handleSubmit = {() => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack)}
-                    handleDelete = {(id) => this.handleDeleteDocument(this.rootRepertoire, id)}
+                    currentLyric = { this.state.currentLyric }
+                    submitForm = { this.handleRepertoireSubmit }
+                    handleEditClick = { this.handleEditClick }
+                    handleChange = { (e) => this.handleDataChange(e, 'currentTrack') }
+                    handleModalLyricOpen = { this.handleModalLyricOpen }
+                    handleModalSongOpen = { this.handleModalSongOpen }
+                    handleSubmit = { () => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack) }
+                    handleDelete = { (id) => this.handleDeleteDocument(this.rootRepertoire, id) }
 
-                    isModalOpen = {this.state.isModalOpen}
-                    repertoire = {this.state.repertoire}
-                    currentTrack = {this.state.currentTrack}
+                    isModalLyricOpen = { this.state.isModalLyricOpen }
+                    isModalSongOpen = { this.state.isModalSongOpen }
+
+                    repertoire = { this.state.songs }
+                    currentTrack = { this.state.currentTrack }
                   />
                 }
               />

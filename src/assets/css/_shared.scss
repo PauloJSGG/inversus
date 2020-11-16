@@ -134,6 +134,7 @@
 }
 
 .admin-modal {
+
   overflow-y: scroll;
   width: 100%;
   max-width: 500px;
@@ -154,6 +155,7 @@
   }
 
   &__row {
+    margin: 5px;
     display: flex;
     width: 500px;
   }

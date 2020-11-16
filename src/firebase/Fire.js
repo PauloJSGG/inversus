@@ -23,12 +23,11 @@ class Fire {
     this.storage = app.storage()
   }
 
-  addGalleryImages = async (url) => {
-    debugger
+  // Gallery
+  addGalleryUrl = async (url) => {
     if(!this.auth.currentUser) {
       return alert('Not authorized')
     }
-    debugger
     return await this.db
       .collection('galleries')
       .add(url)
@@ -44,8 +43,81 @@ class Fire {
     }))
   }
 
+  // Repertoire
+  addSong = async (data) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+    
+    try {
+      const imageUploadTask = this.storage.ref(`gallery/${data.image.name}`).put(data.image, {contentType: data.image.type})
+      const songUploadTask = this.storage.ref(`songs/${data.song.name}`).put(data.song, {contentType: data.song.type})
+
+      let imageUrl = ""
+      let songUrl = ""
+
+      await imageUploadTask
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => imageUrl = url)
+
+      await songUploadTask
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => songUrl = url)
+
+      return await this.db
+        .collection('songs')
+        .add({
+          name: data.name,
+          imageUrl: imageUrl,
+          spotifyUrl: data.spotifyUrl,
+          songUrl: songUrl,
+        })
+    } catch (e) {
+      throw e
+    }
+  }
 
 
+  getSongs = async () => {
+    const snapshot = await this.db
+      .collection('songs')
+      .get()
+
+  return snapshot.docs.map(item => ({
+      ...item.data()
+    }))
+  }
+
+  // Lyrics
+  addLyric = async (data) => {
+    try {
+      return await this.db
+        .collection('lyrics')
+        .add(data)
+    } catch (e) {
+      throw e
+    }
+  }
+
+  // Members
+  addMember = async (data) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+    return await this.db
+      .collection('repertoires')
+      .add(data)
+  }
+
+  getMembers = async () => {
+    const snapshot = await this.db
+      .collection('repetoires')
+      .get()
+
+  return snapshot.docs.map(item => ({
+      ...item.data()
+    }))
+  }
 
 
   //UPLOAD IMAGES
