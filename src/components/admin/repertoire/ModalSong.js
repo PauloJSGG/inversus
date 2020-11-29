@@ -37,7 +37,7 @@ const FormRender = (props) => {
         </div>
         <div className='admin-modal__row'>
           <label className='admin-modal__label'>Música:</label>
-          <input type="file" accept=".mp3" name="song" onChange={(e) => setFieldValue("song", e.currentTarget.files[0])}/>
+          <input type="file" accept=".wma" name="song" onChange={(e) => setFieldValue("song", e.currentTarget.files[0])}/>
         </div>
         <div className='admin-modal__button'>
           <button
@@ -55,7 +55,7 @@ const FormRender = (props) => {
 
 const ModalSong = (props) => {
   const {
-    submitForm,
+    submitSongForm,
     values,
     handleModalSongOpen,
     isModalSongOpen,
@@ -78,7 +78,12 @@ const ModalSong = (props) => {
           spotifyUrl: "",
           song: {},
         }}
-        onSubmit={submitForm}
+        onSubmit={(values) => {
+          if(values.song.size < 5097152)
+            submitSongForm(values);
+          else
+            alert("Ficheiro demasiado")
+        }}
       >
         {props => <FormRender {...props}/>}  
       </Formik>

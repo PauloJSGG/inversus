@@ -18,26 +18,18 @@ const customStyles = {
 };
 
 const FormRender = (props) => {
-  const { setFieldValue, handleSubmit } = props;
+  const { setFieldValue, handleSubmit, values } = props;
 
   return (
     <form onSubmit={handleSubmit}>
       <div className='admin-modal'>
         <div className='admin-modal__row'>
-          <label className='admin-modal__label'>Nome:</label>
-          <Field className='admin-modal__input' name="name"/>
+          <label className='admin-modal__label'>title:</label>
+          <Field className='admin-modal__input' name="title"/>
         </div>
         <div className='admin-modal__row'>
-          <label className='admin-modal__label'>Imagem:</label>
-          <input type="file" name="image" onChange={(e) => setFieldValue("image", e.currentTarget.files[0])}/>
-        </div>
-        <div className='admin-modal__row'>
-          <label className='admin-modal__label'>URL Spotify:</label>
-          <Field className='admin-modal__input' name="spotifyUrl"/>
-        </div>
-        <div className='admin-modal__row'>
-          <label className='admin-modal__label'>Música:</label>
-          <input type="file" accept=".mp3" name="song" onChange={(e) => setFieldValue("song", e.currentTarget.files[0])}/>
+          <label className='admin-modal__label'>lyrics:</label>
+          <textarea className='admin-modal__textarea' name = "lyric" value = {values.lyric} onChange={(e) => setFieldValue("lyric", e.currentTarget.value)}/>
         </div>
         <div className='admin-modal__button'>
           <button
@@ -55,9 +47,10 @@ const FormRender = (props) => {
 
 const ModalLyric = (props) => {
   const {
-    submitForm,
+    submitLyricForm,
     values,
-    handleModalOpen,
+    handleModalLyricOpen,
+    isModalLyricOpen,
 
     isModalOpen,
     repertoire,
@@ -66,18 +59,18 @@ const ModalLyric = (props) => {
 
   return (
     <Modal
-      isOpen={isModalOpen}
-      onRequestClose={() => handleModalOpen(false)}
+      isOpen={isModalLyricOpen}
+      onRequestClose={() => handleModalLyricOpen(false)}
       style={customStyles}
     >
       <Formik
         initialValues={values ? values : {
-          name: "",
-          image: {},
-          spotifyUrl: "",
-          song: {},
+          songId: "",
+          title: "",
+          lyric: "",
+          language: ""
         }}
-        onSubmit={submitForm}
+        onSubmit={submitLyricForm}
       >
         {props => <FormRender {...props}/>}  
       </Formik>

@@ -90,7 +90,9 @@ class AdminRoute extends Component{
       description: '',
       category: ''
     },
-    gallery: []
+    gallery: [],
+    isModalLyricOpen: false,
+    isModalSongOpen: false    
   }
 
   constructor() {
@@ -237,17 +239,15 @@ class AdminRoute extends Component{
     }
   }
 
-  handleModalLyricOpen = val => this.setState({isModalLyricOpen: val})
-
-  handleModalSongOpen = (open, val) => {
-    debugger;
-    this.setState((prevState) => ({
-      currentLyric: {
-        ...prevState["currentLyric"],
-        id: val.id
-      },
-    }))
+  handleModalLyricOpen = (open, val) => {
+    if(open)
+      return this.setState({isModalLyricOpen: open, currentLyric: { songId: val.id }})
+    else
+      return this.setState({isModalLyricOpen: open, currentLyric: {} })
   }
+
+  handleModalSongOpen = (open) => this.setState({isModalSongOpen: open})
+
 
   logout = () => {
     this.fire.logout()
@@ -325,7 +325,9 @@ class AdminRoute extends Component{
                                     })
   }
 
-  handleRepertoireSubmit = (values) => this.fire.addSong(values)
+  handleSongSubmit = (values) => this.fire.addSong(values)
+
+  handleLyricSubmit = (values) => this.fire.addLyric(values)
 
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
@@ -375,7 +377,8 @@ class AdminRoute extends Component{
                   (props) =>
                   <RepertoireEdit
                     currentLyric = { this.state.currentLyric }
-                    submitForm = { this.handleRepertoireSubmit }
+                    submitSongForm = { this.handleSongSubmit }
+                    submitLyricForm = { this.handleLyricSubmit }
                     handleEditClick = { this.handleEditClick }
                     handleChange = { (e) => this.handleDataChange(e, 'currentTrack') }
                     handleModalLyricOpen = { this.handleModalLyricOpen }

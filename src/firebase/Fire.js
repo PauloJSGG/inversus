@@ -10,7 +10,8 @@ const fireConfig = {
   projectId: process.env.REACT_APP_FIRE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIRE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIRE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIRE_APP_ID
+  appId: process.env.REACT_APP_FIRE_APP_ID,
+  measurementId: process.env.REACT_APP_FIRE_MEASUREMENT_ID,
 };
 
 class Fire {
@@ -82,8 +83,9 @@ class Fire {
     const snapshot = await this.db
       .collection('songs')
       .get()
-
+  debugger
   return snapshot.docs.map(item => ({
+      id: item.id,
       ...item.data()
     }))
   }
@@ -91,9 +93,13 @@ class Fire {
   // Lyrics
   addLyric = async (data) => {
     try {
+      debugger
       return await this.db
         .collection('lyrics')
-        .add(data)
+        .add({
+          ...data,
+          language: this.language
+        })
     } catch (e) {
       throw e
     }

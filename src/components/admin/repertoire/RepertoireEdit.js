@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 import { Formik, Field, setFieldValue } from 'formik';
 import ModalSong from './ModalSong'
+import ModalLyric from './ModalLyric'
 
 Modal.setAppElement('#root')
 
@@ -22,7 +23,6 @@ const customStyles = {
 
 const RepertoireEdit = (props) => {
   const {
-    submitForm,
     values,
     handleModalOpen,
     handleModalSongOpen,
@@ -36,6 +36,9 @@ const RepertoireEdit = (props) => {
   return (
     <>
       <ModalSong
+        {...props}
+      />
+      <ModalLyric
         {...props}
       />
       <div className='admin-repertoire'>
