@@ -30,7 +30,7 @@ const RepertoireEdit = (props) => {
 
     isModalOpen,
     repertoire,
-    currentTrack
+    currentSong
   } = props
 
   return (

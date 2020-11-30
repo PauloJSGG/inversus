@@ -51,12 +51,12 @@ const ModalLyric = (props) => {
     values,
     handleModalLyricOpen,
     isModalLyricOpen,
+    currentSong,
 
     isModalOpen,
     repertoire,
-    currentTrack
   } = props
-
+  debugger
   return (
     <Modal
       isOpen={isModalLyricOpen}
@@ -64,11 +64,10 @@ const ModalLyric = (props) => {
       style={customStyles}
     >
       <Formik
-        initialValues={values ? values : {
-          songId: "",
-          title: "",
-          lyric: "",
-          language: ""
+        initialValues={{
+          ...currentSong,
+          lyric: '',
+          title: '',
         }}
         onSubmit={submitLyricForm}
       >

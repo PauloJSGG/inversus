@@ -26,6 +26,7 @@ import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
 const defaultState = {
   animate: true,
   muted: false,
+  songs: [],
   dynamicData: {
     repertoire: [],
     members: [],
@@ -49,7 +50,7 @@ const defaultState = {
     },
   ],
 
-  currentTrack: {
+  currentSong: {
     name: '',
     lyrics: '',
     imgUrl: '',
@@ -69,8 +70,7 @@ class MainRoute extends Component {
   // componentDidMount() {
   //   this.fire.isInitialized()
   //     .then(() => {
-  //       if (this.state.currentLanguage.length > 0)
-  //         this.refreshData(this.state.currentLanguage)
+  //       Fire.getSongs().then(data => this.setState({songs: data}))
   //     })
   // }
 
@@ -81,7 +81,7 @@ class MainRoute extends Component {
   refreshData = () => {
     let state = {currentLanguage: this.fire.language}
     this.fire.getDynamicData()
-      .then(result => (state = {...state, dynamicData: result}))
+      .then(result => (state = {...state, dynamicData: result, songs: result.songs}))
       .then(() => this.fire.getStaticData())
       .then(result => (state = {...state, headerLinks: result.header_links}))
       .then(() => this.setState(state))
@@ -97,19 +97,20 @@ class MainRoute extends Component {
   }
 
   handleSelectTrack = (id) => {
-    const track = this.state.dynamicData.repertoire.filter(item => item.id === id)[0]
+    debugger
+    const track = this.state.songs.filter(item => item.id === id)[0]
 
     this.setState({
       ...this.state,
       isModalOpen: true,
-      currentTrack: track
+      currentSong: track
     })
   }
 
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   render() {
-    console.log('state',this.state)
+    debugger
     sessionStorage.setItem('appState', JSON.stringify(this.state))
     return(
       <>
@@ -138,6 +139,7 @@ class MainRoute extends Component {
                       path={'/repertoire'}
                       render={ () => <Repertoire
                         {...this.state}
+                        currentLanguage={this.fire.language}
                         handleSelectTrack = {this.handleSelectTrack}
                         handleModalOpen = {this.handleModalOpen}
                         handleMute = {this.handleMute}

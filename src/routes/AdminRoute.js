@@ -49,12 +49,7 @@ class AdminRoute extends Component{
     isModalOpen: false,
     repertoire: [],
     members: [],
-    currentLyric: {
-      language: '',
-      text: '',
-      songId: ''
-    },
-    currentTrack: {
+    currentSong: {
       id: '',
       name: '',
       imageUrl: '',
@@ -66,7 +61,7 @@ class AdminRoute extends Component{
       imgUrl: '',
       text: '',
       image: null,
-      url: '',
+      active: false,
     },
     languageList: [
       {
@@ -92,7 +87,9 @@ class AdminRoute extends Component{
     },
     gallery: [],
     isModalLyricOpen: false,
-    isModalSongOpen: false    
+    isModalSongOpen: false,
+    isModalMemberOpen: false,
+
   }
 
   constructor() {
@@ -103,13 +100,24 @@ class AdminRoute extends Component{
     this.rootMembers = 'dynamic_values/members'
   }
 
+  updateSongs() {
+    this.fire.getSongs()
+      .then(data => this.setState({songs: data}))
+  }
+  updateMembers() {
+    this.fire.getMembers()
+      .then(data => this.setState({members: data}))
+  }
+
   componentDidMount() {
     this.fire.isInitialized()
       .then(val => this.setState({firebaseInitialized: val}))
-      .then(() => this.fire.getSongs())
+      .then(() => Fire.getSongs())
       .then(r => {
         this.setState({songs: r})
       })
+      .then(Fire.getMembers)
+      .then(r => this.setState({members: r}))
   }
 
   // componentDidUpdate() {
@@ -148,19 +156,6 @@ class AdminRoute extends Component{
     })
   }
 
-  handleDataChange = (event, key) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-
-    this.setState((prevState) => ({
-      [key]: {
-        ...prevState[key],
-        [name]: value
-      },
-    }))
-  }
 
   handleSetLanguage = (language) => {
     this.fire.setLanguage(language)
@@ -168,53 +163,11 @@ class AdminRoute extends Component{
       .then(r => this.setState(r))
   }
 
-  // handleUploadImage = e => {
-  //   const { image } = this.state
-  //   const uploadTask = this.fire.storage.ref(`images/${image.name}`).put(image)
-
-  //   uploadTask.on('state_change', snapshot => console.log('progress'),
-  //                                 error => console.log(error),
-  //                                 () => {
-  //                                   this.fire.storage.ref('images').child(image.name).getDownloadURL().then(url => console.log(url))
-  //                                 }
-  //   )
-  // }
-
-  handleAddDocument = (path, data) => {
-    if (data.id) {
-      this.fire.updateDocument(path, data)
-        .then(() =>  alert('✔️Success✔️'))
-        .then(() => this.fire.getDynamicData())
-        .then(r => this.setState(r))
-        .catch((e) => alert('❌Error❌'))
-        .finally(() => this.handleModalOpen(false))
-    }
-    else {
-      let imgUrl = ''
-      const { image } = this.state
-      const uploadTask = this.fire.storage.ref(`images/${image.name}`).put(image)
-
-      uploadTask.on('state_changed', snapshot => console.log('progress'),
-                                     error => alert(error),
-                                     () => {
-                                       this.fire.storage.ref('images').child(image.name).getDownloadURL().then(url => imgUrl = url)
-                                                                                                         .then(() => this.fire.addToCollection(path, {...data, imgUrl}))
-                                                                                                         .then(() =>  alert('✔️Success✔️'))
-                                                                                                         .then(() => this.fire.getDynamicData())
-                                                                                                         .then(r => this.setState(r))
-                                                                                                         .catch((e) => alert('❌Error❌'))
-                                                                                                         .finally(() => this.handleModalOpen(false))
-                                     }
-      )
-    }
-  }
-
-  handleDeleteDocument = (path, trackId) => {
-    this.fire.deleteDocument(`${path}/${trackId}`)
-      .then((e) => alert('✅Success✅'))
-      .then(() => this.fire.getDynamicData())
-      .then(r => this.setState(r))
-      .catch((e) => alert(e))
+  handleMemberSubmit = async (values) => {
+    debugger
+    await this.fire.addMember(values)
+      this.setState({currentMember: {}, isModalMemberOpen: false})
+      this.updateMembers()
   }
 
   cleanState = () => this.setState((prevState) => ({
@@ -241,13 +194,14 @@ class AdminRoute extends Component{
 
   handleModalLyricOpen = (open, val) => {
     if(open)
-      return this.setState({isModalLyricOpen: open, currentLyric: { songId: val.id }})
+      return this.setState({ isModalLyricOpen: open, currentSong: val })
     else
-      return this.setState({isModalLyricOpen: open, currentLyric: {} })
+      return this.setState({ isModalLyricOpen: open, currentLyric: {} })
   }
 
   handleModalSongOpen = (open) => this.setState({isModalSongOpen: open})
 
+  handleModalMemberOpen = (open) => this.setState({isModalMemberOpen: open})
 
   logout = () => {
     this.fire.logout()
@@ -288,13 +242,6 @@ class AdminRoute extends Component{
     }
   }
 
-  handleSongSubmit = (val) => {
-    if (val.target.files) {
-      const song = val.target.files[0];
-      this.setState({ currentSong: song })
-    }
-  }
-
   handleCategoryChange = val => {
     const category = val.target.value
     this.setState(prevState => ({
@@ -305,29 +252,13 @@ class AdminRoute extends Component{
     }))
   }
 
-  handleGallerySubmit = () => {
-    let imgUrl = ''
-    const { currentGaleryImage } = this.state
-    debugger
-    const uploadTask = this.fire.storage.ref(`gallery/${currentGaleryImage.name}`).put(currentGaleryImage)
-
-    uploadTask.on('state_changed', snapshot => console.log('progress'),
-                                    error => alert(error),
-                                    () => {
-                                      this.fire.storage.ref('gallery').child(currentGaleryImage.name).getDownloadURL()
-                                        .then(url => imgUrl = url)
-                                        .then(() => this.fire.addGalleryImages(this.state.currentGaleryImage))
-                                        .then(() =>  alert('✔️Success✔️'))
-                                        .then(() => this.fire.getGalleryImages())
-                                        .then(r => this.setState(r))
-                                        .catch((e) => alert(e.message))
-                                        .finally(() => this.handleModalOpen(false))
-                                    })
+  handleSongSubmit = async (values) => {
+    await this.fire.addSong(values)
+    this.setState({currentSong: {}, isModalSongOpen: false})
+    this.updateSongs()
   }
-
-  handleSongSubmit = (values) => this.fire.addSong(values)
-
-  handleLyricSubmit = (values) => this.fire.addLyric(values)
+    
+  handleLyricSubmit = (values) => this.fire.addSongLyric(values)
 
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
@@ -376,7 +307,6 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <RepertoireEdit
-                    currentLyric = { this.state.currentLyric }
                     submitSongForm = { this.handleSongSubmit }
                     submitLyricForm = { this.handleLyricSubmit }
                     handleEditClick = { this.handleEditClick }
@@ -390,7 +320,7 @@ class AdminRoute extends Component{
                     isModalSongOpen = { this.state.isModalSongOpen }
 
                     repertoire = { this.state.songs }
-                    currentTrack = { this.state.currentTrack }
+                    currentSong = { this.state.currentSong }
                   />
                 }
               />
@@ -399,16 +329,19 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <MembersEdit
+                    handleModalMemberOpen = {this.handleModalMemberOpen}
                     handleEditClick = {this.handleEditClick}
                     handleUpload = {this.handleUpload}
                     handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
-                    handleSubmit = {() => this.handleAddDocument(this.rootMembers, this.state.currentMember)}
+                    handleSubmit = {this.handleMemberSubmit}
                     handleDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
                     handleModalOpen = {this.handleModalOpen}
 
+                    values = {this.state.currentMember}
                     currentMember = {this.state.currentMember}
                     members = {this.state.members}
-                    isModalOpen = {this.state.isModalOpen}
+                    isModalMemberOpen = {this.state.isModalMemberOpen}
+                    currentLanguage = {this.state.currentLanguage}
                   />
                 }
               />

@@ -31,13 +31,16 @@ const fade = (e) => {
 
 export const repertoire = (props) => {
   const {
-    dynamicData,
-    currentTrack,
+    currentLanguage,
+    songs,
+    currentSong,
     handleSelectTrack,
     handleModalOpen,
     handleMute,
     isModalOpen
   } = props
+
+  debugger
 
   return (
     <div className="content-container">
@@ -59,7 +62,7 @@ export const repertoire = (props) => {
               setTimeout(() => fade(element), 1000)
             }}
           >
-            <source src={currentTrack.previewUrl}/>
+            <source src={currentSong.songUrl}/>
           </audio>
           <div className="repertoire-modal">
             <div className="repertoire-header">
@@ -73,14 +76,14 @@ export const repertoire = (props) => {
                       <FontAwesomeIcon  icon={['fas','volume-up']} style={{height: '2rem', width: '2rem'}} />
                   }
                 </button>
-                <a href={currentTrack.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem'}} icon={['fab','spotify']} /></a>
+                <a href={currentSong.spotifyUrl} style={{color: 'white'}} target="blank"><FontAwesomeIcon style={{height: '2rem', width: '2rem'}} icon={['fab','spotify']} /></a>
               </div>
-              <h1 style={{textAlign: 'center'}}>{currentTrack.name}</h1>
+              <h1 style={{textAlign: 'center'}}>{currentSong.title}</h1>
             </div>
             <div className="repertoire-body">
               <div className = 'shade1'/>
               <div className = 'repertoire-body__lyrics whitespace-pre-wrap'>
-                <p>{currentTrack.lyrics}</p>
+                <p>{currentSong[currentLanguage] && currentSong[currentLanguage].lyric}</p>
               </div>
               <div className = 'shade2'/>
             </div>
@@ -89,11 +92,12 @@ export const repertoire = (props) => {
       <div className = 'repertoire'>
         <div className = 'shade1'/>
         <div className = 'repertoire-container'>
-          {dynamicData.repertoire.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item, i) => {
+          {songs.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item, i) => {
             return(
+              item[currentLanguage] &&
               <div key = {item.id} className={`repertoire-card`} onClick = {() => handleSelectTrack(item.id)}>
-                <div className="repertoire-card__background" style={{backgroundImage: `url(${item.imgUrl})`, filter: `grayscale(1)`}}>
-                  <h1>{item.name}</h1>
+                <div className="repertoire-card__background" style={{backgroundImage: `url(${item.imageUrl})`, filter: `grayscale(1)`}}>
+                  <h1>{item[currentLanguage].title}</h1>
                 </div>
               </div>
             )

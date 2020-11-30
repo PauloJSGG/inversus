@@ -1,7 +1,10 @@
 import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Formik, Field, setFieldValue } from 'formik';
 import Modal from 'react-modal';
+
+import ModalMember from './ModalMember'
 
 Modal.setAppElement('#root')
 
@@ -18,6 +21,7 @@ const customStyles = {
   overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0.2)' }
 };
 
+
 const MembersEdit = (props) => {
   const {
     handleModalOpen,
@@ -25,45 +29,23 @@ const MembersEdit = (props) => {
     handleChange,
     handleEditClick,
     handleUpload,
+    handleModalMemberOpen,
 
-    isModalOpen,
+    isModalMemberOpen,
     members,
-    currentMember
+    values,
+    currentMember,
+    currentLanguage
   } = props
 
   return (
     <>
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => handleModalOpen(false)}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div className='admin-modal'>
-          <div className='admin-modal__row'>
-            <label className='admin-modal__label'>Nome:</label>
-            <input className='admin-modal__input' name = "name" value = {currentMember.name} onChange={e => handleChange(e)}/>
-          </div>
-          <div className = 'admin-modal__row'>
-            <label className='admin-modal__label'>Imagem:</label>
-            <input type="file" name="file"  onChange={e => handleUpload(e)}/>
-          </div>
-          <div className = 'admin-modal__row'>
-            <label    className='admin-modal__label'>Texto:</label>
-            <textarea className='admin-modal__textarea' name = "text" value = {currentMember.text} onChange={e => handleChange(e)}/>
-          </div>
-          <div className = 'admin-modal__button'>
-            <button
-              className = 'shared-button shared-button--second'
-              onClick = {handleSubmit}
-              type='submit'
-              title='submit'
-            >
-              <FontAwesomeIcon icon={['fas','plus']} />
-            </button>
-          </div>
-        </div>
-      </Modal>
+      <ModalMemberText
+        values = {currentMember[currentLanguage].text}
+      />
+      <ModalMember
+        {...props}
+      />
       <div className='admin-members'>
         <div className='admin-members__list'>
           {members.map((item => {
@@ -80,7 +62,7 @@ const MembersEdit = (props) => {
           }))}
         </div>
       </div>
-      <button className = 'shared-button shared-button--second' onClick = { () => handleModalOpen(true)}>Adicionar</button>
+      <button className = 'shared-button shared-button--second' onClick = { () => handleModalMemberOpen(true)}>Adicionar</button>
     </>
   )
 }

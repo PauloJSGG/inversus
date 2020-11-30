@@ -78,12 +78,19 @@ class Fire {
     }
   }
 
-
-  getSongs = async () => {
+  getSongs = async (language) => {
     const snapshot = await this.db
       .collection('songs')
       .get()
-  debugger
+  return snapshot.docs.map(item => ({
+      id: item.id,
+      ...item.data()
+    }))
+  }
+  getMembers = async (language) => {
+    const snapshot = await this.db
+      .collection('members')
+      .get()
   return snapshot.docs.map(item => ({
       id: item.id,
       ...item.data()
@@ -91,14 +98,17 @@ class Fire {
   }
 
   // Lyrics
-  addLyric = async (data) => {
+  addSongLyric = async (data) => {
+    debugger;
     try {
-      debugger
       return await this.db
-        .collection('lyrics')
-        .add({
-          ...data,
-          language: this.language
+        .collection('songs')
+        .doc(data.id)
+        .update({
+          [this.language]: {
+            lyric: data.lyric,
+            title: data.title
+          }
         })
     } catch (e) {
       throw e
@@ -106,13 +116,33 @@ class Fire {
   }
 
   // Members
+
   addMember = async (data) => {
     if(!this.auth.currentUser) {
       return alert('Not authorized')
     }
-    return await this.db
-      .collection('repertoires')
-      .add(data)
+    
+    try {
+      debugger
+      const imageUploadTask = this.storage.ref(`members/${data.image.name}`).put(data.image, {contentType: data.image.type})
+
+      let imageUrl = ""
+
+      await imageUploadTask
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => imageUrl = url)
+
+      return await this.db
+        .collection('members')
+        .add({
+          name: data.name,
+          imageUrl: imageUrl,
+          text: data.text,
+          active: data.active,
+        })
+    } catch (e) {
+      throw e
+    }
   }
 
   getMembers = async () => {
@@ -190,14 +220,16 @@ class Fire {
 
   //DYNAMIC DATA
   async getDynamicData() {
-    const repertoire = await this.getCollection('dynamic_values/repertoire')
+    // const repertoire = await this.getCollection('dynamic_values/repertoire')
+    const songs = await this.getSongs();
     const texts = await this.getDocument('dynamic_values')
     const members = await this.getCollection('dynamic_values/members')
     const gallery = await this.getGalleryImages('gallery')
+
     const homeText = texts ? texts.homeText : ''
     const data = {
       homeText,
-      repertoire: repertoire,
+      songs: songs,
       members: members,
       currentLanguage: this.language,
       gallery: gallery
