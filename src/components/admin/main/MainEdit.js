@@ -35,7 +35,7 @@ const MainEdit = (props) => {
   return(
         <Formik
           initialValues={values ? values : {
-            }}
+          }}
           onSubmit={onSubmit}
           >
             {props => <FormRender currentLanguage={currentLanguage} onSubmit={onSubmit} {...props}/>}   

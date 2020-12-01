@@ -90,7 +90,7 @@ export const repertoire = (props) => {
       <div className = 'repertoire'>
         <div className = 'shade1'/>
         <div className = 'repertoire-container'>
-          {songs.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item, i) => {
+          {songs.filter(item => item.visibility !== false).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item, i) => {
             return(
               item[currentLanguage] &&
               <div key = {item.id} className={`repertoire-card`} onClick = {() => handleSelectTrack(item.id)}>

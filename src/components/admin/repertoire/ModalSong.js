@@ -73,6 +73,7 @@ const ModalSong = (props) => {
           image: {},
           spotifyUrl: "",
           song: {},
+          visibility: true,
         }}
         onSubmit={(values) => {
           if(values.song.size < 5097152)

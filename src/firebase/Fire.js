@@ -73,6 +73,7 @@ class Fire {
           imageUrl: imageUrl,
           spotifyUrl: data.spotifyUrl,
           songUrl: songUrl,
+          visibility: data.visibility
         })
     } catch (e) {
       throw e
@@ -124,7 +125,33 @@ class Fire {
   getLinks = async () => {
     const snapshot = await this.db
       .collection('links')
+      .where('_id', "==", 'nav')
       .get()  
+
+    return snapshot.docs.map(item => ({
+        id: item.id,
+        ...item.data()
+      }))
+  }
+
+  getGallery = async (category) => {
+    debugger
+    const snapshot = await this.db
+      .collection('galleries')
+      .where('category', "==", category)
+      .get()
+
+    return snapshot.docs.map(item => ({
+      id: item.id,
+      ...item.data()
+    }))
+  }
+  
+  getGalleryCategories = async () => {
+    const snapshot = await this.db
+      .collection('links')
+      .where('_id', "==", 'category')
+      .get()    
 
     return snapshot.docs.map(item => ({
         id: item.id,
@@ -157,18 +184,28 @@ class Fire {
     }
   }
 
-  updateHomeText = async (data) => {
+  AddOrUpdateHomeText = async (data) => {
+
     try {
-      return await this.db
-        .collection('texts')
-        .doc(data.id)
-        .update(data)
+      if(!data.id)
+        return await this.db
+          .collection('texts')
+          .add({
+            _id: 'homeText',
+            ...data
+          }) 
+
+        return await this.db
+          .collection('texts')
+          .doc(data.id)
+          .update(data)
     } catch (e) {
       throw e
     }
   }
 
   getHomeText = async () => {
+
     const snapshot = await this.db
       .collection('texts')
       .where('_id','==','homeText')
@@ -193,7 +230,6 @@ class Fire {
     }
     
     try {
-      debugger
       const imageUploadTask = this.storage.ref(`members/${shortid.generate()}`).put(data.image, {contentType: data.image.type})
 
       let imageUrl = ""
@@ -219,8 +255,7 @@ class Fire {
       return alert('Not authorized')
     }
     debugger
-    
-    try {
+      try {
       const imageUploadTask = this.storage.ref(`galleries/${shortid.generate()}`).put(data.image, {contentType: data.image.type})
 
       let imageUrl = ""

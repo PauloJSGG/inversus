@@ -18,7 +18,7 @@ const customStyles = {
 };
 
 const FormRender = (props) => {
-  const { setFieldValue, handleSubmit, values, currentLanguage } = props;
+  const { setFieldValue, handleSubmit, values, currentLanguage, galleryCategories } = props;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,12 +26,12 @@ const FormRender = (props) => {
         <div className='admin-modal__row'>
           <label className='admin-modal__label'>Categoria:</label>
           <Field as="select" className='admin-modal__input' name="category" style={{width: '100%'}}>
-            <option>Escolha uma categoria</option>
-            <option value="encontros">Encontros</option>
-            <option value="espetaculos">Espetaculos</option>
-            <option value="estudio">estudio</option>
-            <option value="coimbra">Guitarra de Coimbra</option>
-            <option value="ualg">Serenatas ualg</option>
+            <option label="Selecione uma categoria" />
+            {galleryCategories &&galleryCategories.map((item, index) => {
+              return(
+                <option value={item.value}>{item[currentLanguage]}</option>
+              )
+            })}
           </Field>
         </div>
         <div className='admin-modal__row'>
@@ -64,6 +64,7 @@ const GalleryEdit = (props) => {
     isModalOpen,
     isGalleryModalOpen,
     currentLanguage,
+    galleryCategories,
     galleries,
     currentImage
   } = props
@@ -80,7 +81,7 @@ const GalleryEdit = (props) => {
           }}
           onSubmit={onSubmit}
         >
-          {props => <FormRender currentLanguage = {currentLanguage} {...props}/>}  
+          {props => <FormRender currentLanguage = {currentLanguage} galleryCategories={galleryCategories} {...props}/>}  
         </Formik>
       </Modal>
       <div className="content-container">

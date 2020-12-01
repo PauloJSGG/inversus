@@ -46,6 +46,7 @@ class AdminRoute extends Component{
     languages: [],
     texts: {},
     members: [],
+    galleryCategories: [],
     currentSong: {
       id: '',
       name: '',
@@ -109,12 +110,14 @@ class AdminRoute extends Component{
     const members = await Fire.getMembers()
     const homeText = await Fire.getHomeText()
     const galleries = await Fire.getGalleries()
+    const galleryCategories = await Fire.getGalleryCategories()
     this.setState({
       firebaseInitialized: firebaseInitialized,
       songs: songs,
       members: members,
       homeText: homeText,
       galleries: galleries,
+      galleryCategories: galleryCategories,
       currentLanguage: Fire.language,
       isModalLyricOpen: false,
       isModalSongOpen: false,
@@ -134,7 +137,7 @@ class AdminRoute extends Component{
     }
   }
 
-  handleSubmitHomeText = (values) => Fire.updateHomeText(values).then(this.refreshData)
+  handleSubmitHomeText = (values) => Fire.AddOrUpdateHomeText(values).then(this.refreshData)
 
   handleSetLanguage = (language) => Fire.setLanguage(language).then(this.refreshData)
 
@@ -356,9 +359,11 @@ class AdminRoute extends Component{
                     onModalOpen = {this.handleModalGalleryOpen}
                     onCategoryChange = {this.handleCategoryChange}
                     onSubmit = {this.handleGallerySubmit}
+                    galleryCategories = {this.state.galleryCategories}
 
                     isModalOpen = {this.state.isModalGalleryOpen}
 
+                    currentLanguage = {this.state.currentLanguage}
                     currentMember = {this.state.currentMember}
                     members = {this.state.members}
                     galleries = {this.state.galleries}

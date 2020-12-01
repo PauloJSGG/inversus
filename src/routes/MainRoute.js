@@ -5,6 +5,7 @@ import Repertoire from '../components/main/repertoire'
 import Members from '../components/main/members'
 import Albums from '../components/main/albums'
 import Contacts from '../components/main/contacts'
+import Galleries from '../components/main/galleries'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -25,6 +26,8 @@ import Fire from '../firebase/Fire'
 
 import { Route } from 'react-router-dom'
 import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
+import { faBoxTissue } from '@fortawesome/free-solid-svg-icons'
+import { faThinkPeaks } from '@fortawesome/free-brands-svg-icons'
 
 const headerLinks = [
   {
@@ -87,8 +90,12 @@ const defaultState = {
     imgUrl: '',
     spotifyUrl: ''
   },
+  currentGallery: [],
+  currentGalleryImageIndex: 0,
   links: [],
   videoEnded: false,
+
+  isGalleryModalOpen: false
 }
 
 class MainRoute extends Component {
@@ -121,8 +128,38 @@ class MainRoute extends Component {
     const members = await Fire.getMembers()
     const links = await Fire.getLinks()
     const homeText = await Fire.getHomeText()
+    const galleryCategories = await Fire.getGalleryCategories()
 
-    this.setState({songs: songs, members: members, links: links, homeText: homeText}, this.refreshStorage)    
+    this.setState({
+      songs: songs,
+      members: members,
+      links: links,
+      homeText: homeText,
+      galleryCategories: galleryCategories
+    },
+      this.refreshStorage)    
+  }
+
+  handleGalleryModalOpen = async (open, category) => {
+    if(!open) {
+      return this.setState({isGalleryModalOpen: false, gallery: [], currentGalleryImage: {}})
+    }
+    const gallery = await Fire.getGallery(category)
+    debugger
+    this.setState({currentGallery: gallery, isGalleryModalOpen: open})
+  }
+  handleGalleryNext = async () => {
+    debugger
+    if(this.state.currentGallery.length - 1 > this.state.currentGalleryImageIndex)
+      return this.setState({currentGalleryImageIndex: this.state.currentGalleryImageIndex + 1})
+    else
+      return this.setState({currentGalleryImageIndex: 0})
+  }
+  handleGalleryBack = async () => {
+    if(0 < this.state.currentGalleryImageIndex)
+      this.setState({currentGalleryImageIndex: this.state.currentGalleryImageIndex - 1})
+    else
+      this.setState({currentGalleryImageIndex: this.state.currentGallery.length -1})
   }
 
   handleSetLanguage = (language) => {
@@ -192,6 +229,19 @@ class MainRoute extends Component {
                     <Route path={'/albums'} component={Albums}/>
                     <Route path={'/contacts'} component={Contacts}/>
                     <Route path={'/social'} component={Social}/>
+                    <Route path={'/gallery'} component={() => 
+                      <Galleries 
+                        galleryCategories={this.state.galleryCategories}
+                        currentLanguage={this.state.currentLanguage}
+                        onModalOpen={this.handleGalleryModalOpen}
+                        onGalleryNext={this.handleGalleryNext}
+                        onGalleryBack={this.handleGalleryBack}
+                        isModalOpen={this.state.isGalleryModalOpen}
+                        currentGallery={this.state.currentGallery}
+                        currentGalleryImageIndex={this.state.currentGalleryImageIndex}
+                        onNext={this.handleGalleryImageNext}
+                      />
+                      }/>
                     <Route path={'/'} exact component={() => <Home homeText={this.state.homeText} currentLanguage={this.state.currentLanguage}></Home>}/>
                   </AnimatedSwitch>
                 )} />

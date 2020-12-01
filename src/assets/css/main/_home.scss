@@ -15,11 +15,9 @@
   &__text {
     overflow: scroll;
 
-    p {
-
-    }::first-letter{
-      font-size: 3rem;
-    }
+    p::first-letter{
+        font-size: 3rem;
+      }
   }
 
   &__image {

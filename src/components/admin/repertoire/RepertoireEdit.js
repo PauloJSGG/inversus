@@ -78,7 +78,7 @@ const RepertoireEdit = (props) => {
                     </h1>
                   </div>
                   <button style={{color: 'red'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">❌</span></button>
-                  <button style={{color: 'red'}} onClick={() => onVisibility(item)}>{item.visibility ? <FontAwesomeIcon icon={['fas','eye']}/> : <FontAwesomeIcon icon={['fas','eye-slash']}/>}</button>
+                  <button style={{color: 'red'}} onClick={() => onVisibility(item)}>{item.visibility ? <FontAwesomeIcon icon={['fas','eye-slash']}/> : <FontAwesomeIcon icon={['fas','eye']}/>}</button>
                 </>
               )
           }))}
