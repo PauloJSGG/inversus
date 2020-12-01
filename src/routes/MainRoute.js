@@ -145,11 +145,9 @@ class MainRoute extends Component {
       return this.setState({isGalleryModalOpen: false, gallery: [], currentGalleryImage: {}})
     }
     const gallery = await Fire.getGallery(category)
-    debugger
     this.setState({currentGallery: gallery, isGalleryModalOpen: open})
   }
   handleGalleryNext = async () => {
-    debugger
     if(this.state.currentGallery.length - 1 > this.state.currentGalleryImageIndex)
       return this.setState({currentGalleryImageIndex: this.state.currentGalleryImageIndex + 1})
     else

@@ -135,7 +135,6 @@ class Fire {
   }
 
   getGallery = async (category) => {
-    debugger
     const snapshot = await this.db
       .collection('galleries')
       .where('category', "==", category)
@@ -254,7 +253,6 @@ class Fire {
     if(!this.auth.currentUser) {
       return alert('Not authorized')
     }
-    debugger
       try {
       const imageUploadTask = this.storage.ref(`galleries/${shortid.generate()}`).put(data.image, {contentType: data.image.type})
 

@@ -45,7 +45,6 @@ const Galleries = (props) => {
     isModalOpen
   } = props
 
-  debugger
   return (
     <>
       <div className='content-container'>
