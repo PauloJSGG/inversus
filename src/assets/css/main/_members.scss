@@ -19,26 +19,8 @@
 
 .members-container {
   display: flex;
-  flex-wrap: wrap;
-  .members__img {
-    object-fit: cover;
-    filter: grayscale(1);
-    width: 50%;
-
-  }
-  .members__text{
-    display: inline-block;
-    width: 50%;
-    color: white;
-    font-size: 14px;
-    line-height: unset;
-
-  }
-  // p {
-  //   all: unset;
-  // }
-
-
+  flex-direction: column;
+  justify-content: center;
 }
 
 .members__img{

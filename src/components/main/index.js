@@ -20,10 +20,10 @@ const Main = ({homeText, currentLanguage}) => {
       <div className="home">
         <div className="home__text">
           <div className="shade1"/>
-            {homeText[currentLanguage].replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
+            {homeText[currentLanguage] && homeText[currentLanguage].replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
               <>
                 <p>{item}</p>
-                <img src={guitars[i]} className="home__image" alt="home"/>
+                {guitars[i] && <img src={guitars[i]} className="home__image" alt="home"/>}
               </>
             ))}
           <div className="shade2"/>

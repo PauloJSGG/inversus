@@ -4,6 +4,9 @@ import Social from '../components/main/social'
 import Repertoire from '../components/main/repertoire'
 import Members from '../components/main/members'
 import Albums from '../components/main/albums'
+import Contacts from '../components/main/contacts'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Video from '../components/shared/Video'
 
@@ -91,8 +94,11 @@ const defaultState = {
 class MainRoute extends Component {
   constructor(props) {
     super(props)
-    this.state = sessionStorage.getItem("appState") ? JSON.parse(sessionStorage.getItem("appState")) : defaultState;
-    this.fire = Fire
+    this.state = defaultState
+    if(sessionStorage.getItem("appState")){
+      this.state = JSON.parse(sessionStorage.getItem("appState")) 
+      Fire.setLanguage(this.state.currentLanguage)  
+    }
   }
 
   // componentDidMount() {
@@ -106,23 +112,23 @@ class MainRoute extends Component {
     this.setState({videoEnded: true})
   }
 
+  // refreshStorage = async () => {
+  //   sessionStorage.setItem('appState', JSON.stringify(this.state))
+  // }
+
   refreshData = async () => {
     const songs = await Fire.getSongs()
     const members = await Fire.getMembers()
     const links = await Fire.getLinks()
     const homeText = await Fire.getHomeText()
-    this.setState({songs: songs, members: members, links: links, currentLanguage: this.fire.language, homeText: homeText})
-    // let state = {currentLanguage: this.fire.language}
-    // this.fire.getDynamicData()
-    //   .then(result => (state = {...state, dynamicData: result, songs: result.songs}))
-    //   .then(() => this.fire.getStaticData())
-    //   .then(result => (state = {...state, headerLinks: result.header_links}))
-    //   .then(() => this.setState(state))
+
+    this.setState({songs: songs, members: members, links: links, homeText: homeText}, this.refreshStorage)    
   }
 
   handleSetLanguage = (language) => {
     Fire.setLanguage(language)
-    this.refreshData()
+    this.setState({currentLanguage: language}, this.refreshData)
+
   }
 
   handleMute = () => {
@@ -171,7 +177,7 @@ class MainRoute extends Component {
                       path={'/repertoire'}
                       render={ () => <Repertoire
                         {...this.state}
-                        currentLanguage={this.fire.language}
+                        currentLanguage={this.state.currentLanguage}
                         handleSelectTrack = {this.handleSelectTrack}
                         handleModalOpen = {this.handleModalOpen}
                         handleMute = {this.handleMute}
@@ -184,10 +190,55 @@ class MainRoute extends Component {
                       />}
                     />
                     <Route path={'/albums'} component={Albums}/>
+                    <Route path={'/contacts'} component={Contacts}/>
                     <Route path={'/social'} component={Social}/>
                     <Route path={'/'} exact component={() => <Home homeText={this.state.homeText} currentLanguage={this.state.currentLanguage}></Home>}/>
                   </AnimatedSwitch>
                 )} />
+                <div className="main-footer" style={{display: 'flex', width: '100%', justifyContent: 'center', position: 'fixed', zIndex: '200'}}>
+                  <a
+                    href="https://www.facebook.com/inversusfado/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon
+                      icon={['fab','facebook']}
+                      style={{height: '1em',  width: '1rem', margin:'5px', color: 'white'}}
+                    />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/inversusfado/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon
+                      icon={['fab','instagram']}
+                      style={{height: '1em',  width: '1rem', margin:'5px', color: 'white'}}
+                    />
+                  </a>
+                  <a
+                    href="https://open.spotify.com/artist/68hqv7bUIw71HHJExldzLZ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FontAwesomeIcon
+                      icon={['fab','spotify']}
+                      style={{height: '1em',  width: '1rem', margin:'5px', color: 'white' }}
+                    />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/channel/UCbYgNYLv-PDjDbsMqLdu5eA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    color="white"
+                  >
+                    <FontAwesomeIcon
+                      icon={['fab','youtube']}
+                      style={{height: '1em',  width: '1rem', margin:'5px', color: 'white'}}
+                    />
+                  </a>
+                </div>
+                
               </div>
             )
             }

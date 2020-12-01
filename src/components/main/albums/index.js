@@ -13,16 +13,6 @@ const Albums = (props) => {
       <div className="albums">
         <div className="shade1"/>
         <div className="albums__spotify">
-          <a
-            href="https://open.spotify.com/album/3XpVLtxY894BuJv6TAKqTY?highlight=spotify:track:2wvHmg6WIfktTiSiCopVsA"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={['fab','spotify']}
-              style={{height: '4em',  width: '4rem', margin:'5px', color: 'white'}}
-            />
-          </a>
         </div>
         <div className="albums-container">
           <img src={capa}/>

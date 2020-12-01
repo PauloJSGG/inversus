@@ -211,6 +211,13 @@
   }
 }
 
+.main-footer{
+  top: 88vh;
+  @media screen and (min-width: 600px) {
+    top: 94vh;
+  }
+}
+
 .gallery-card {
   display: flex;
   margin: 1rem;

@@ -1,7 +1,10 @@
 import React from 'react'
 
 const Members = (props) => {
-  const {dynamicData} = props
+  const {
+    members,
+    currentLanguage
+  } = props
 
   return (
     <div className="content-container">
@@ -9,23 +12,12 @@ const Members = (props) => {
         <div className='shade1'/>
           <div className="members-container">
             {
-              dynamicData.members.map((item, i) => {
-                const leftOrRight = i % 2 === 0 ? 'left' : 'right';
-                return leftOrRight === 'left' ? (
+              members.map((item, i) => 
                   <div>
-                    <img src={item.imgUrl} className="members__img" alt="paralax"/>
-                    <p className="members__text whitespace-pre-wrap" >{item.text}</p>
-                  </div>
-                ) : (
-                  <div>
-                   <p className="members__text whitespace-pre-wrap" style={{textAlign: 'right'}}>{item.text}</p>
-                   <img src={item.imgUrl} className="members__img" alt="paralax"/>
+                    <img src={item.imageUrl} className="members__img" alt="paralax"/>
+                    <p className="members__text whitespace-pre-wrap" style={{color: 'white'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
                   </div>
                 )
-                }
-
-                )
-              })
             }
           </div>
         <div className='shade2'/>
