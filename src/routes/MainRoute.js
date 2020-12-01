@@ -72,15 +72,18 @@ const defaultState = {
   languageList: [
     {
       language: 'pt',
-      imgSrc: pt
+      imgSrc: pt,
+      enabled: true
     },
     {
       language: 'en',
-      imgSrc: en
+      imgSrc: en,
+      enabled: false
     },
     {
       language: 'de',
-      imgSrc: de
+      imgSrc: de,
+      enabled: false
     },
   ],
 
@@ -102,6 +105,7 @@ class MainRoute extends Component {
   constructor(props) {
     super(props)
     this.state = defaultState
+    Fire.addView()
     if(sessionStorage.getItem("appState")){
       this.state = JSON.parse(sessionStorage.getItem("appState")) 
       Fire.setLanguage(this.state.currentLanguage)  

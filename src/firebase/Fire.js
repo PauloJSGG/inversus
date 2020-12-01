@@ -1,3 +1,4 @@
+import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
@@ -25,16 +26,6 @@ class Fire {
     this.storage = app.storage()
   }
 
-  // Gallery
-  addGalleryUrl = async (url) => {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
-    }
-    return await this.db
-      .collection('galleries')
-      .add(url)
-  }
-
   getGalleryImages = async () => {
     const snapshot = await this.db
       .collection('galleries')
@@ -43,6 +34,26 @@ class Fire {
     return snapshot.docs.map(item => ({
       ...item.data()
     }))
+  }
+
+  addView = async () => {
+    const snapshot = await this.db
+      .collection('info')
+      .where('_id', "==", 'views')
+      .get()
+    
+    const data = {
+      id: snapshot.docs[0].id,
+      ...snapshot.docs[0].data()
+    } 
+    await this.db
+      .collection('info')
+      .doc(data.id)
+      .update({
+        ...data,
+        number: data.number + 1
+      })
+    
   }
 
   // Repertoire
@@ -75,7 +86,9 @@ class Fire {
           songUrl: songUrl,
           visibility: data.visibility
         })
+        .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }
@@ -92,17 +105,30 @@ class Fire {
   }
 
   deleteSong = async (id) => {
-    const snapshot = await this.db
-      .collection('songs')
-      .doc(id)
-      .delete()
+    try{
+      return await this.db
+        .collection('songs')
+        .doc(id)
+        .delete()  
+        .then(alert('✅Success✅'))
+    } catch (e){
+      alert('❌Error❌')
+      throw e
+    }
+    
   }
 
   deleteMember = async (id) => {
-    const snapshot = await this.db
-      .collection('members')
-      .doc(id)
-      .delete()
+    try {
+      return await this.db
+        .collection('members')
+        .doc(id)
+        .delete() 
+        .then(alert('✅Success✅'))
+    } catch (e) {
+      alert('❌Error❌')
+      throw e
+    }
   }
 
   deleteGallery = async (id) => {
@@ -165,7 +191,9 @@ class Fire {
         .collection('songs')
         .doc(data.id)
         .update(data)
+        .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }
@@ -178,13 +206,14 @@ class Fire {
           _id: 'homeText',
           [this.language]: text
         })
+        .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }
 
   AddOrUpdateHomeText = async (data) => {
-
     try {
       if(!data.id)
         return await this.db
@@ -198,13 +227,14 @@ class Fire {
           .collection('texts')
           .doc(data.id)
           .update(data)
+          .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }
 
   getHomeText = async () => {
-
     const snapshot = await this.db
       .collection('texts')
       .where('_id','==','homeText')
@@ -244,7 +274,9 @@ class Fire {
           imageUrl: imageUrl,
           active: data.active,
         })
+        .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }
@@ -269,7 +301,9 @@ class Fire {
           category: data.category,
           imageUrl: imageUrl
         })
+        .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }
@@ -290,7 +324,9 @@ class Fire {
         .collection('members')
         .doc(data.id)
         .update(data)
+        .then(alert('✅Success✅'))
     } catch (e) {
+      alert('❌Error❌')
       throw e
     }
   }

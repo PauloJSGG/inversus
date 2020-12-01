@@ -20,7 +20,8 @@ const Main = ({homeText, currentLanguage}) => {
       <div className="home">
         <div className="home__text">
           <div className="shade1"/>
-            <h2>IN VERSUS [′ĩ v′ɛrsus]</h2>
+            <h2 style={{marginTop: 0, marginBottom: 0}}>IN VERSUS</h2>
+            <h1 style={{marginTop: 0}}>[′ĩ v′ɛrsus]</h1>
             {homeText[currentLanguage] && homeText[currentLanguage].replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
               <>
                 <p>{item}</p>

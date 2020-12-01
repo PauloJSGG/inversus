@@ -17,15 +17,19 @@ const LanguageSelector = (props) => {
             console.log('languages: ', currentLanguage, item.language)
             if (item.language === currentLanguage)
               return <img src={item.imgSrc} alt="language" style={{width: '50px', border: '5px solid #ddd', margin: '2px 2px', display: display }}/>
-            else
+            else if(item.enabled)
               return (
                 <button
                   onClick={() => handleSetLanguage(item.language)}
                   className="language-selector__button"
                 >
-                  <img src={item.imgSrc} alt="language" style={{width: '50px', height: '30px', margin: '2px 2px'}}/>
+                  <img src={item.imgSrc} alt="language" style={{width: '50px', height: '30px', margin: '2px 2px',}}/>
                 </button>
               )
+            else
+                return(
+                  <img src={item.imgSrc} alt="language" style={{width: '50px', height: '30px', margin: '2px 2px',filter: 'grayscale(1)'}}/>
+                )
 
           })
           }
