@@ -6,6 +6,19 @@ import { Formik, Field, setFieldValue } from 'formik';
 import ModalSong from './ModalSong'
 import ModalLyric from './ModalLyric'
 
+import pt from '../../../assets/img/pt.svg'
+import en from '../../../assets/img/gb.svg'
+import de from '../../../assets/img/de.svg'
+
+import languages from '../../../util/languages'
+
+const flags = {
+  pt: pt,
+  en: en,
+  de: de
+}
+
+
 Modal.setAppElement('#root')
 
 const customStyles = {
@@ -57,7 +70,11 @@ const RepertoireEdit = (props) => {
                 <>
                   <div key={item.id} onClick = {() => onModalLyricOpen(true,item) } className="admin-repertoire__row">
                     <h1>
-                      {item.name}
+                      {item.name}{Object.keys(item).map(element => {
+                        if(languages.includes(element)){
+                          return <img src={flags[element]} style={{width: '30px',  margin: '2px 2px'}}></img>
+                      }
+                  })}
                     </h1>
                   </div>
                   <button style={{color: 'red'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">❌</span></button>

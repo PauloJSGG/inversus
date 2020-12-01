@@ -4,9 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Formik, Field, setFieldValue } from 'formik';
 import Modal from 'react-modal';
 
+import pt from '../../../assets/img/pt.svg'
+import en from '../../../assets/img/gb.svg'
+import de from '../../../assets/img/de.svg'
+
 import ModalMember from './ModalMember'
 import ModalMemberText from './ModalMemberText'
 
+import languages from '../../../util/languages'
+
+const flags = {
+  pt: pt,
+  en: en,
+  de: de
+}
 
 const MembersEdit = (props) => {
   const {
@@ -26,7 +37,8 @@ const MembersEdit = (props) => {
     members,
     values,
     currentMember,
-    currentLanguage
+    currentLanguage,
+    languageList
   } = props
 
   return (
@@ -50,10 +62,15 @@ const MembersEdit = (props) => {
                 <>
                   <div key={item.id} onClick={() => onModalMemberTextOpen(true,item)} className="admin-members__row">
                     <h1>
-                      {item.name}
+                      {item.name}{Object.keys(item).map(element => {
+                        if(languages.includes(element)){
+                          return <img src={flags[element]} style={{width: '30px',  margin: '2px 2px'}}></img>
+                      }
+                  })}
                     </h1>
                   </div>
                   <button style={{color: 'red'}} onClick={() => onDelete(item.id)}><span role="img" aria-label="out">❌</span></button>
+                  
                 </>
               )
           }))}

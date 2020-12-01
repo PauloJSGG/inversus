@@ -45,7 +45,6 @@ class AdminRoute extends Component{
     songs: [],
     languages: [],
     texts: {},
-    isModalOpen: false,
     members: [],
     currentSong: {
       id: '',
@@ -116,11 +115,20 @@ class AdminRoute extends Component{
     const firebaseInitialized = await this.fire.isInitialized()
     const songs = await Fire.getSongs()
     const members = await Fire.getMembers()
-    debugger
     const homeText = await Fire.getHomeText()
-    this.setState({firebaseInitialized: firebaseInitialized, songs: songs, members: members, homeText: homeText, currentLanguage: Fire.language})
+    this.setState({
+      firebaseInitialized: firebaseInitialized,
+      songs: songs,
+      members: members,
+      homeText: homeText,
+      currentLanguage: Fire.language,
+      isModalLyricOpen: false,
+      isModalSongOpen: false,
+      isModalMemberOpen: false, 
+      isModalMemberTextOpen: false, 
+      isModalLanguageOpen: false, 
+    })
   }
-
 
   login = async () => {
     try {
@@ -248,9 +256,7 @@ class AdminRoute extends Component{
   }
 
   handleSongSubmit = async (values) => {
-    await this.fire.addSong(values)
-    this.setState({currentSong: {}, isModalSongOpen: false})
-    this.updateSongs()
+    Fire.addSong(values).then(this.refreshData)
   }
     
   handleLyricSubmit = (values) => this.fire.updateSong(values).then(this.refreshData)
@@ -309,6 +315,7 @@ class AdminRoute extends Component{
                     onSubmit = { () => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack) }
                     onDelete = { this.handleSongDelete }
                     onVisibility = { this.handleSongVisibility }
+                    languageList = { this.languageList }
 
                     isModalLyricOpen = { this.state.isModalLyricOpen }
                     isModalSongOpen = { this.state.isModalSongOpen }
@@ -340,6 +347,7 @@ class AdminRoute extends Component{
                     currentMember = {this.state.currentMember}
                     members = {this.state.members}
                     currentLanguage = {this.state.currentLanguage}
+                    languageList = { this.languageList }
                   />
                 }
               />

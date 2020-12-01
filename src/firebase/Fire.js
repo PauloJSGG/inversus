@@ -197,7 +197,6 @@ class Fire {
   }
 
   updateMember = async (data) => {
-    debugger
     try {
       return await this.db
         .collection('members')
