@@ -30,6 +30,7 @@ const MembersEdit = (props) => {
     onModalMemberOpen,
     onModalMemberTextOpen,
     onSubmitModalMemberText,
+    onSubmitModalMember,
 
 
     isModalMemberOpen,
@@ -52,7 +53,7 @@ const MembersEdit = (props) => {
       />
       <ModalMember
         onModalOpen = {onModalMemberOpen}
-        onSubmit = {onSubmit}
+        onSubmit = {onSubmitModalMember}
         isModalOpen = {isModalMemberOpen}
       />
       <div className='admin-members'>
@@ -69,7 +70,7 @@ const MembersEdit = (props) => {
                   })}
                     </h1>
                   </div>
-                  <button style={{color: 'red'}} onClick={() => onDelete(item.id)}><span role="img" aria-label="out">❌</span></button>
+                  <button style={{color: 'red'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">❌</span></button>
                   
                 </>
               )

@@ -4,8 +4,7 @@
   width: 75%;
 
   @media screen and (max-width: 600px) {
-    width: 75%;
-    font-size: 20px;
+    width: 55%;
   }
 
   &--left{
@@ -19,7 +18,8 @@
 
 .members-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  // flex-direction: column;
   justify-content: center;
 }
 

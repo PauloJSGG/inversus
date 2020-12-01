@@ -24,11 +24,11 @@ const FormRender = (props) => {
     <form onSubmit={handleSubmit}>
       <div className='admin-modal'>
         <div className='admin-modal__row'>
-          <label className='admin-modal__label'>title:</label>
+          <label className='admin-modal__label'>Titulo:</label>
           <Field className='admin-modal__input' name={`${currentLanguage}.title`} value = {values[currentLanguage] ? values[currentLanguage].title : ""}/>
         </div>
         <div className='admin-modal__row'>
-          <label className='admin-modal__label'>lyrics:</label>
+          <label className='admin-modal__label'>Letra:</label>
           <textarea className='admin-modal__textarea' name={`${currentLanguage}.lyric`} value = {values[currentLanguage] ? values[currentLanguage].lyric : ""} onChange={(e) => setFieldValue(`${currentLanguage}.lyric`, e.currentTarget.value)}/>
         </div>
         <div className='admin-modal__button'>

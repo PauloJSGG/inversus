@@ -2,6 +2,7 @@ import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
 import 'firebase/storage'
+const shortid = require('shortid');
 
 const fireConfig = {
   apiKey: process.env.REACT_APP_FIRE_API_KEY,
@@ -51,8 +52,8 @@ class Fire {
     }
     
     try {
-      const imageUploadTask = this.storage.ref(`gallery/${data.image.name}`).put(data.image, {contentType: data.image.type})
-      const songUploadTask = this.storage.ref(`songs/${data.song.name}`).put(data.song, {contentType: data.song.type})
+      const imageUploadTask = this.storage.ref(`photos/${shortid.generate()}`).put(data.image, {contentType: data.image.type})
+      const songUploadTask = this.storage.ref(`songs/${shortid.generate()}`).put(data.song, {contentType: data.song.type})
 
       let imageUrl = ""
       let songUrl = ""
@@ -92,6 +93,20 @@ class Fire {
   deleteSong = async (id) => {
     const snapshot = await this.db
       .collection('songs')
+      .doc(id)
+      .delete()
+  }
+
+  deleteMember = async (id) => {
+    const snapshot = await this.db
+      .collection('members')
+      .doc(id)
+      .delete()
+  }
+
+  deleteGallery = async (id) => {
+    const snapshot = await this.db
+      .collection('galleries')
       .doc(id)
       .delete()
   }
@@ -160,6 +175,9 @@ class Fire {
       .limit(1)
       .get()
 
+    if(!snapshot.docs[0])
+      return {}
+
     const data = snapshot.docs[0].data();
     const id = snapshot.docs[0].id;
     
@@ -175,7 +193,8 @@ class Fire {
     }
     
     try {
-      const imageUploadTask = this.storage.ref(`members/${data.image.name}`).put(data.image, {contentType: data.image.type})
+      debugger
+      const imageUploadTask = this.storage.ref(`members/${shortid.generate()}`).put(data.image, {contentType: data.image.type})
 
       let imageUrl = ""
 
@@ -188,12 +207,48 @@ class Fire {
         .add({
           name: data.name,
           imageUrl: imageUrl,
-          text: data.text,
           active: data.active,
         })
     } catch (e) {
       throw e
     }
+  }
+
+  addGallery = async (data) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+    debugger
+    
+    try {
+      const imageUploadTask = this.storage.ref(`galleries/${shortid.generate()}`).put(data.image, {contentType: data.image.type})
+
+      let imageUrl = ""
+
+      await imageUploadTask
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => imageUrl = url)
+
+      return await this.db
+        .collection('galleries')
+        .add({
+          description: data.description,
+          category: data.category,
+          imageUrl: imageUrl
+        })
+    } catch (e) {
+      throw e
+    }
+  }
+
+  getGalleries = async () => {
+    const snapshot = await this.db
+      .collection('galleries')
+      .get()
+    return snapshot.docs.map(item => ({
+        id: item.id,
+        ...item.data()
+      }))
   }
 
   updateMember = async (data) => {
@@ -215,7 +270,7 @@ class Fire {
     return this.auth.signOut()
   }
 
-  setLanguage(language) {
+  setLanguage = async (language) => {
     this.language = language
   }
 

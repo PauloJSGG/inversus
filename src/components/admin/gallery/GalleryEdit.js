@@ -1,62 +1,114 @@
 import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Formik, Field } from 'formik';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content: {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    backgroundColor       : 'black'
+  },
+  overlay: { zIndex: 99999, backgroundColor: 'rgba(188,158,91,0.2)' }
+};
+
+const FormRender = (props) => {
+  const { setFieldValue, handleSubmit, values, currentLanguage } = props;
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className='admin-modal'>
+        <div className='admin-modal__row'>
+          <label className='admin-modal__label'>Categoria:</label>
+          <Field as="select" className='admin-modal__input' name="category" style={{width: '100%'}}>
+            <option>Escolha uma categoria</option>
+            <option value="encontros">Encontros</option>
+            <option value="espetaculos">Espetaculos</option>
+            <option value="estudio">estudio</option>
+            <option value="coimbra">Guitarra de Coimbra</option>
+            <option value="ualg">Serenatas ualg</option>
+          </Field>
+        </div>
+        <div className='admin-modal__row'>
+          <label className='admin-modal__label'>Descrição:</label>
+          <Field  name="description" style={{width: '100%'}}/>
+        </div>
+        <div className='admin-modal__row'>
+          <label className='admin-modal__label'>Imagem:</label>
+          <input type="file" name="image" style={{width: '100%'}} onChange={(e) => setFieldValue("image", e.currentTarget.files[0])}/>
+        </div>
+        <div className='admin-modal__button'>
+          <button
+            className='shared-button shared-button--second'
+            type='submit'
+            title='submit'
+          >
+            <FontAwesomeIcon icon={['fas','plus']} />
+          </button>
+        </div>
+      </div>
+    </form>
+  )
+}
 
 const GalleryEdit = (props) => {
   const {
-    handleGalleryModalOpen,
-    handleGallerySubmit,
-    handleGalleryChange,
-    handleGalleryEditClick,
-    handleGalleryUpload,
-    handleCategoryChange,
-
+    onSubmit,
+    onDelete,
+    onModalOpen,
+    isModalOpen,
     isGalleryModalOpen,
-    gallery,
+    currentLanguage,
+    galleries,
     currentImage
   } = props
 
   return (
     <>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => onModalOpen(false)}
+        style={customStyles}
+      >
+        <Formik
+          initialValues={{
+          }}
+          onSubmit={onSubmit}
+        >
+          {props => <FormRender currentLanguage = {currentLanguage} {...props}/>}  
+        </Formik>
+      </Modal>
       <div className="content-container">
         <div className="admin-gallery">
           <div className="admin-gallery-container">
-            {gallery.map((item, i) => {
+            {galleries.map((item, i) => {
               return(
-                <div key = {item.id} className={`gallery-card`}>
-                  <div className="gallery-card__background" style={{backgroundImage: `url(${item.imageUrl})`}}>
-                    <h1>{item.name}</h1>
+                <>
+                  <div key = {item.id} className={`gallery-card`}>
+                    <div className="gallery-card__background" style={{backgroundImage: `url(${item.imageUrl})`}}>
+                      <h1>{item.description}</h1>
+                      <h1>{item.category}</h1>
+
+                    </div>
                   </div>
-                </div>
+                  <button style={{color: 'red'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">❌</span></button>
+                </>
               )
             })}
           </div>
-          <div className="admin-gallery-add">
-            <div>
-              <select name="categories" id="categories" onChange={e => handleCategoryChange(e)}>
-                <option>Escolha uma categoria</option>
-                <option value="encontros">Encontros</option>
-                <option value="espetaculos">Espetaculos</option>
-                <option value="estudio">estudio</option>
-                <option value="coimbra">Guitarra de Coimbra</option>
-                <option value="ualg">Serenatas ualg</option>
-              </select>
-            </div>
-              <div>
-                <label className="admin-gallery-add__label">Descrição</label>
-                <input type="text" name="description"  onChange={e => handleGalleryUpload(e)}/>
-              </div>
-              <input type="file" name="file"  onChange={e => handleGalleryUpload(e)}/>
-              <button
-                className = 'shared-button shared-button--second'
-                onClick = {handleGallerySubmit}
-                type='submit'
-                title='submit'
-              >
-                <FontAwesomeIcon icon={['fas','plus']} />
-              </button>
-          </div>
         </div>
+        <button
+            style={{}}
+            className='shared-button shared-button--second'
+            onClick = {() => onModalOpen(true)}
+          >
+            Adicionar Foto
+          </button>
       </div>
     </>
   )

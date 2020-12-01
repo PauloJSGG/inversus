@@ -82,12 +82,13 @@ class AdminRoute extends Component{
       description: '',
       category: ''
     },
-    gallery: [],
+    galleries: [],
     isModalLyricOpen: false,
     isModalSongOpen: false,
     isModalMemberOpen: false, 
     isModalMemberTextOpen: false, 
     isModalLanguageOpen: false, 
+    isModalGalleryOpen: false, 
   }
 
   constructor() {
@@ -96,15 +97,6 @@ class AdminRoute extends Component{
     Fire.setLanguage('pt')
     this.rootRepertoire = 'dynamic_values/repertoire'
     this.rootMembers = 'dynamic_values/members'
-  }
-
-  updateSongs() {
-    this.fire.getSongs()
-      .then(data => this.setState({songs: data}))
-  }
-  updateMembers() {
-    this.fire.getMembers()
-      .then(data => this.setState({members: data}))
   }
 
   async componentDidMount() {
@@ -116,17 +108,20 @@ class AdminRoute extends Component{
     const songs = await Fire.getSongs()
     const members = await Fire.getMembers()
     const homeText = await Fire.getHomeText()
+    const galleries = await Fire.getGalleries()
     this.setState({
       firebaseInitialized: firebaseInitialized,
       songs: songs,
       members: members,
       homeText: homeText,
+      galleries: galleries,
       currentLanguage: Fire.language,
       isModalLyricOpen: false,
       isModalSongOpen: false,
       isModalMemberOpen: false, 
       isModalMemberTextOpen: false, 
-      isModalLanguageOpen: false, 
+      isModalLanguageOpen: false,
+      isModalGalleryOpen: false,
     })
   }
 
@@ -139,21 +134,13 @@ class AdminRoute extends Component{
     }
   }
 
-  handleSubmitHomeText = (values) => {
-    Fire.updateHomeText(values)
-    this.refreshData()
-  }
+  handleSubmitHomeText = (values) => Fire.updateHomeText(values).then(this.refreshData)
 
-  handleSetLanguage = (language) => {
-    this.fire.setLanguage(language)
-    this.refreshData()
-  }
+  handleSetLanguage = (language) => Fire.setLanguage(language).then(this.refreshData)
 
-  handleMemberSubmit = async (values) => {
-    await this.fire.addMember(values)
-      this.setState({currentMember: {}, isModalMemberOpen: false})
-      this.updateMembers()
-  }
+  handleMemberSubmit = async (values) => Fire.addMember(values).then(this.refreshData)
+
+  handleGallerySubmit = async (values) => Fire.addGallery(values).then(this.refreshData)
 
   handleMemberTextSubmit = async (values) => {
     Fire.updateMember(values)
@@ -200,11 +187,17 @@ class AdminRoute extends Component{
 
   handleModalMemberOpen = (open) => this.setState({isModalMemberOpen: open})
 
+  handleModalGalleryOpen = (open) => this.setState({isModalGalleryOpen: open})
+
   handleModalLanguageOpen = (open) => this.setState({isModalLanguageOpen: open})
 
   handleSongVisibility = (data) => Fire.updateSong({...data, visibility: !data.visibility}).then(this.refreshData)
 
   handleSongDelete = (data) => Fire.deleteSong(data.id).then(this.refreshData)
+
+  handleGalleryDelete = (data) => Fire.deleteGallery(data.id).then(this.refreshData)
+
+  handleMemberDelete = (data) => Fire.deleteMember(data.id).then(this.refreshData)
 
   logout = () => {
     this.fire.logout()
@@ -338,7 +331,7 @@ class AdminRoute extends Component{
                     onChange = {(e) => this.handleDataChange(e, 'currentMember')}
                     onSubmitModalMember = {this.handleMemberSubmit}
                     onSubmitModalMemberText = {this.handleMemberTextSubmit}
-                    onDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
+                    onDelete = { this.handleMemberDelete }
 
                     isModalMemberOpen = {this.state.isModalMemberOpen}
                     isModalMemberTextOpen = {this.state.isModalMemberTextOpen}
@@ -359,16 +352,16 @@ class AdminRoute extends Component{
                     onEditClick = {this.handleEditClick}
                     onGalleryUpload = {this.handleGalleryUpload}
                     onChange = {(e) => this.handleDataChange(e, 'currentMember')}
-                    onGallerySubmit = {() => this.handleGallerySubmit()}
-                    onDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
-                    onModalOpen = {this.handleModalOpen}
+                    onDelete = { this.handleGalleryDelete }
+                    onModalOpen = {this.handleModalGalleryOpen}
                     onCategoryChange = {this.handleCategoryChange}
+                    onSubmit = {this.handleGallerySubmit}
 
-                    isModalOpen = {this.state.isModalOpen}
+                    isModalOpen = {this.state.isModalGalleryOpen}
 
                     currentMember = {this.state.currentMember}
                     members = {this.state.members}
-                    gallery = {this.state.gallery}
+                    galleries = {this.state.galleries}
                   />
                 }
               />

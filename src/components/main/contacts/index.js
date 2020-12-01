@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Contacts = (props) => {
   return (
     <div className="content-container">
-      <div className="albums">
+      <div style={{width: '100%', height: '100%'}}>
         <div className='shade1'/>
           <div className="">
             <div style={{width: '100%', textAlign: 'left'}}>
