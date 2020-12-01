@@ -109,6 +109,8 @@ class MainRoute extends Component {
     if(sessionStorage.getItem("appState")){
       this.state = JSON.parse(sessionStorage.getItem("appState")) 
       Fire.setLanguage(this.state.currentLanguage)  
+    } else {
+      this.state = defaultState
     }
   }
 
