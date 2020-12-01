@@ -23,35 +23,45 @@ const customStyles = {
 
 const RepertoireEdit = (props) => {
   const {
-    values,
-    handleModalOpen,
-    handleModalSongOpen,
-    handleModalLyricOpen,
-
-    isModalOpen,
+    onModalSongOpen,
+    onModalLyricOpen,
+    onSubmitSongForm,
+    onSubmitLyricForm,
+    onDelete,
+    onVisibility,
+    isModalSongOpen,  
+    isModalLyricOpen,
+    currentSong,
+    currentLanguage,
     repertoire,
-    currentSong
   } = props
 
   return (
     <>
       <ModalSong
-        {...props}
+        onModalOpen = {onModalSongOpen}
+        isModalOpen = {isModalSongOpen}
+        submitForm = {onSubmitSongForm}
       />
       <ModalLyric
-        {...props}
+        onModalOpen = {onModalLyricOpen}
+        onSubmitForm = {onSubmitLyricForm}
+        isModalOpen = {isModalLyricOpen}  
+        currentSong = {currentSong}
+        currentLanguage = {currentLanguage}
       />
       <div className='admin-repertoire'>
         <div className = 'admin-repertoire__list'>
           {repertoire.map((item => {
               return(
                 <>
-                  <div key={item.id} onClick = {() => handleModalLyricOpen(true,item) } className="admin-repertoire__row">
+                  <div key={item.id} onClick = {() => onModalLyricOpen(true,item) } className="admin-repertoire__row">
                     <h1>
                       {item.name}
                     </h1>
                   </div>
-                  <button style={{color: 'red'}} onClick={() => props.handleDelete(item.id)}><span role="img" aria-label="out">❌</span></button>
+                  <button style={{color: 'red'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">❌</span></button>
+                  <button style={{color: 'red'}} onClick={() => onVisibility(item)}>{item.visibility ? <FontAwesomeIcon icon={['fas','eye']}/> : <FontAwesomeIcon icon={['fas','eye-slash']}/>}</button>
                 </>
               )
           }))}
@@ -59,7 +69,7 @@ const RepertoireEdit = (props) => {
           <button
             style={{}}
             className='shared-button shared-button--second'
-            onClick = { () => handleModalSongOpen(true)}
+            onClick = { () => onModalSongOpen(true)}
           >
             Adicionar Musica
           </button>

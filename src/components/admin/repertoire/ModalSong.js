@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Formik, Field } from 'formik';
 import Modal from 'react-modal';
-import { Formik, Field, setFieldValue } from 'formik';
 
 const customStyles = {
   content: {
@@ -55,20 +55,16 @@ const FormRender = (props) => {
 
 const ModalSong = (props) => {
   const {
-    submitSongForm,
-    values,
-    handleModalSongOpen,
-    isModalSongOpen,
-
+    onModalOpen,
     isModalOpen,
-    repertoire,
-    currentTrack
+    submitForm,
+    values,
   } = props
 
   return (
     <Modal
-      isOpen={isModalSongOpen}
-      onRequestClose={() => handleModalSongOpen(false)}
+      isOpen={isModalOpen}
+      onRequestClose={() => onModalOpen(false)}
       style={customStyles}
     >
       <Formik
@@ -80,7 +76,7 @@ const ModalSong = (props) => {
         }}
         onSubmit={(values) => {
           if(values.song.size < 5097152)
-            submitSongForm(values);
+            submitForm(values);
           else
             alert("Ficheiro demasiado grande")
         }}

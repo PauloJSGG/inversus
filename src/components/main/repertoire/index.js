@@ -40,8 +40,6 @@ export const repertoire = (props) => {
     isModalOpen
   } = props
 
-  debugger
-
   return (
     <div className="content-container">
       <Modal

@@ -6,18 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Header = (props) => {
 
-  const {links, signOut} = props
-  const logo = links.filter(item => item.label === 'logo')[0]
-  const nav = links.filter(item => item.label !== 'logo')
-                   .sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0))
+  const {links, signOut, currentLanguage} = props
+  const nav = links.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0))
 
   return(
     <header className="header">
-      <Link to={logo.to} title={logo.label} className="header__logo"><img src={Logo} alt="logo"></img></Link>
+      <Link to={'/'} className="header__logo"><img src={Logo} alt="logo"></img></Link>
       <nav className='header__nav'>
         <ul className='header-nav-list'>
           {
-            nav.map(item => <NavLink exact to={item.to} title="Events" className='m-2'>{item.label}</NavLink>)
+            nav.map(item => <NavLink exact to={item.to} title="Events" className='m-2'>{item[currentLanguage] ? item[currentLanguage] : item.label}</NavLink>)
           }
           <a className="m-2" href="https://www.facebook.com/inversusfado/events/?ref=page_internal" target="_blank">
             <FontAwesomeIcon

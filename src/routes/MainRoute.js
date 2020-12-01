@@ -23,9 +23,37 @@ import Fire from '../firebase/Fire'
 import { Route } from 'react-router-dom'
 import AnimatedSwitch from '../components/shared/AnimatedSwitch.js'
 
+const headerLinks = [
+  {
+    to: '/admin',
+    label: 'logo',
+  },
+  {
+    to: '/admin',
+    label: 'Texto principal',
+  },
+  {
+    to: '/admin/repertoire',
+    label: 'Repertório',
+  },  
+  {
+    to: '/admin/members',
+    label: 'Membros',
+  },
+  {
+    to: '/admin/gallery',
+    label: 'Galeria',
+  },
+  // {
+  //   to: '/admin/languages',
+  //   label: 'Linguas',
+  // },
+]
+
 const defaultState = {
   animate: true,
   muted: false,
+  homeText: '',
   songs: [],
   dynamicData: {
     repertoire: [],
@@ -56,7 +84,7 @@ const defaultState = {
     imgUrl: '',
     spotifyUrl: ''
   },
-  headerLinks: [],
+  links: [],
   videoEnded: false,
 }
 
@@ -78,17 +106,22 @@ class MainRoute extends Component {
     this.setState({videoEnded: true})
   }
 
-  refreshData = () => {
-    let state = {currentLanguage: this.fire.language}
-    this.fire.getDynamicData()
-      .then(result => (state = {...state, dynamicData: result, songs: result.songs}))
-      .then(() => this.fire.getStaticData())
-      .then(result => (state = {...state, headerLinks: result.header_links}))
-      .then(() => this.setState(state))
+  refreshData = async () => {
+    const songs = await Fire.getSongs()
+    const members = await Fire.getMembers()
+    const links = await Fire.getLinks()
+    const homeText = await Fire.getHomeText()
+    this.setState({songs: songs, members: members, links: links, currentLanguage: this.fire.language, homeText: homeText})
+    // let state = {currentLanguage: this.fire.language}
+    // this.fire.getDynamicData()
+    //   .then(result => (state = {...state, dynamicData: result, songs: result.songs}))
+    //   .then(() => this.fire.getStaticData())
+    //   .then(result => (state = {...state, headerLinks: result.header_links}))
+    //   .then(() => this.setState(state))
   }
 
   handleSetLanguage = (language) => {
-    this.fire.setLanguage(language)
+    Fire.setLanguage(language)
     this.refreshData()
   }
 
@@ -97,7 +130,6 @@ class MainRoute extends Component {
   }
 
   handleSelectTrack = (id) => {
-    debugger
     const track = this.state.songs.filter(item => item.id === id)[0]
 
     this.setState({
@@ -110,7 +142,6 @@ class MainRoute extends Component {
   handleModalOpen = (val) => this.setState({isModalOpen: val})
 
   render() {
-    debugger
     sessionStorage.setItem('appState', JSON.stringify(this.state))
     return(
       <>
@@ -130,8 +161,9 @@ class MainRoute extends Component {
             (
               <div className = 'main'>
                 <Header
-                  links={this.state.headerLinks}
+                  links={this.state.links}
                   signOut={() => this.setState({currentLanguage: ""})}
+                  currentLanguage={this.state.currentLanguage}
                 />
                 <Route render={({location}) => (
                   <AnimatedSwitch location={location}>
@@ -153,7 +185,7 @@ class MainRoute extends Component {
                     />
                     <Route path={'/albums'} component={Albums}/>
                     <Route path={'/social'} component={Social}/>
-                    <Route path={'/'} exact component={() => <Home text={this.state.dynamicData.homeText}></Home>}/>
+                    <Route path={'/'} exact component={() => <Home homeText={this.state.homeText} currentLanguage={this.state.currentLanguage}></Home>}/>
                   </AnimatedSwitch>
                 )} />
               </div>

@@ -14,13 +14,13 @@ const guitars = [
   guitar5,
 ]
 
-const Main = ({text}) => {
+const Main = ({homeText, currentLanguage}) => {
   return (
     <div className="content-container">
       <div className="home">
         <div className="home__text">
           <div className="shade1"/>
-            {text.replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
+            {homeText[currentLanguage].replace(/[\r\n]{2,}/g, "\n").split('\n').map((item, i,) => (
               <>
                 <p>{item}</p>
                 <img src={guitars[i]} className="home__image" alt="home"/>

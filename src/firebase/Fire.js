@@ -78,44 +78,96 @@ class Fire {
     }
   }
 
-  getSongs = async (language) => {
+  getSongs = async () => {
     const snapshot = await this.db
       .collection('songs')
       .get()
-  return snapshot.docs.map(item => ({
-      id: item.id,
-      ...item.data()
-    }))
-  }
-  getMembers = async (language) => {
-    const snapshot = await this.db
-      .collection('members')
-      .get()
-  return snapshot.docs.map(item => ({
-      id: item.id,
-      ...item.data()
+
+    return snapshot.docs.map(item => ({
+        id: item.id,
+        ...item.data()
     }))
   }
 
+  deleteSong = async (id) => {
+    const snapshot = await this.db
+      .collection('songs')
+      .doc(id)
+      .delete()
+  }
+
+  getMembers = async () => {
+    const snapshot = await this.db
+      .collection('members')
+      .get()
+    return snapshot.docs.map(item => ({
+        id: item.id,
+        ...item.data()
+      }))
+  }
+
+  getLinks = async () => {
+    const snapshot = await this.db
+      .collection('links')
+      .get()  
+
+    return snapshot.docs.map(item => ({
+        id: item.id,
+        ...item.data()
+      }))
+  }
+
   // Lyrics
-  addSongLyric = async (data) => {
-    debugger;
+  updateSong = async (data) => {
     try {
       return await this.db
         .collection('songs')
         .doc(data.id)
-        .update({
-          [this.language]: {
-            lyric: data.lyric,
-            title: data.title
-          }
+        .update(data)
+    } catch (e) {
+      throw e
+    }
+  }
+  // Lyrics
+  addHomeText = async (text) => {
+    try {
+      return await this.db
+        .collection('texts')
+        .add({
+          _id: 'homeText',
+          [this.language]: text
         })
     } catch (e) {
       throw e
     }
   }
 
-  // Members
+  updateHomeText = async (data) => {
+    try {
+      return await this.db
+        .collection('texts')
+        .doc(data.id)
+        .update(data)
+    } catch (e) {
+      throw e
+    }
+  }
+
+  getHomeText = async () => {
+    const snapshot = await this.db
+      .collection('texts')
+      .where('_id','==','homeText')
+      .limit(1)
+      .get()
+
+    const data = snapshot.docs[0].data();
+    const id = snapshot.docs[0].id;
+    
+    return {
+      id,
+      ...data
+    }
+  }
 
   addMember = async (data) => {
     if(!this.auth.currentUser) {
@@ -123,7 +175,6 @@ class Fire {
     }
     
     try {
-      debugger
       const imageUploadTask = this.storage.ref(`members/${data.image.name}`).put(data.image, {contentType: data.image.type})
 
       let imageUrl = ""
@@ -145,101 +196,17 @@ class Fire {
     }
   }
 
-  getMembers = async () => {
-    const snapshot = await this.db
-      .collection('repetoires')
-      .get()
-
-  return snapshot.docs.map(item => ({
-      ...item.data()
-    }))
-  }
-
-
-  //UPLOAD IMAGES
-  // uploadImage = async (image) => {
-  //   const uploadTask = await this.fire.storage.ref(`images/${image.name}`).put(image)
-  //   await uploadTask.on('state_changed', snapshot => console.log('progress'),
-  //                                        error => alert(error),
-  //                                        () => {
-  //                                         this.fire.storage.ref('images').child(image.name).getDownloadURL().then(url => imgUrl = url)
-  //                                        })
-  //   }
-
-  //DOCUMENTS
-  getDocument = async (path) => await this.db
-    .doc(this.language.concat(`/${path}`))
-    .get()
-    .then(r => r.data())
-
-  addOrEditDocument = async (path, data) => await this.db
-    .doc(this.language.concat(`/${path}`))
-    .set(data)
-
-  updateDocument = async (path, data) => {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
+  updateMember = async (data) => {
+    debugger
+    try {
+      return await this.db
+        .collection('members')
+        .doc(data.id)
+        .update(data)
+    } catch (e) {
+      throw e
     }
-
-    return await this.db
-      .doc(this.language.concat(`/${path}/${data.id}`))
-      .update(data)
   }
-
-  deleteDocument = async (path) => {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
-    }
-
-    return await this.db
-      .doc(this.language.concat(`/${path}`))
-      .delete()
-  }
-
-  //COLLECTIONS
-  getCollection = async (path) => {
-    const snapshot = await this.db
-      .collection(this.language.concat(`/${path}`))
-      .get()
-
-    return snapshot.docs.map(item => ({
-      id: item.id,
-      ...item.data()
-    }))
-  }
-
-  addToCollection = async (path, data) => {
-    if(!this.auth.currentUser) {
-      return alert('Not authorized')
-    }
-
-    return await this.db
-      .collection(this.language.concat(`/${path}`))
-      .add(data)
-  }
-
-  //DYNAMIC DATA
-  async getDynamicData() {
-    // const repertoire = await this.getCollection('dynamic_values/repertoire')
-    const songs = await this.getSongs();
-    const texts = await this.getDocument('dynamic_values')
-    const members = await this.getCollection('dynamic_values/members')
-    const gallery = await this.getGalleryImages('gallery')
-
-    const homeText = texts ? texts.homeText : ''
-    const data = {
-      homeText,
-      songs: songs,
-      members: members,
-      currentLanguage: this.language,
-      gallery: gallery
-    }
-
-    return data
-  }
-
-  //STATIC DATA
-  getStaticData = async () => await this.getDocument('static_values')
 
   login(email, password) {
     return this.auth.signInWithEmailAndPassword(email, password)
@@ -250,7 +217,6 @@ class Fire {
   }
 
   setLanguage(language) {
-    console.log('wtf',language)
     this.language = language
   }
 

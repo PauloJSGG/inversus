@@ -4,6 +4,7 @@ import MainEdit from '../components/admin/main/MainEdit'
 import RepertoireEdit from '../components/admin/repertoire/RepertoireEdit'
 import MembersEdit from '../components/admin/members/MembersEdit'
 import GalleryEdit from '../components/admin/gallery/GalleryEdit'
+import LanguagesEdit from '../components/admin/languages/LanguagesEdit'
 
 import LanguageSelector from '../components/shared/LanguageSelector'
 import Header from '../components/shared/Header'
@@ -16,12 +17,9 @@ import Fire from '../firebase/Fire'
 
 import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import { faThinkPeaks } from '@fortawesome/free-brands-svg-icons'
 
 const headerLinks = [
-  {
-    to: '/admin',
-    label: 'logo',
-  },
   {
     to: '/admin',
     label: 'Texto principal',
@@ -29,7 +27,7 @@ const headerLinks = [
   {
     to: '/admin/repertoire',
     label: 'Repertório',
-  },
+  },  
   {
     to: '/admin/members',
     label: 'Membros',
@@ -45,9 +43,9 @@ class AdminRoute extends Component{
     firebaseInitialized: false,
     homeText: '',
     songs: [],
+    languages: [],
     texts: {},
     isModalOpen: false,
-    repertoire: [],
     members: [],
     currentSong: {
       id: '',
@@ -88,8 +86,9 @@ class AdminRoute extends Component{
     gallery: [],
     isModalLyricOpen: false,
     isModalSongOpen: false,
-    isModalMemberOpen: false,
-
+    isModalMemberOpen: false, 
+    isModalMemberTextOpen: false, 
+    isModalLanguageOpen: false, 
   }
 
   constructor() {
@@ -109,22 +108,20 @@ class AdminRoute extends Component{
       .then(data => this.setState({members: data}))
   }
 
-  componentDidMount() {
-    this.fire.isInitialized()
-      .then(val => this.setState({firebaseInitialized: val}))
-      .then(() => Fire.getSongs())
-      .then(r => {
-        this.setState({songs: r})
-      })
-      .then(Fire.getMembers)
-      .then(r => this.setState({members: r}))
+  async componentDidMount() {
+    this.refreshData()    
   }
 
-  // componentDidUpdate() {
-  //   this.fire.getSongs()
-  //     .then(data => this.setState({songs: data}))
-  // }
- 
+  refreshData = async () => {
+    const firebaseInitialized = await this.fire.isInitialized()
+    const songs = await Fire.getSongs()
+    const members = await Fire.getMembers()
+    debugger
+    const homeText = await Fire.getHomeText()
+    this.setState({firebaseInitialized: firebaseInitialized, songs: songs, members: members, homeText: homeText, currentLanguage: Fire.language})
+  }
+
+
   login = async () => {
     try {
       await this.fire.login(this.state.Email, this.state.Password);
@@ -134,40 +131,25 @@ class AdminRoute extends Component{
     }
   }
 
-  handleSubmitHomeText = () => {
-    this.fire.addOrEditDocument('dynamic_values', {homeText: this.state.homeText})
-    .then(r => alert('✅Success✅'))
-    .catch(e => alert(e))
+  handleSubmitHomeText = (values) => {
+    Fire.updateHomeText(values)
+    this.refreshData()
   }
-
-  handleFormChange = (txt) => {
-    this.setState({
-      homeText: txt
-    })
-  }
-
-  handleEditClick = (key, object) => {
-    this.setState({
-      ...this.state,
-      isModalOpen: true,
-      [key]: {
-        ...object
-      }
-    })
-  }
-
 
   handleSetLanguage = (language) => {
     this.fire.setLanguage(language)
-    this.fire.getDynamicData()
-      .then(r => this.setState(r))
+    this.refreshData()
   }
 
   handleMemberSubmit = async (values) => {
-    debugger
     await this.fire.addMember(values)
       this.setState({currentMember: {}, isModalMemberOpen: false})
       this.updateMembers()
+  }
+
+  handleMemberTextSubmit = async (values) => {
+    Fire.updateMember(values)
+      .then(this.refreshData)
   }
 
   cleanState = () => this.setState((prevState) => ({
@@ -196,12 +178,25 @@ class AdminRoute extends Component{
     if(open)
       return this.setState({ isModalLyricOpen: open, currentSong: val })
     else
-      return this.setState({ isModalLyricOpen: open, currentLyric: {} })
+      return this.setState({ isModalLyricOpen: open, currentSong: {} })
+  }
+  
+  handleModalMemberTextOpen = (open, val) => {
+    if(open)
+      return this.setState({ isModalMemberTextOpen: open, currentMember: val })
+    else
+      return this.setState({ isModalMemberTextOpen: open, currentMember: {} })
   }
 
   handleModalSongOpen = (open) => this.setState({isModalSongOpen: open})
 
   handleModalMemberOpen = (open) => this.setState({isModalMemberOpen: open})
+
+  handleModalLanguageOpen = (open) => this.setState({isModalLanguageOpen: open})
+
+  handleSongVisibility = (data) => Fire.updateSong({...data, visibility: !data.visibility}).then(this.refreshData)
+
+  handleSongDelete = (data) => Fire.deleteSong(data.id).then(this.refreshData)
 
   logout = () => {
     this.fire.logout()
@@ -258,7 +253,7 @@ class AdminRoute extends Component{
     this.updateSongs()
   }
     
-  handleLyricSubmit = (values) => this.fire.addSongLyric(values)
+  handleLyricSubmit = (values) => this.fire.updateSong(values).then(this.refreshData)
 
   render() {
     //waiting for firebase to initiate, otherwise it doesn't work
@@ -283,9 +278,9 @@ class AdminRoute extends Component{
           <Switch>
             <div className = "">
               <LanguageSelector
+                handleSetLanguage = {this.handleSetLanguage}
                 languageList = {this.state.languageList}
                 currentLanguage = {this.state.currentLanguage}
-                handleSetLanguage = {this.handleSetLanguage}
                 isAdmin = {true}
               />
               <Route
@@ -293,12 +288,10 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <MainEdit
-                    handleSubmitHomeText = {this.handleSubmitHomeText}
-                    handleFormChange = {this.handleFormChange}
-                    handleSetLanguage = {this.handleSetLanguage}
-                    languageList = {this.state.languageList}
+                    onSubmit = {this.handleSubmitHomeText}
                     currentLanguage = {this.state.currentLanguage}
-                    formValue = {this.state.homeText}
+
+                    values = {this.state.homeText}
                   />
                 }
               />
@@ -307,20 +300,22 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <RepertoireEdit
-                    submitSongForm = { this.handleSongSubmit }
-                    submitLyricForm = { this.handleLyricSubmit }
-                    handleEditClick = { this.handleEditClick }
-                    handleChange = { (e) => this.handleDataChange(e, 'currentTrack') }
-                    handleModalLyricOpen = { this.handleModalLyricOpen }
-                    handleModalSongOpen = { this.handleModalSongOpen }
-                    handleSubmit = { () => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack) }
-                    handleDelete = { (id) => this.handleDeleteDocument(this.rootRepertoire, id) }
+                    onSubmitSongForm = { this.handleSongSubmit }
+                    onSubmitLyricForm = { this.handleLyricSubmit }
+                    onEditClick = { this.handleEditClick }
+                    onChange = { (e) => this.handleDataChange(e, 'currentTrack') }
+                    onModalLyricOpen = { this.handleModalLyricOpen }
+                    onModalSongOpen = { this.handleModalSongOpen }
+                    onSubmit = { () => this.handleAddDocument(this.rootRepertoire, this.state.currentTrack) }
+                    onDelete = { this.handleSongDelete }
+                    onVisibility = { this.handleSongVisibility }
 
                     isModalLyricOpen = { this.state.isModalLyricOpen }
                     isModalSongOpen = { this.state.isModalSongOpen }
 
                     repertoire = { this.state.songs }
                     currentSong = { this.state.currentSong }
+                    currentLanguage = { this.state.currentLanguage }
                   />
                 }
               />
@@ -329,18 +324,21 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <MembersEdit
-                    handleModalMemberOpen = {this.handleModalMemberOpen}
-                    handleEditClick = {this.handleEditClick}
-                    handleUpload = {this.handleUpload}
-                    handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
-                    handleSubmit = {this.handleMemberSubmit}
-                    handleDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
-                    handleModalOpen = {this.handleModalOpen}
+                    onModalMemberOpen = {this.handleModalMemberOpen}
+                    onModalMemberTextOpen = {this.handleModalMemberTextOpen}
+                    onEditClick = {this.handleEditClick}
+                    onUpload = {this.handleUpload}
+                    onChange = {(e) => this.handleDataChange(e, 'currentMember')}
+                    onSubmitModalMember = {this.handleMemberSubmit}
+                    onSubmitModalMemberText = {this.handleMemberTextSubmit}
+                    onDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
+
+                    isModalMemberOpen = {this.state.isModalMemberOpen}
+                    isModalMemberTextOpen = {this.state.isModalMemberTextOpen}
 
                     values = {this.state.currentMember}
                     currentMember = {this.state.currentMember}
                     members = {this.state.members}
-                    isModalMemberOpen = {this.state.isModalMemberOpen}
                     currentLanguage = {this.state.currentLanguage}
                   />
                 }
@@ -350,21 +348,33 @@ class AdminRoute extends Component{
                 render = {
                   (props) =>
                   <GalleryEdit
-                    handleEditClick = {this.handleEditClick}
-                    handleGalleryUpload = {this.handleGalleryUpload}
-                    handleChange = {(e) => this.handleDataChange(e, 'currentMember')}
-                    handleGallerySubmit = {() => this.handleGallerySubmit()}
-                    handleDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
-                    handleModalOpen = {this.handleModalOpen}
-                    handleCategoryChange = {this.handleCategoryChange}
+                    onEditClick = {this.handleEditClick}
+                    onGalleryUpload = {this.handleGalleryUpload}
+                    onChange = {(e) => this.handleDataChange(e, 'currentMember')}
+                    onGallerySubmit = {() => this.handleGallerySubmit()}
+                    onDelete = {(id) => this.handleDeleteDocument(this.rootMembers, id)}
+                    onModalOpen = {this.handleModalOpen}
+                    onCategoryChange = {this.handleCategoryChange}
+
+                    isModalOpen = {this.state.isModalOpen}
 
                     currentMember = {this.state.currentMember}
                     members = {this.state.members}
-                    isModalOpen = {this.state.isModalOpen}
                     gallery = {this.state.gallery}
                   />
                 }
               />
+              {/* <Route
+                exact path={`${url}/languages`}
+                render = {
+                  (props) =>
+                  <LanguagesEdit
+                    languages = {this.state.languages}
+                    onModalOpen = {this.handleModalLanguageOpen}
+                    isModalOpen = {this.state.isModalLanguageOpen}
+                  />
+                }
+              /> */}
             </div>
           </Switch>
         )}/>

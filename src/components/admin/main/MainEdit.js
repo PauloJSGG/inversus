@@ -1,45 +1,45 @@
 import React from 'react'
 
-// const addNewLine = (text) => {
-//   const split = text.split('\n')
-//   let added = []
-//   split.forEach(item => added.push(`${item}\n\n`))
-//   console.log('2:',added)
-//   return added.reduce((a, b) => a.concat(b))
-// }
+import { Formik, Field } from 'formik';
 
-// const removeNewLine = (text) => {
+const FormRender = (props) => {
+  const { setFieldValue, handleSubmit, values, currentLanguage } = props;
 
-// }
+  
+  return (
+    <form onSubmit={handleSubmit}>
+       <div className='admin-main'>
+       <textarea className='admin-main__input' name = {currentLanguage} value = {values[currentLanguage] ? values[currentLanguage] : ""} onChange={(e) => setFieldValue(currentLanguage, e.currentTarget.value)}/>
+          <button
+            className='shared-button shared-button--second'
+            type='submit'
+            title='submit'
+          >
+            enviar
+        </button>
+       </div>
+    </form>
+  )
+}
 
 const MainEdit = (props) => {
-
+  
   const {
-    handleSubmitHomeText,
-    handleFormChange,
-    formValue
+    onSubmit,
+    onFormChange,
+    formValue,
+    currentLanguage,
+    values
   } = props
 
-  // const formValueWithNewLine = addNewLine(formValue)
-
   return(
-    <>
-      <div className='admin-main'>
-        <textarea
-          onChange={e => handleFormChange(e.target.value)}
-          className='admin-main__input'
-          value={formValue}
-        />
-        <button
-          className='shared-button shared-button--second'
-          type='submit'
-          title='submit'
-          onClick={handleSubmitHomeText}
-        >
-          enviar
-        </button>
-      </div>
-    </>
+        <Formik
+          initialValues={values ? values : {
+            }}
+          onSubmit={onSubmit}
+          >
+            {props => <FormRender currentLanguage={currentLanguage} onSubmit={onSubmit} {...props}/>}   
+          </Formik>
   )
 }
 

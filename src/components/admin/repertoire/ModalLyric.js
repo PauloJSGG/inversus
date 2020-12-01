@@ -2,7 +2,7 @@ import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
-import { Formik, Field, setFieldValue } from 'formik';
+import { Formik, Field } from 'formik';
 
 const customStyles = {
   content: {
@@ -18,18 +18,18 @@ const customStyles = {
 };
 
 const FormRender = (props) => {
-  const { setFieldValue, handleSubmit, values } = props;
+  const { setFieldValue, handleSubmit, values, currentLanguage } = props;
 
   return (
     <form onSubmit={handleSubmit}>
       <div className='admin-modal'>
         <div className='admin-modal__row'>
           <label className='admin-modal__label'>title:</label>
-          <Field className='admin-modal__input' name="title"/>
+          <Field className='admin-modal__input' name={`${currentLanguage}.title`} value = {values[currentLanguage] ? values[currentLanguage].title : ""}/>
         </div>
         <div className='admin-modal__row'>
           <label className='admin-modal__label'>lyrics:</label>
-          <textarea className='admin-modal__textarea' name = "lyric" value = {values.lyric} onChange={(e) => setFieldValue("lyric", e.currentTarget.value)}/>
+          <textarea className='admin-modal__textarea' name={`${currentLanguage}.lyric`} value = {values[currentLanguage] ? values[currentLanguage].lyric : ""} onChange={(e) => setFieldValue(`${currentLanguage}.lyric`, e.currentTarget.value)}/>
         </div>
         <div className='admin-modal__button'>
           <button
@@ -47,31 +47,26 @@ const FormRender = (props) => {
 
 const ModalLyric = (props) => {
   const {
-    submitLyricForm,
-    values,
-    handleModalLyricOpen,
-    isModalLyricOpen,
-    currentSong,
-
+    onModalOpen,
+    onSubmitForm,
     isModalOpen,
-    repertoire,
+    currentSong,
+    currentLanguage,
   } = props
-  debugger
-  return (
+
+    return (
     <Modal
-      isOpen={isModalLyricOpen}
-      onRequestClose={() => handleModalLyricOpen(false)}
+      isOpen={isModalOpen}
+      onRequestClose={() => onModalOpen(false)}
       style={customStyles}
     >
       <Formik
         initialValues={{
-          ...currentSong,
-          lyric: '',
-          title: '',
+          ...currentSong
         }}
-        onSubmit={submitLyricForm}
+        onSubmit={onSubmitForm}
       >
-        {props => <FormRender {...props}/>}  
+        {props => <FormRender currentLanguage = {currentLanguage} {...props}/>}  
       </Formik>
     </Modal>
   )
