@@ -16,11 +16,11 @@ const Members = (props) => {
           <div className='shade1'/>
             {
               active.map((item, i) => (
-                <div className="admin-parallax__group">
-                  <div className="admin-parallax__layer admin-parallax__layer--back">
-                    <img src={item.imageUrl} style={{objectFit: 'cover', height: '600px', width: '1300px'}} className="members__img" alt="paralax"/>
+                <div className="members-parallax__group">
+                  <div className="members-parallax__layer members-parallax__layer--back">
+                    <img src={item.imageUrl} className="members__img members-parallax__image" alt="paralax"/>
                   </div>
-                  <div className="admin-parallax__layer admin-parallax__layer--base">
+                  <div className="members-parallax__layer members-parallax__layer--base">
                       <p className="members__text" style={{color: 'white'}} >{item.name}</p>
                       <p className="members__text" style={{color: 'white', fontSize: '1rem', textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
                   </div>
@@ -28,11 +28,11 @@ const Members = (props) => {
               ))}
             {
               inactive.map((item, i) => 
-                  <div className="admin-parallax__group">
-                    <div className="admin-parallax__layer admin-parallax__layer--back">
-                      <img src={item.imageUrl} style={{objectFit: 'cover', height: '600px', width: '1300px'}} className="members__img" alt="paralax"/>
+                  <div className="members-parallax__group">
+                    <div className="members-parallax__layer members-parallax__layer--back">
+                      <img src={item.imageUrl} className="members__img members-parallax__image" alt="paralax"/>
                     </div>
-                    <div className="admin-parallax__layer admin-parallax__layer--base">
+                    <div className="members-parallax__layer members-parallax__layer--base">
                       <p className="members__text" style={{color: 'white'}} >{item.name}</p>
                       <p className="members__text" style={{color: 'white', fontSize: '1rem',  textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
                     </div>

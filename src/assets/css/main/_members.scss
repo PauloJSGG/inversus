@@ -23,85 +23,56 @@
   justify-content: center;
 }
 
-.members__img{
-  height: 13rem;
-  display: inline-block;
-  min-width: 100px;
-  object-fit: cover;
-  filter: grayscale(1);
-}
+// .members__img{
+//   height: 13rem;
+//   display: inline-block;
+//   min-width: 100px;
+//   object-fit: cover;
+//   filter: grayscale(1);
+// }
 
 
-.parallax {
+.members-parallax {
+  perspective-origin-x: 100%;
   perspective: 1px;
-  height: 100vh;
-  -webkit-perspective-origin-x: 100%;
+  height: 120vh;
   overflow-x: hidden;
   overflow-y: auto;
-  color: white;
+
+  &__image {
+    object-fit: cover;
+    height: 600px;
+    width: 1300px;
+    filter: grayscale(1);
+
+
+  @media screen and (max-width: 600px) {
+    height: 300px;
+    width: 600px;
+  }
+  }
+
+  &__group {
+    position: relative;
+    height: 100vh;
+    transform-style: preserve-3d;
+    transform: translate3d(0px, 0, 0px) ;
+  }
+
+  &__layer {
+    transform-origin-x: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    &--base {
+      transform: translateZ(0);
+    }
+
+    &--back {
+      transform: translateZ(-1px);
+    }
+  }
 }
-
-// .parallax__group--left {
-//   z-index: 2;
-//   display: flex;
-//   width: 100%;
-//   // height: 500px;
-//   height: 100vh;
-//   -webkit-transform-style: preserve-3d;
-//   transform-style: preserve-3d;
-
-//   .parallax__layer {
-//     color: white;
-//     right: 0;
-//     bottom: 0;
-//     left: 0;
-//   }
-//   .parallax__layer--base {
-//     width: 53%;
-//     text-shadow: 2px 2px #000000;
-//     padding: 49vh;
-//     // width: 65%;
-//     // transform: translateZ(0) scale(1);
-//   }
-//   .parallax__layer--back {
-//     // padding: 1vh 0;
-//     // width: 100%;
-//     // width: 30%;
-//     // -webkit-perspective-origin-x: 0%;
-
-//     transform: translate(-80%, -3%) translateZ(-1px);
-//   }
-// }
-
-// .parallax__group--right {
-//   position: relative;
-//   display: flex;
-//   width: 100%;
-//   justify-content: end;
-//   height: 500px;
-//   height: 100vh;
-//   -webkit-transform-style: preserve-3d;
-//   transform-style: preserve-3d;
-
-//   .parallax__layer {
-//     color: white;
-//     position: absolute;
-//     top: -200px;
-//     right: 0;
-//     bottom: 0;
-//     left: 0;
-//   }
-//   .parallax__layer--base {
-//     text-align: right;
-//     text-shadow: 2px 2px #000000;
-//     padding: 100vh 0;
-//     width: 75%;
-//     transform: translate(33%, -17%)  translateZ(0) scale(1);
-//   }
-//   .parallax__layer--back {
-//     // padding: 1vh 0;
-//     // width: 50%;
-//     -webkit-perspective-origin-x: 0%;
-//     transform: translateZ(-1px);
-//   }
-// }
