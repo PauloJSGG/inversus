@@ -3,8 +3,16 @@
   height: 66%;
   width: 75%;
 
+  &__text {
+    @media screen and (max-width: 600px) {
+      font-size: 13px;
+      margin-bottom: 1px; 
+      line-height: 15px; 
+    }
+  }
+
   @media screen and (max-width: 600px) {
-    width: 55%;
+    width: 97%;
   }
 
   &--left{

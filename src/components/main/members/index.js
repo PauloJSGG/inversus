@@ -21,8 +21,8 @@ const Members = (props) => {
                     <img src={item.imageUrl} className="members__img members-parallax__image" alt="paralax"/>
                   </div>
                   <div className="members-parallax__layer members-parallax__layer--base">
-                      <p className="members__text" style={{color: 'white'}} >{item.name}</p>
-                      <p className="members__text" style={{color: 'white', fontSize: '1rem', textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
+                      <p className="" style={{color: 'white'}} >{item.name}</p>
+                      <p className="members__text" style={{color: 'white', textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
                   </div>
                 </div>
               ))}
@@ -33,7 +33,7 @@ const Members = (props) => {
                       <img src={item.imageUrl} className="members__img members-parallax__image" alt="paralax"/>
                     </div>
                     <div className="members-parallax__layer members-parallax__layer--base">
-                      <p className="members__text" style={{color: 'white'}} >{item.name}</p>
+                      <p className="" style={{color: 'white'}} >{item.name}</p>
                       <p className="members__text" style={{color: 'white', fontSize: '1rem',  textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
                     </div>
                   </div>
