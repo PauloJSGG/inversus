@@ -12,22 +12,30 @@ const Members = (props) => {
   return (
     <div className="content-container">
       <div className="members">
-        <div className='shade1'/>
-          <div className="members-container">
+          <div className="admin-parallax">
+          <div className='shade1'/>
             {
-              active.map((item, i) => 
-                  <div>
-                    <img src={item.imageUrl} className="members__img" alt="paralax"/>
-                    <p className="members__text whitespace-pre-wrap" style={{color: 'white'}} >{item.name}</p>
-                    <p className="members__text whitespace-pre-wrap" style={{color: 'white', fontSize: '1rem'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
+              active.map((item, i) => (
+                <div className="admin-parallax__group">
+                  <div className="admin-parallax__layer admin-parallax__layer--back">
+                    <img src={item.imageUrl} style={{objectFit: 'cover', height: '600px', width: '1300px'}} className="members__img" alt="paralax"/>
                   </div>
-                )
-            }
+                  <div className="admin-parallax__layer admin-parallax__layer--base">
+                      <p className="members__text" style={{color: 'white'}} >{item.name}</p>
+                      <p className="members__text" style={{color: 'white', fontSize: '1rem', textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
+                  </div>
+                </div>
+              ))}
             {
               inactive.map((item, i) => 
-                  <div>
-                    <img src={item.imageUrl} className="members__img" alt="paralax"/>
-                    <p className="members__text whitespace-pre-wra  p" style={{color: 'white'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
+                  <div className="admin-parallax__group">
+                    <div className="admin-parallax__layer admin-parallax__layer--back">
+                      <img src={item.imageUrl} style={{objectFit: 'cover', height: '600px', width: '1300px'}} className="members__img" alt="paralax"/>
+                    </div>
+                    <div className="admin-parallax__layer admin-parallax__layer--base">
+                      <p className="members__text" style={{color: 'white'}} >{item.name}</p>
+                      <p className="members__text" style={{color: 'white', fontSize: '1rem',  textShadow: '2px 2px #000000'}} >{item[currentLanguage] && item[currentLanguage].text}</p>
+                    </div>
                   </div>
                 )
             }
