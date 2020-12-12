@@ -118,11 +118,16 @@ class Fire {
     
   }
 
-  deleteMember = async (id) => {
+  deleteMember = async (data) => {
     try {
+      if(data.imageUrl){
+        const imageRef = this.storage.refFromURL(data.imageUrl);
+        imageRef.delete()
+      }
+
       return await this.db
         .collection('members')
-        .doc(id)
+        .doc(data.id)
         .delete() 
         .then(alert('✅Success✅'))
     } catch (e) {
@@ -268,13 +273,19 @@ class Fire {
         .then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => imageUrl = url)
 
+
+      const normalizedData = {
+        name: data.name,
+        imageUrl: imageUrl,
+        active: data.active,
+      }
+      if(data[this.language] && data[this.language].text && data[this.language].text.length > 0) {
+        normalizedData[this.language] = data[this.language]
+      }
+
       return await this.db
         .collection('members')
-        .add({
-          name: data.name,
-          imageUrl: imageUrl,
-          active: data.active,
-        })
+        .add(normalizedData)
         .then(alert('✅Success✅'))
     } catch (e) {
       alert('❌Error❌')

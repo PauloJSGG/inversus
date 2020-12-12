@@ -19,6 +19,7 @@ import { Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { faThinkPeaks } from '@fortawesome/free-brands-svg-icons'
 
+
 const headerLinks = [
   {
     to: '/admin',
@@ -204,7 +205,7 @@ class AdminRoute extends Component{
 
   handleGalleryDelete = (data) => Fire.deleteGallery(data.id).then(this.refreshData)
 
-  handleMemberDelete = (data) => Fire.deleteMember(data.id).then(this.refreshData)
+  handleMemberDelete = (data) => Fire.deleteMember(data).then(this.refreshData)
 
   logout = () => {
     this.fire.logout()

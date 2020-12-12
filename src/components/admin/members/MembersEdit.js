@@ -13,6 +13,9 @@ import ModalMemberText from './ModalMemberText'
 
 import languages from '../../../util/languages'
 
+import { confirmAlert } from 'react-confirm-alert';
+import "react-confirm-alert/src/react-confirm-alert.css";
+
 const flags = {
   pt: pt,
   en: en,
@@ -21,36 +24,37 @@ const flags = {
 
 const MembersEdit = (props) => {
   const {
-    onModalOpen,
-    onSubmit,
-    onChange,
-    onEditClick,
-    onUpload,
     onDelete,
     onModalMemberOpen,
-    onModalMemberTextOpen,
-    onSubmitModalMemberText,
     onSubmitModalMember,
 
 
     isModalMemberOpen,
-    isModalMemberTextOpen,
     members,
-    values,
     currentMember,
     currentLanguage,
-    languageList
   } = props
+
+
+  const confirmDelete = (item) => {
+    confirmAlert({
+      title: 'Confirmar',
+      message: 'Tem a certeza que deseja eliminar o membro?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: () => onDelete(item)
+        },
+        {
+          label: 'Não',
+        }
+      ]
+    });
+  }
+
 
   return (
     <>
-      {/* <ModalMemberText
-        values = {currentMember}
-        currentLanguage = {currentLanguage}
-        onSubmit = {handleMemberSubmit}
-        isModalOpen = {isModalMemberTextOpen}
-        onModalOpen = {onModalMemberTextOpen}
-      /> */}
       <ModalMember
         values = {currentMember}
         onModalOpen = {onModalMemberOpen}
@@ -58,11 +62,12 @@ const MembersEdit = (props) => {
         isModalOpen = {isModalMemberOpen}
         currentLanguage = {currentLanguage}
       />
+
       <div className='admin-list'>
         {members.map((item => {
             return(
               <>
-                <div key={item.id} className="admin-list__item" style={{backgroundColor: item.active ? '#39A912' : '#AB0D0D'}}>
+                <div key={item.id} className="admin-list__item" style={{backgroundColor: item.active ? '#245201' : '#AB0D0D'}}>
                   <h1>
                     {item.name}{Object.keys(item).map(element => {
                       if(languages.includes(element)){
@@ -70,8 +75,8 @@ const MembersEdit = (props) => {
                     }
                 })}
                   </h1>
-                  <button style={{color: 'white', backgroundColor: 'black'}} onClick={() => onModalMemberOpen(true, item)}><span role="img" aria-label="out">Editar</span></button>
-                  <button style={{color: 'white', backgroundColor: 'black'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">Apagar</span></button>
+                  <button className="admin-list__button" onClick={() => onModalMemberOpen(true, item)}><span role="img" aria-label="out">Editar</span></button>
+                  <button className="admin-list__button" onClick={() => confirmDelete(item)}><span role="img" aria-label="out">Apagar</span></button>
                 </div>
               </>
             )

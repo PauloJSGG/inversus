@@ -88,8 +88,8 @@
 
 .admin-list {
   display: flex;
-  flex-direction: column;
   width: 100%;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
@@ -106,6 +106,25 @@
       background-color: rgba(188,158,91,1);
     }
   }
+
+  &__button {
+    color: white;
+    background-color: rgba(188,158,91,1);
+    margin: 2px;
+    padding: 4px;
+    border-radius: 5px;
+
+    &:hover {
+      font-size: 20px;
+      animation: button 0.5s;
+      
+    }
+  }
+}
+
+@keyframes button {
+  from { font-size: 11px; }
+  to { opacity: 20px; }
 }
 
 .admin-main {
@@ -151,7 +170,7 @@
     border-radius: 15px 0px 15px 0px;
     transition: 0.3s;
     &:hover {
-      background-color: rgba(188,158,91,1);
+    background-color: rgba(188,158,91,1);
     }
   }
 }
