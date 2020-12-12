@@ -141,6 +141,7 @@ class Fire {
   getMembers = async () => {
     const snapshot = await this.db
       .collection('members')
+      .orderBy('active','desc')
       .get()
     return snapshot.docs.map(item => ({
         id: item.id,
@@ -281,6 +282,49 @@ class Fire {
     }
   }
 
+  updateMember = async (data) => {
+    if(!this.auth.currentUser) {
+      return alert('Not authorized')
+    }
+    
+    try {
+      if(data.imageUpdate){
+        const imageRef = this.storage.refFromURL(data.imageUrl);
+        imageRef.delete()
+
+        const imageUploadTask = this.storage.ref(`members/${shortid.generate()}`).put(data.imageUpdate, {contentType: data.imageUpdate.type})
+        await imageUploadTask
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => data.imageUrl = url)
+      }
+
+      const normalizedData = {
+        name: data.name,
+        imageUrl: data.imageUrl,
+        active: data.active,
+      }
+      if(data[this.language] && data[this.language].text && data[this.language].text.length > 0) {
+        normalizedData[this.language] = data[this.language]
+      }
+
+      return await this.db
+        .collection('members')
+        .doc(data.id)
+        .set(normalizedData)
+        .then(alert('✅Success✅'))
+    } catch (e) {
+      alert('❌Error❌')
+      throw e
+    }
+  }
+
+  addOrUpdateMember = async (data) => {
+    if(data.id)
+      return await this.updateMember(data)
+    else
+      return await this.addMember(data)
+  }
+
   addGallery = async (data) => {
     if(!this.auth.currentUser) {
       return alert('Not authorized')
@@ -316,19 +360,6 @@ class Fire {
         id: item.id,
         ...item.data()
       }))
-  }
-
-  updateMember = async (data) => {
-    try {
-      return await this.db
-        .collection('members')
-        .doc(data.id)
-        .update(data)
-        .then(alert('✅Success✅'))
-    } catch (e) {
-      alert('❌Error❌')
-      throw e
-    }
   }
 
   login(email, password) {

@@ -55,11 +55,10 @@ class AdminRoute extends Component{
       songUrl: '',
     },
     currentMember: {
-      name: '',
-      imgUrl: '',
-      text: '',
-      image: null,
+      name: "",
+      image: {},
       active: false,
+      imageUrl: "",
     },
     languageList: [
       {
@@ -141,14 +140,14 @@ class AdminRoute extends Component{
 
   handleSetLanguage = (language) => Fire.setLanguage(language).then(this.refreshData)
 
-  handleMemberSubmit = async (values) => Fire.addMember(values).then(this.refreshData)
+  handleMemberSubmit = async (values) => Fire.addOrUpdateMember(values).then(this.refreshData)
 
   handleGallerySubmit = async (values) => Fire.addGallery(values).then(this.refreshData)
 
-  handleMemberTextSubmit = async (values) => {
-    Fire.updateMember(values)
-      .then(this.refreshData)
-  }
+  // handleMemberTextSubmit = async (values) => {
+  //   Fire.updateMember(values)
+  //     .then(this.refreshData)
+  // }
 
   cleanState = () => this.setState((prevState) => ({
     currentTrack: {
@@ -186,9 +185,14 @@ class AdminRoute extends Component{
       return this.setState({ isModalMemberTextOpen: open, currentMember: {} })
   }
 
+  handleModalMemberOpen = (open, val) => {
+    if(open)
+      return this.setState({ isModalMemberOpen: open, currentMember: val })
+    else
+      return this.setState({ isModalMemberOpen: open })
+  }
+  
   handleModalSongOpen = (open) => this.setState({isModalSongOpen: open})
-
-  handleModalMemberOpen = (open) => this.setState({isModalMemberOpen: open})
 
   handleModalGalleryOpen = (open) => this.setState({isModalGalleryOpen: open})
 

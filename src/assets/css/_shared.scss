@@ -86,6 +86,28 @@
   }
 }
 
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  &__item {
+    width: 45%;
+    border: 3px solid black;
+    text-align: center;
+    color: white;
+    box-shadow: 2px;
+    background-color: rgba(188,158,91,0.5);
+    border-radius: 15px 0px 15px 0px;
+    transition: 0.3s;
+    &:hover {
+      background-color: rgba(188,158,91,1);
+    }
+  }
+}
+
 .admin-main {
   display: flex;
   flex-direction: column;
@@ -140,7 +162,7 @@
   width: 100%;
   max-width: 500px;
   height: 100%;
-  max-height: 500px;
+  max-height: 80%;
   z-index: 99999;
   display: flex;
   flex-direction: column;
@@ -174,6 +196,13 @@
   &__button {
     display: flex;
     justify-content: flex-end;
+
+    button:disabled,
+    button[disabled]{
+      background-color: #cccccc;
+      color: #666666;
+      cursor: none;
+    }
   }
 
   &__input {

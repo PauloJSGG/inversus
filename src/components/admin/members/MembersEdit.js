@@ -44,38 +44,38 @@ const MembersEdit = (props) => {
 
   return (
     <>
-      <ModalMemberText
+      {/* <ModalMemberText
         values = {currentMember}
         currentLanguage = {currentLanguage}
-        onSubmit = {onSubmitModalMemberText}
+        onSubmit = {handleMemberSubmit}
         isModalOpen = {isModalMemberTextOpen}
         onModalOpen = {onModalMemberTextOpen}
-      />
+      /> */}
       <ModalMember
+        values = {currentMember}
         onModalOpen = {onModalMemberOpen}
         onSubmit = {onSubmitModalMember}
         isModalOpen = {isModalMemberOpen}
+        currentLanguage = {currentLanguage}
       />
-      <div className='admin-members'>
-        <div className='admin-members__list'>
-          {members.map((item => {
-              return(
-                <>
-                  <div key={item.id} onClick={() => onModalMemberTextOpen(true,item)} className="admin-members__row">
-                    <h1>
-                      {item.name}{Object.keys(item).map(element => {
-                        if(languages.includes(element)){
-                          return <img src={flags[element]} style={{width: '30px',  margin: '2px 2px'}}></img>
-                      }
-                  })}
-                    </h1>
-                  </div>
-                  <button style={{color: 'red'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">❌</span></button>
-                  
-                </>
-              )
-          }))}
-        </div>
+      <div className='admin-list'>
+        {members.map((item => {
+            return(
+              <>
+                <div key={item.id} className="admin-list__item" style={{backgroundColor: item.active ? '#39A912' : '#AB0D0D'}}>
+                  <h1>
+                    {item.name}{Object.keys(item).map(element => {
+                      if(languages.includes(element)){
+                        return <img src={flags[element]} style={{width: '30px',  margin: '2px 2px'}}></img>
+                    }
+                })}
+                  </h1>
+                  <button style={{color: 'white', backgroundColor: 'black'}} onClick={() => onModalMemberOpen(true, item)}><span role="img" aria-label="out">Editar</span></button>
+                  <button style={{color: 'white', backgroundColor: 'black'}} onClick={() => onDelete(item)}><span role="img" aria-label="out">Apagar</span></button>
+                </div>
+              </>
+            )
+        }))}
       </div>
       <div style={{display: "flex", width: "100", justifyContent: "center "}}>
         <button className = 'shared-button shared-button--second' onClick = { () => onModalMemberOpen(true)}>Adicionar</button>

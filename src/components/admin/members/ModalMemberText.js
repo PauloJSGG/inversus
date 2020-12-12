@@ -28,6 +28,10 @@ const FormRender = (props) => {
           <label className='admin-modal__label'>Texto:</label>
           <textarea className='admin-modal__textarea' name = "lyric" value = {values[currentLanguage] ? values[currentLanguage].text : ""} onChange={(e) => setFieldValue(`${currentLanguage}.text`, e.currentTarget.value)}/>
         </div>
+        <div className = 'admin-modal__row'>
+          <label className='admin-modal__label'>Activo?</label>
+          <Field type="checkbox" name="active"/>
+        </div>
         <div className = 'admin-modal__button'>
           <button
             className = 'shared-button shared-button--second'
